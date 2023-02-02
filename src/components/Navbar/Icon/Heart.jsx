@@ -3,8 +3,6 @@ import * as React from "react"
 const Heart = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="currentWidth"
-    height="currentHeight"
     viewBox="0 0 500 500"
     {...props}
   >
