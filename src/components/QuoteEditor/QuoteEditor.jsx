@@ -59,13 +59,11 @@ export default function QuoteEditor() {
     bgColor: "#00000000"
   };
 
-  console.log(styles);
-
   return (
     <>
       <button onClick={getImage}>Click me</button>
       <QuoteView quote={quote} viewStyle={viewStyle} className={styles.quoteView}/>
-      <Navbar />
+      <Navbar page={"editor"}/>
     </>
   );
 }

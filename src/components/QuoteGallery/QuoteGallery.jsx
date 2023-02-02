@@ -61,7 +61,7 @@ export default function QuoteGallery() {
     <>
       {/* Ici la barre de recherche etc. */}
       <ul className={styles.quoteGallery}>{imgElements}</ul>
-      <Navbar />
+      <Navbar page={"quotes"}/>
     </>
   );
 }

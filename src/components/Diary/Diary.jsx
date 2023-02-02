@@ -1,8 +1,8 @@
 import Navbar from "../Navbar/Navbar";
 
-import styles from "./Homepage.module.css";
+import styles from "../Homepage/Homepage.module.css";
 
-export default function Homepage() {
+export default function App() {
   let path = "backgrounds/bg01.jpg";
   return (
     <>
@@ -11,8 +11,10 @@ export default function Homepage() {
         style={{
           backgroundImage: `url(${path})`
         }}
-      ></div>
-      <Navbar page={"homepage"} />
+      >
+        <h1>Mon journal</h1>
+      </div>
+      <Navbar page={"diary"} />
     </>
   );
 }
