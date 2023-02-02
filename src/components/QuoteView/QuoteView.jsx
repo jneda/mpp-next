@@ -1,7 +1,6 @@
-import "./QuoteView.css";
+import styles from "./QuoteView.module.css";
 
 export default function QuoteView({ quote, viewStyle }) {
-  //console.log(quote, viewStyle);
   const {
     image,
     contentFont,
@@ -14,15 +13,15 @@ export default function QuoteView({ quote, viewStyle }) {
 
   return (
     <article
-      className="quote-view"
+      className={styles.quoteView}
       style={{
         backgroundImage: `url(${image})`,
         backgroundColor: bgColor
       }}
     >
-      <blockquote>
+      <blockquote className={styles.blockquote}>
         <p
-          className="quote-content"
+          className={styles.quoteContent}
           style={{
             fontFamily: contentFont,
             fontSize: contentFontSize,
@@ -32,7 +31,7 @@ export default function QuoteView({ quote, viewStyle }) {
           {quote.content}
         </p>
         <p
-          className="quote-author"
+          className={styles.quoteAuthor}
           style={{
             fontFamily: authorFont,
             fontSize: authorFontSize,

@@ -3,7 +3,7 @@ import QuoteView from "../QuoteView/QuoteView";
 
 import * as htmlToImage from "html-to-image";
 
-import "./QuoteEditor.css";
+import styles from "./QuoteEditor.module.css";
 
 export default function QuoteEditor() {
   function getImage() {
@@ -46,7 +46,7 @@ export default function QuoteEditor() {
 
   const quote = {
     content:
-      "L’homme qui déplace une montagne commence par déplacer les petites pierres.",
+      "L'homme qui déplace une montagne commence par déplacer les petites pierres.",
     author: { name: "Confucius" }
   };
   const viewStyle = {
@@ -59,10 +59,12 @@ export default function QuoteEditor() {
     bgColor: "#00000000"
   };
 
+  console.log(styles);
+
   return (
     <>
       <button onClick={getImage}>Click me</button>
-      <QuoteView quote={quote} viewStyle={viewStyle} />
+      <QuoteView quote={quote} viewStyle={viewStyle} className={styles.quoteView}/>
       <Navbar />
     </>
   );

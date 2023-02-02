@@ -1,8 +1,8 @@
-.quote-view {
+.quoteView {
   width: 100%;
 }
 
-.quote-gallery {
+.quoteGallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
@@ -11,10 +11,10 @@
   list-style-type: none;
 }
 
-.quote-gallery li {
+.quoteGalleryLi {
   margin: 10px;
 }
 
-.quote-gallery .quote-view {
+.quoteGalleryQuoteView {
   border-radius: 15px;
 }

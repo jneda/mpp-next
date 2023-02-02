@@ -1,6 +1,5 @@
 import Navbar from "../Navbar/Navbar";
-import QuoteView from "../QuoteView/QuoteView";
-import "./QuoteGallery.css";
+import styles from "./QuoteGallery.module.css";
 
 export default function QuoteGallery() {
   /*   
@@ -47,9 +46,9 @@ export default function QuoteGallery() {
 
   const imgElements = imagePaths.map((path) => {
     return (
-      <li>
+      <li className={styles.quoteGalleryLi}>
         <img
-          className="quote-view"
+          className={styles.quoteView}
           key={path}
           src={`quoteviews/${path}`}
           alt={path}
@@ -61,7 +60,7 @@ export default function QuoteGallery() {
   return (
     <>
       {/* Ici la barre de recherche etc. */}
-      <ul className="quote-gallery">{imgElements}</ul>
+      <ul className={styles.quoteGallery}>{imgElements}</ul>
       <Navbar />
     </>
   );

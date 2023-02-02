@@ -1,4 +1,4 @@
-import { svgs } from "../Icon/index";
+import { svgs } from "./Icon/index";
 
 import styles from "./Navbar.module.css";
 
@@ -13,7 +13,7 @@ export default function Navbar() {
     console.log(svg)
     return (
       <a href={svg.href} key={svg.href} className={styles.navbarLink}>
-        {/* {svg.constructor({ style: style })} */}
+        {svg.component({ style: style })}
       </a>
     );
   });
