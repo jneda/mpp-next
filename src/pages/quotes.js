@@ -1,15 +1,19 @@
+import Navbar from "@/components/Navbar/Navbar";
 import QuoteGallery from "@/components/QuoteGallery/QuoteGallery";
 import { initDb } from "db/db/sequelize";
 
 export default function ({ quoteSources }) {
   // show raw data for sequelize testing purposes
 
-  const quotes = quoteSources.map(quoteSource => <li key={quoteSource.id}>{quoteSource.content} - { quoteSource.author.name }</li>)
+  const quotes = quoteSources.map(quoteSource => <li key={quoteSource.id}>{quoteSource.content} - {quoteSource.author.name}</li>);
   // return <QuoteGallery />;
   return (
-    <ul>
-      {quotes}
-    </ul>
+    <>
+      <ul>
+        {quotes}
+      </ul>
+      <Navbar page="quotes" />
+    </>
   );
 }
 
