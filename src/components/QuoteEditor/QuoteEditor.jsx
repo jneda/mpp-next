@@ -7,7 +7,7 @@ import styles from "./QuoteEditor.module.css";
 
 export default function QuoteEditor() {
   function getImage() {
-    var node = document.querySelector(".quote-view");
+    var node = document.querySelector("#quote-view");
     htmlToImage
       .toSvg(node)
       .then(function (dataUrl) {
@@ -61,8 +61,8 @@ export default function QuoteEditor() {
 
   return (
     <>
-      <button onClick={getImage}>Click me</button>
-      <QuoteView quote={quote} viewStyle={viewStyle} className={styles.quoteView}/>
+      <button className={styles.button} onClick={getImage}>Click me</button>
+      <QuoteView id="quote-view" quote={quote} viewStyle={viewStyle} className={styles.quoteView}/>
       <Navbar page={"editor"}/>
     </>
   );
