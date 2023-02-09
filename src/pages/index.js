@@ -23,8 +23,7 @@ export async function getStaticProps() {
   sequelize.close();
 
   testAuthors = testAuthors.map(author => author.toJSON())
-
-  console.log(testAuthors);
+  
   return {
     props: {
       testAuthors: testAuthors,
