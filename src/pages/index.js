@@ -1,7 +1,8 @@
-import { initDb } from "db/db/sequelize";
+import { Author } from "db/sequelize";
 
 export default function ({ testAuthors }) {
   const authors = testAuthors.map(author => <li key={author.id}>{author.name}</li>);
+  console.log(authors);
 
   return (
     <>
@@ -15,12 +16,8 @@ export default function ({ testAuthors }) {
 }
 
 export async function getStaticProps() {
-  const sequelize = await initDb();
 
-  const Author = sequelize.models.author;
-  
   let testAuthors = await Author.findAll();
-  sequelize.close();
 
   testAuthors = testAuthors.map(author => author.toJSON())
   

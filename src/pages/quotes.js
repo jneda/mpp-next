@@ -1,5 +1,5 @@
 import QuoteGallery from "@/components/QuoteGallery/QuoteGallery";
-import { initDb } from "db/db/sequelize";
+import { Author, QuoteSource } from "db/sequelize";
 
 export default function ({ quoteSources }) {
   // show raw data for sequelize testing purposes
@@ -14,11 +14,9 @@ export default function ({ quoteSources }) {
 }
 
 export async function getStaticProps() {
-  const sequelize = await initDb();
-  const QuoteSource = sequelize.models.quoteSource;
-  const Author = sequelize.models.author;
 
   const quoteSourcesData = await QuoteSource.findAll({ include: Author });
+
   const quoteSources = quoteSourcesData.map(quoteSourceData => quoteSourceData.toJSON());
 
   return {
