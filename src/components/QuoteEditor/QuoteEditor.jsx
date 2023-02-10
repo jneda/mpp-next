@@ -1,5 +1,6 @@
 import Navbar from "../Navbar/Navbar";
 import QuoteView from "../QuoteView/QuoteView";
+import Toolbar from "./Toolbar";
 
 import * as htmlToImage from "html-to-image";
 
@@ -62,6 +63,7 @@ export default function QuoteEditor() {
   return (
     <>
       <button onClick={getImage}>Click me</button>
+      <Toolbar />
       <QuoteView quote={quote} viewStyle={viewStyle} className={styles.quoteView}/>
       <Navbar page={"editor"}/>
     </>
