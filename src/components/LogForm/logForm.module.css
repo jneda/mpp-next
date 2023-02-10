@@ -1,0 +1,15 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #a92360;
+}
+
+.form input::placeholder{
+    color:#a92360;
+    opacity: 40%;
+}
