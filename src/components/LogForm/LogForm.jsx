@@ -25,7 +25,9 @@ export default function SignForm() {
       <form className={styles.form} action="/api/logIn" method="post">
         <input type="email" name="email" placeholder="Email" value={user.email} onChange={handleChange} />
         <input type="password" name="password" placeholder="Mot de Passe" autoComplete="new-password" value={user.password} onChange={handleChange} />
-        <button type="submit">Se connecter</button>
+        <div>
+          <button className={styles.btn} type="submit">Se connecter</button>
+        </div>
       </form>
     );
   }

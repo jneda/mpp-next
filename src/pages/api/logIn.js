@@ -1,5 +1,7 @@
 import {User} from 'db/sequelize';
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const privateKey = require('../../auth/private_key');
 
 export default async function logUser(req,res){
     const user = await User.findOne({where: {email: req.body.email}})
@@ -12,6 +14,12 @@ export default async function logUser(req,res){
         const message = `Le mot de passe est incorrect.`;
         return res.status(401).json({message});
     }
+    
+    const token = jwt.sign(
+        {userId: user.id},
+        privateKey,
+        {expiresIn: '24h'}
+    )
     const message = `L'utilisateur a été connecté avec succès.`;
-    return res.status(200).json({ message, data: user});
+    return res.status(200).json({ message, data: user, token});
 }
