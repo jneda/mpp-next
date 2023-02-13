@@ -16,10 +16,10 @@ const BgImageModel = require("./models/bgImage");
 const ColorModel = require("./models/color");
 const FontModel = require("./models/font");
 
-const sequelize = new Sequelize("mypeacefulplace", "root", "", {
+const sequelize = new Sequelize("mypeacefulplace", "root", "root", {
   host: "localhost",
   dialect: "mysql",
-  logging: false
+  logging: true
 });
 
 sequelize
@@ -178,6 +178,8 @@ function initDb() {
   // return sequelize.sync({ alter: true });
   return sequelize.sync();
 }
+
+// initDb()
 
 module.exports = {
     Author,
