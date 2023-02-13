@@ -16,10 +16,10 @@ const BgImageModel = require("./models/bgImage");
 const ColorModel = require("./models/color");
 const FontModel = require("./models/font");
 
-const sequelize = new Sequelize("mypeacefulplace", "root", "root", {
+const sequelize = new Sequelize("mypeacefulplace", "root", "", {
   host: "localhost",
   dialect: "mysql",
-  logging: console.log,
+  logging: false
 });
 
 sequelize

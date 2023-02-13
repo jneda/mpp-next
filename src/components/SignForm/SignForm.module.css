@@ -1,0 +1,37 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #a92360;
+    width: 90%;
+    padding: 2vh 0;
+    margin: 1vh 0;
+}
+
+.form input::placeholder{
+    color:#a92360;
+    opacity: 40%;
+}
+
+.btn{
+    background-color: #fca444;
+    margin-top: 6vh;
+    width: 70%;
+    height: 6vh;
+    max-width: 250px;
+    border-radius: 30px;
+    border: none;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+
