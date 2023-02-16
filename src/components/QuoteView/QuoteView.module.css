@@ -2,6 +2,8 @@
   text-align: center;
   background-size: cover;
   background-position: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .blockquote {
@@ -13,6 +15,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  text-shadow: 1px 1px 1px #fff;
 }
 
 .quoteContent::before {
