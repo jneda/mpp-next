@@ -7,7 +7,11 @@ const SetFontIcon = (props) => (
     viewBox="-0.29 0 20.59 20.59"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
+    pointerEvents={"all"}
+    onClick={() => props.clickhandler(props.name)}
   >
+    {/* Rect needed to make icon clickable in Firefox */}
+    <rect x="0" y="0" width="100%" height="100%" fill="none" />
     <g
       fill="none"
       stroke="#000"
