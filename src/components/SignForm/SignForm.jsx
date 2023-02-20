@@ -1,9 +1,5 @@
 import { useState } from "react";
 import styles from "./SignForm.module.css";
-
-
-
-
 export default function SignForm() {
 
     const[user, setUser] = useState({

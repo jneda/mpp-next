@@ -1,9 +1,6 @@
 import { useState } from "react";
 import styles from "./LogForm.module.css";
 
-
-
-
 export default function SignForm() {
 
     const[user, setUser] = useState({
@@ -17,12 +14,17 @@ export default function SignForm() {
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        await fetch('/api/createUser',{method: "POST", body: {}})
+        console.log(e.target);
+        const response = await fetch('/api/logIn',{method: "POST", body: JSON.stringify(user)});
         setUser({email:"", password:""})              //equivalent de input.value="" après enregistrer formulaire
+        if (response) {
+          const data = await response.json();
+          console.log(data);
+        };
     }
 
     return (
-      <form className={styles.form} action="/api/logIn" method="post">
+      <form className={styles.form} action="/api/logIn" method="post" onSubmit={handleSubmit}>
         <input type="email" name="email" placeholder="Email" value={user.email} onChange={handleChange} />
         <input type="password" name="password" placeholder="Mot de Passe" autoComplete="new-password" value={user.password} onChange={handleChange} />
         <div>
