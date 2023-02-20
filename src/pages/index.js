@@ -1,4 +1,4 @@
-import { initDb } from "db/db/sequelize";
+import { Author } from "db/sequelize";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -11,7 +11,8 @@ export default function Index ({ testAuthors }) {
 
   // testing sequelize
   const authors = testAuthors.map(author => <li key={author.id}>{author.name}</li>);
-  
+  console.log(authors);
+
   return (
     <>
       <main>
@@ -25,16 +26,11 @@ export default function Index ({ testAuthors }) {
 }
 
 export async function getStaticProps() {
-  const sequelize = await initDb();
 
-  const Author = sequelize.models.author;
-  
   let testAuthors = await Author.findAll();
-  sequelize.close();
 
   testAuthors = testAuthors.map(author => author.toJSON())
-
-  console.log(testAuthors);
+  
   return {
     props: {
       testAuthors: testAuthors,
