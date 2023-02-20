@@ -14,9 +14,10 @@ export default function SignForm() {
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        console.log(e.target);
-        const response = await fetch('/api/logIn',{method: "POST", body: JSON.stringify(user)});
+        
+        const response = await fetch('/api/logIn',{method: "POST", body: JSON.stringify(user)});        
         setUser({email:"", password:""})              //equivalent de input.value="" après enregistrer formulaire
+
         if (response) {
           const data = await response.json();
           console.log(data);
