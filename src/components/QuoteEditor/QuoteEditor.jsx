@@ -54,9 +54,10 @@ export default function QuoteEditor() {
 
   // util function
   function getImage() {
-    const node = document.querySelector(".quote-view");
+    console.log("coucou !");
+    const node = document.querySelector("article");
     htmlToImage
-      .toSvg(node)
+      .toPng(node)
       .then(function (dataUrl) {
         /* const img = new Image();
         img.src = dataUrl;
@@ -94,12 +95,12 @@ export default function QuoteEditor() {
   // dummy data for testing
   const quote = {
     content:
-      "L'homme qui déplace une montagne commence par déplacer les petites pierres.",
-    author: { name: "Confucius" },
+      "Sois fainéant, tu vivras content.",
+    author: { name: "Coluche" },
   };
   // dummy style for testing
   const viewStyle = {
-    image: "/backgrounds/bg02.jpg",
+    image: "/backgrounds/background-g3981561ff_1920.jpg",
     contentFont: "serif",
     contentFontSize: "2rem",
     authorFont: "cursive",
@@ -124,12 +125,13 @@ export default function QuoteEditor() {
 
   return (
     <>
-      {/* <button onClick={getImage}>Click me</button> */}
+      <button onClick={getImage}>Click me</button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
         viewStyle={viewStyle}
         className={styles.quoteView}
+        // onClick={getImage}
       />
       {/* <ImageEditor /> */}
       {editor}
