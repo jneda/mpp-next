@@ -3,7 +3,7 @@ import { svgs } from "./Icon/index";
 import styles from "./Navbar.module.css";
 
 export default function Navbar({ page }) {
-  console.log(page);
+  // console.log(page);
 
   const color = "#A92360";
   const style = {

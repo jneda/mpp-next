@@ -1,6 +1,15 @@
 import { Author } from "db/sequelize";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function ({ testAuthors }) {
+export default function Index ({ testAuthors }) {
+  // testing next router
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/homepage');
+  }, []); 
+
+  // testing sequelize
   const authors = testAuthors.map(author => <li key={author.id}>{author.name}</li>);
   console.log(authors);
 
@@ -13,6 +22,7 @@ export default function ({ testAuthors }) {
       </main>
     </>
   );
+  
 }
 
 export async function getStaticProps() {

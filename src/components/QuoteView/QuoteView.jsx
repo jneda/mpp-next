@@ -1,6 +1,6 @@
 import styles from "./QuoteView.module.css";
 
-export default function QuoteView({ quote, viewStyle }) {
+export default function QuoteView({ id, quote, viewStyle, className }) {
   const {
     image,
     contentFont,
@@ -13,7 +13,8 @@ export default function QuoteView({ quote, viewStyle }) {
 
   return (
     <article
-      className={styles.quoteView}
+      id={id}
+      className={`${className} ${styles.quoteView}`}
       style={{
         backgroundImage: `url(${image})`,
         backgroundColor: bgColor
