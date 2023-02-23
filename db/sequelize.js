@@ -16,8 +16,8 @@ const BgImageModel = require("./models/bgImage");
 const ColorModel = require("./models/color");
 const FontModel = require("./models/font");
 
-const sequelize = new Sequelize("mypeacefulplace", "root", "", {
-  host: "localhost",
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
   dialect: "mysql",
   logging: false
 });
@@ -180,20 +180,20 @@ function initDb() {
 }
 
 module.exports = {
-    Author,
-    BgImage,
-    Color,
-    DiaryEntry,
-    Font,
-    Mood,
-    QuoteCategory,
-    QuoteList,
-    QuoteSource,
-    QuoteView,
-    QuoteViewStyle,
-    Role,
-    Task,
-    TaskCategory,
-    User,
-    UserStyle,
+  Author,
+  BgImage,
+  Color,
+  DiaryEntry,
+  Font,
+  Mood,
+  QuoteCategory,
+  QuoteList,
+  QuoteSource,
+  QuoteView,
+  QuoteViewStyle,
+  Role,
+  Task,
+  TaskCategory,
+  User,
+  UserStyle,
 };
