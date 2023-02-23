@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-/*
+
 .page{
     position: relative;
     margin-top: 10vh;
@@ -84,8 +84,8 @@
     height: 10%;
     background-color: #fca444;
 }
-*/
 
+/*
 .btns div{
     margin-top: 4vh;
     width: 80vw;
@@ -123,10 +123,10 @@
     border-right : 0.8em solid transparent;
     border-top   : 1.6em solid #fca444;
     transform: translateX(-50%);
-}
+}*/
 
 
-/*
+
 .textArea{
     margin-top: 3vh;
     resize: none;
@@ -138,4 +138,4 @@
     font-size: 16px;
     font-family: 'Lato', sans-serif;
     line-height: 20px;
-}*/
+}

@@ -196,4 +196,5 @@ module.exports = {
     TaskCategory,
     User,
     UserStyle,
+    UserTasks
 };
