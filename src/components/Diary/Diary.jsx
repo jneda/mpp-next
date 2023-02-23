@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "../Homepage/Homepage.module.css";
 import style from './diary.module.css'
 import DiaryPage from "../DiaryPage/DiaryPage";
+import DiaryAddButton from "../DiaryAddButton/DiaryAddButton";
 
 export default function Diary(props) {
   const [page, setPage] = useState(true)
@@ -20,6 +21,7 @@ export default function Diary(props) {
     setColor(['#897b7b', '#fff'])
   }
 
+  console.log(props.userTasks)
   return (
     <>
       <div
@@ -51,46 +53,24 @@ export default function Diary(props) {
         </div>
 
         { page ?
-          <DiaryPage page={page} diary={props.diaryNotes}/>
+          ( props.diaryNotes.userDiaryEntries.length == 0 ? 
+          <>
+            <DiaryPage page={page} diary={props.diaryNotes}/>
+            <DiaryAddButton />
+          </>
           :
-          <DiaryPage page={page}/>
+          <div className={style.noNotes}>
+            <h3>Notes personelles</h3>
+            <p>Vous n'avez aucune note de journal <br /> pour le moment</p>
+            <DiaryAddButton />
+          </div>
+          )
+          :
+          <>
+            <DiaryPage page={page} tasks={props.userTasks}/>
+            <DiaryAddButton />
+          </>
         }
-
-        {/* {props.diaryNotes.userDiaryEntries.length == 0 && 
-        <div className={style.page}>
-          <div className={style.inters}>
-            <div className={style.inter1}></div>
-            <div className={style.inter2}></div>
-            <div className={style.inter3}></div>
-          </div>
-
-          <div className={style.marge}></div>
-          <div className={style.decor}>
-            <span className={style.dot}></span>
-            <span className={style.dot}></span>
-            <span className={style.dot}></span>
-            <span className={style.dot}></span>
-            <span className={style.dot}></span>
-            <span className={style.dot}></span>
-            <span className={style.dot}></span>
-            <span className={style.dot}></span>
-          </div>
-          <div className={style.txt}>
-            <h1>{page? todayDate : 'Ma to do list'}</h1>
-            {page ? 
-            (<>
-              <textarea className={style.textArea} onChange={handleChangesNotes} value={notes}></textarea>
-              <button>Valider</button>
-            </>)
-            :
-            (<ul>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-            </ul>)
-            }
-          </div>
-        </div>} */}
       </div>
       <Navbar page={"diary"} />
     </>
