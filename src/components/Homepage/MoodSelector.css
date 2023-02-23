@@ -1,0 +1,23 @@
+.rainbow,
+.transparent {
+  margin: 0 auto;
+  border-radius: 50% 50% 0 0;
+}
+
+.rainbow {
+  /*position: fixed;*/
+  /* transform: translateY(-250%);*/
+  width: 90vw;
+  height: 90vw;
+  background-color: green;
+  margin-top: 68vh;
+}
+
+.transparent {
+  position: relative;
+  transform: translateY(-85vw);
+  height: 80vw;
+  width: 80vw;
+  opacity: 1;
+  background: turquoise;
+}

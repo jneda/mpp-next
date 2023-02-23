@@ -1,0 +1,20 @@
+.quoteView {
+  width: 100%;
+}
+
+.quoteGallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-row-gap: 0px;
+  /* normalize */
+  list-style-type: none;
+}
+
+.quoteGalleryLi {
+  margin: 10px;
+}
+
+.quoteGalleryQuoteView {
+  border-radius: 15px;
+}

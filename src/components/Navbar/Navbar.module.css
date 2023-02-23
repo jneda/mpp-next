@@ -1,0 +1,15 @@
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(242, 234, 234, 0.5);
+}
+
+.navbarLink {
+  padding: 0.8rem;
+}

@@ -1,0 +1,88 @@
+.rs-bar {
+  position: relative !important;
+}
+
+.rs-handle {
+  position: absolute;
+  top: -4px;
+  left: -10px;
+}
+
+.rs-border {
+  border: 1px solid grey;
+}
+
+.dot {
+  height: 228px;
+  width: 233px;
+  background-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid grey;
+}
+
+.inner-circle {
+  position: absolute;
+  top: 20px;
+  left: 17px;
+}
+
+.min-legend {
+  position: absolute;
+  bottom: 40px;
+  left: -10px;
+}
+.left-legend {
+  position: absolute;
+  bottom: 130px;
+  left: -30px;
+}
+
+.top-legend {
+  position: absolute;
+  top: -30px;
+  left: 120px;
+}
+
+.right-legend {
+  position: absolute;
+  bottom: 130px;
+  right: -45px;
+}
+
+.max-legend {
+  position: absolute;
+  bottom: 40px;
+  right: -10px;
+}
+.tooltip-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.tooltip-head {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.tooltip-body {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.rs-range {
+  stroke-width: 23px;
+}
+
+.rs-range-color {
+  background-color: #cceaf0;
+  border: 3px solid #000000;
+  border-bottom: 0;
+}
+
+.rs-svg-mode .rs-border {
+  stroke: teal !important;
+}
