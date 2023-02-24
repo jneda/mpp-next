@@ -16,8 +16,8 @@ const BgImageModel = require("./models/bgImage");
 const ColorModel = require("./models/color");
 const FontModel = require("./models/font");
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-  host: process.env.DB_HOST,
+const sequelize = new Sequelize("mypeacefulplace", "root", "", {
+  host: "localhost",
   dialect: "mysql",
   logging: false
 });
