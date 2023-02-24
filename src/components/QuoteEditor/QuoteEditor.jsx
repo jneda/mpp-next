@@ -4,6 +4,7 @@ import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
 
+
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";

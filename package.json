@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "13.1.6",
+    "@next/font": "^13.1.6",
     "bcrypt": "^5.1.0",
     "html-to-image": "^1.11.11",
     "jsonwebtoken": "^9.0.0",
