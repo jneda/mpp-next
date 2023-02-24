@@ -14,7 +14,7 @@ export default function SignForm() {
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        await fetch('/api/createUser',{method: "POST", body: {}})
+        await fetch('/api/createUser', {method: "POST", body: {}})
         setUser({name: "", email:"", password:""})              //equivalent de input.value="" après enregistrer formulaire
     }
 
