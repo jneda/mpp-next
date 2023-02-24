@@ -20,7 +20,6 @@ export default function ({ quoteSources }) {
 export async function getStaticProps() {
 
   const quoteSourcesData = await QuoteSource.findAll({ include: Author });
-
   const quoteSources = quoteSourcesData.map(quoteSourceData => quoteSourceData.toJSON());
 
   return {
