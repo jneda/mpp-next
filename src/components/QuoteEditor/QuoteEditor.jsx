@@ -36,7 +36,10 @@ export default function QuoteEditor() {
 
  
   const modifyPolice = (dataInChild) => {
-    console.log(dataInChild)
+    var divText = document.getElementById("text-font-police")
+
+    divText.classList.replace(userPolice, `${dataInChild}`);
+    console.log(userPolice)
   }
   /* const editors = {
     [Modes.PREVIEW]: null,
