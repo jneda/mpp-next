@@ -38,8 +38,8 @@ const caveat = Caveat({
 
 //Faire un tableau de polices et mapper pour créer les li
 
-export default function FontEditor() {
-  
+export default function FontEditor(props) {
+  var divText = document.getElementById('test-font')
   const [ defaultPolice, setDefaultPolice] = useState(`${courgette.className}`)
   //Dans le state j'appelle la classe correspondant à la font de la li cliquée qui sera placée dans la div citation
   const [ actualPolice, setActualPolice ] = useState(defaultPolice)
@@ -49,10 +49,14 @@ export default function FontEditor() {
     const clickedPolice = element.target.classList[0];
 
     setActualPolice(clickedPolice)
-
-    divText.classList.replace(actualPolice, `${clickedPolice}`);
+    callToParent(actualPolice);
+    // divText.classList.replace(actualPolice, `${clickedPolice}`);
   }
 
+  function callToParent (actualPolice) {
+    
+    props.changeFontFunc(actualPolice);
+  }
 
   return (
     <div
