@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
+import { Courgette } from '@next/font/google'
 
 
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
+
+const courgette = Courgette({
+  subsets: ['latin'],
+  weight: '400'
+})
 
 export default function QuoteEditor() {
   /** Enum-like object */
@@ -18,6 +24,20 @@ export default function QuoteEditor() {
     SET_FONT: "setFont",
   });
 
+
+  //----------------------
+  //Essai fonction modifyFont
+  //-------------------------
+
+
+  const [ defaultPolice, setDefaultPolice] = useState(`${courgette.className}`)
+
+  const [ userPolice, setUserPolice] = useState(defaultPolice)
+
+ 
+  const modifyPolice = (dataInChild) => {
+    console.log(dataInChild)
+  }
   /* const editors = {
     [Modes.PREVIEW]: null,
     [Modes.SET_COLOR]: <ColorEditor />,
@@ -28,7 +48,8 @@ export default function QuoteEditor() {
   const editors = {
     preview: null,
     setColor: <ColorEditor />,
-    setFont: <FontEditor />,
+    setFont: <FontEditor
+    changeFontFunc = {modifyPolice} />,
     setImage: <ImageEditor />,
   };
 
