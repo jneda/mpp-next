@@ -45,7 +45,7 @@ export default function FontEditor(props) {
   const [ actualPolice, setActualPolice ] = useState(defaultPolice)
 
   function setPolice(element) {
-    var divText = document.getElementById('test-font')
+    
     const clickedPolice = element.target.classList[0];
 
     setActualPolice(clickedPolice)
@@ -66,7 +66,7 @@ export default function FontEditor(props) {
       }}
       className={styles.editor}
     >
-        <div className={`${styles.testFontText} ${caveat.className}`} id="test-font">
+        <div className={`${styles.testFontText} ${defaultPolice}`} id="test-font">
           Le cheval c'est génial
         </div>
         <ul>
