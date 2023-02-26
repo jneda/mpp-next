@@ -1,30 +1,24 @@
-import { DiaryEntry, Task, User } from "db/sequelize";
+import { withSessionSsr } from "@/session/withSession";
+import { User } from "db/sequelize";
+import { parseDate } from "../lib/dateHelper";
 import Diary from "../components/Diary/Diary";
 
-export default function (userDiaryEntries, userTasks) {
-  return <Diary diaryNotes={userDiaryEntries} userTasks={userTasks} />;
-}
+export default function ({ entries, tasks }) {
+  return <Diary diaryNotes={entries} userTasks={tasks} />;
+};
 
-export async function getStaticProps() {
-  const userDiaryEntriesData = await DiaryEntry.findAll({
-    where: { userId: "5" },
-  }); /*object Date cannot be serialized as JSON*/
-  // console.log(userDiaryEntriesData);
-  const userDiaryEntries = userDiaryEntriesData.map((diaryEntry) => {
-    console.log(diaryEntry);
-    return diaryEntry.toJSON();
-  });
+export const getServerSideProps = withSessionSsr(
+  async function getServerSideProps({ req }) {
+    const sessionUser = req.session.user;
 
-  const userTasksData = await User.findAll({
-    where: { id: "5" },
-    include: [{ model: Task }],
-  });
-  const userTasks = userTasksData.map((task) => task.toJSON());
+    const user = await User.findByPk(sessionUser.id);
 
-  return {
-    props: {
-      userDiaryEntries: userDiaryEntries,
-      userTasks: userTasks,
-    },
-  };
-}
+    const rawOption = { raw: true };
+    const entries = await user.getDiaryEntries(rawOption);
+    const tasks = await user.getTasks(rawOption);
+
+    return {
+      props: { entries: parseDate(entries), tasks },
+    };
+  }
+);

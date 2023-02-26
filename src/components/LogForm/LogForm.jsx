@@ -16,19 +16,25 @@ export default function SignForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("[login]:", JSON.stringify(user));
 
-    const response = await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify(user),
-    });
-    setUser({ email: "", password: "" }); //equivalent de input.value="" après enregistrer formulaire
+    let response;
+    try {
+      response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify(user),
+      });
+      setUser({ email: "", password: "" }); //equivalent de input.value="" après enregistrer formulaire
 
-    if (response) {
-      // logging
-      const data = await response.json();
-      console.log(data);
-      // redirect
-      router.push("/homepage");
+      if (response) {
+        // logging
+        const data = await response.json();
+        console.log(data);
+        // redirect
+        router.push("/homepage");
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
