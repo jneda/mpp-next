@@ -24,7 +24,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 
 sequelize
   .authenticate()
-  .then((result) => console.log("Connexion réussie : ", result))
+  .then((result) => console.log("Connexion réussie "))
   .catch((err) => console.error(`Echec: ${err}`));
 
 const QuoteSource = QuoteSourceModel(sequelize, DataTypes);
