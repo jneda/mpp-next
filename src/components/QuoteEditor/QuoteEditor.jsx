@@ -3,17 +3,12 @@ import Navbar from "../Navbar/Navbar";
 import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
-import { Courgette } from '@next/font/google'
 
 
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
 
-const courgette = Courgette({
-  subsets: ['latin'],
-  weight: '400'
-})
 
 export default function QuoteEditor() {
   /** Enum-like object */
@@ -29,17 +24,15 @@ export default function QuoteEditor() {
   //Essai fonction modifyFont
   //-------------------------
 
-
-  const [ defaultPolice, setDefaultPolice] = useState(`${courgette.className}`)
-
-  const [ userPolice, setUserPolice] = useState(defaultPolice)
-
  
-  const modifyPolice = (dataInChild) => {
+  const modifyPolice = (clickedData, dataInChild) => {
     var divText = document.getElementById("text-font-police")
 
-    divText.classList.replace(userPolice, `${dataInChild}`);
-    console.log(userPolice)
+    // setUserPolice(clickedData);
+
+    divText.classList.replace(dataInChild, `${clickedData}`);
+    console.log(dataInChild)
+    // console.log(userPolice)
   }
   /* const editors = {
     [Modes.PREVIEW]: null,
