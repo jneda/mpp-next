@@ -39,24 +39,35 @@ const caveat = Caveat({
 //Faire un tableau de polices et mapper pour créer les li
 
 export default function FontEditor(props) {
-  var divText = document.getElementById('test-font')
   const [ defaultPolice, setDefaultPolice] = useState(`${courgette.className}`)
   //Dans le state j'appelle la classe correspondant à la font de la li cliquée qui sera placée dans la div citation
   const [ actualPolice, setActualPolice ] = useState(defaultPolice)
 
+  const [ clickedPolice, setClickedPolice ] = useState(actualPolice)
+
   function setPolice(element) {
-    
-    const clickedPolice = element.target.classList[0];
+    // 1) Au clic j'appelle setPolice qui récupère l'élément cliqué
+    // 2) setPolice appelle une autre fonction qui change le state clickedPolice
+    // 3) le state contient lui même une fonction callback
+    // 4) Cette fonction définit une constante qui contient la mise à jour de la police cliquée
+    // la mise à jour de l'état dans React est asynchrone, si j'appelais séparément setClickedPolice et setActualPolice, la valeur de clickedPolice ne sera pas mise à jour au premier clic
+    // 5) J'appelle ma fonction callToParent qui fait le lien avec l'éditeur pour y remonter mes states
+    // 6) la fonction retourne obligatoirement la nouvelle valeur cliquée
+    setClickedPolice(() => {
+      const newClickedPolice =  element.target.classList[0];
+      callToParent(newClickedPolice, actualPolice);
+      setActualPolice(newClickedPolice);
+      return newClickedPolice;
+      
+    });
 
-    setActualPolice(clickedPolice)
-    callToParent(actualPolice);
-    // divText.classList.replace(actualPolice, `${clickedPolice}`);
   }
 
-  function callToParent (actualPolice) {
+  function callToParent(clickedPolice, actualPolice) {
     
-    props.changeFontFunc(actualPolice);
+    props.changeFontFunc(clickedPolice, actualPolice);
   }
+
 
   return (
     <div
@@ -66,11 +77,8 @@ export default function FontEditor(props) {
       }}
       className={styles.editor}
     >
-        <div className={`${styles.testFontText} ${defaultPolice}`} id="test-font">
-          Le cheval c'est génial
-        </div>
         <ul>
-          <li  className={`${zeyada.className} ${styles.policeItem}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
+          <li  className={`${zeyada.className} ${styles.policeItem}`} onClick={setPolice}>{`Il est temps de rallumer les étoiles`}</li>
           <li  className={`${merriweather.className} ${styles.policeItem}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
           <li  className={`${caveat.className} ${styles.policeItem}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
           <li  className={`${GreatVibes.className} ${styles.policeItem}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
@@ -79,45 +87,3 @@ export default function FontEditor(props) {
     </div>
   );
 }
-
-  // useEffect ( () => {
-
-  //   //Mise en place de la boucle qui me permet de sélectionner tous les paragraphes et de leur appliquer une fonction
-  //   var policeLi = document.getElementsByTagName('li');
-
-  
-  //     for (let i = 0; i < policeLi.length; i++) {
-  //       setPolice(policeLi[i]);
-  //   }
-  //   })
-
-  //   function setPolice(element) {
-
-  //     //Je souhaite récupérer le nom de la classe de la li cliquée et l'ajouter à ma div de texte test
-  //     // A tester avec un state pour le modifier avec setState
-  //     const textDiv = element;
-      
-  //     // console.log(textDiv)
-
-  //     const clickedPolice = element.classList[0];
-    
-  //     // console.log(textDiv)
-  
-  //     // const textDivClass = textDiv.classList[1];
-  //     console.log(clickedPolice)
-  
-  //     setTextPolice(`${clickedPolice}`)
-  //   }
-    // function setPolice(event) {
-    //   //Je souhaite récupérer le nom de la classe de la li cliquée et l'ajouter à ma div de texte test
-      
-    //   const clickedPolice = event.target.classList[0];
-     
-    //   const textDiv = document.querySelector(`.${styles.testFontText}`)
-    //   // console.log(textDiv)
-  
-    //   const textDivClass = textDiv.classList[1];
-    //   console.log(clickedPolice)
-  
-    //   textDiv.classList.replace(textDivClass, `${clickedPolice}`);
-    // }
