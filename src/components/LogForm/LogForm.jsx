@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from 'yup';
@@ -6,11 +5,6 @@ import styles from "./LogForm.module.css";
 
 export default function SignForm() {
   const router = useRouter();
-
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
 
   const handleSubmit = async (userInput) => {
     console.log("[login]:", JSON.stringify(userInput));
@@ -21,7 +15,6 @@ export default function SignForm() {
         method: "POST",
         body: JSON.stringify(userInput),
       });
-      setUser({ email: "", password: "" }); //equivalent de input.value="" après enregistrer formulaire
 
       if (response) {
         // logging

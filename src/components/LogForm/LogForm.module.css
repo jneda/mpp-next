@@ -1,76 +1,75 @@
 .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form input {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #a92360;
-    width: 90%;
-    padding: 2vh 0;
-    margin: 1vh 0;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #a92360;
+  width: 90%;
+  padding: 2vh 0;
+  margin: 1vh 0;
 }
 
 .form input::placeholder {
-    color: #a92360;
-    opacity: 40%;
+  color: #a92360;
+  opacity: 40%;
 }
 
-
 .buttonWrapper {
-    margin-top: 6vh;
-    padding: 0.2em;
-    border-radius: 30px;
-    position: relative;
+  margin-top: 6vh;
+  padding: 0.2em;
+  border-radius: 30px;
+  position: relative;
 }
 
 .buttonWrapper::before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(180deg,
-        hsl(311deg 55% 31%) 0%,
-        hsl(323deg 62% 36%) 9%,
-        hsl(332deg 66% 42%) 18%,
-        hsl(341deg 64% 48%) 27%,
-        hsl(351deg 70% 55%) 36%,
-        hsl(4deg 77% 61%) 45%,
-        hsl(15deg 85% 62%) 55%,
-        hsl(24deg 90% 63%) 64%,
-        hsl(28deg 92% 63%) 73%,
-        hsl(31deg 94% 63%) 82%,
-        hsl(34deg 95% 63%) 91%,
-        hsl(37deg 96% 63%) 100%
-    );
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    180deg,
+    hsl(311deg 55% 31%) 0%,
+    hsl(323deg 62% 36%) 9%,
+    hsl(332deg 66% 42%) 18%,
+    hsl(341deg 64% 48%) 27%,
+    hsl(351deg 70% 55%) 36%,
+    hsl(4deg 77% 61%) 45%,
+    hsl(15deg 85% 62%) 55%,
+    hsl(24deg 90% 63%) 64%,
+    hsl(28deg 92% 63%) 73%,
+    hsl(31deg 94% 63%) 82%,
+    hsl(34deg 95% 63%) 91%,
+    hsl(37deg 96% 63%) 100%
+  );
 }
 
-
 .btn {
-    position: relative;
-    background-color: #fff;
-    width: 100%;
-    height: 6vh;
-    max-width: 250px;
-    padding: 0 2vw;
-    border-radius: 30px;
-    border: none;
-    color: #a92360;
-    font-family: 'Lato', sans-serif;
-    font-size: 0.7em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 1;
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  height: 6vh;
+  max-width: 250px;
+  padding: 0 2vw;
+  border-radius: 30px;
+  border: none;
+  color: #a92360;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 1;
 }
 
 .errorText {
-    font-family: 'Lato', sans-serif;
-    color: red;
+  font-family: 'Lato', sans-serif;
+  color: red;
 }

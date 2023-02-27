@@ -1,16 +1,10 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./SignForm.module.css";
+
 export default function SignForm() {
   const router = useRouter();
-
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
 
   const handleSubmit = async (userInput) => {
     
@@ -28,8 +22,6 @@ export default function SignForm() {
       // handle error
       return;
     }
-
-    setUser({ name: "", email: "", password: "" });              //equivalent de input.value="" après enregistrer formulaire
 
     // log in
     try {
@@ -59,11 +51,11 @@ export default function SignForm() {
       {formik => (
         <Form className={styles.form}>
           <Field type="text" name="name" placeholder="Pseudo" />
-          <ErrorMessage name="name">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+          <ErrorMessage name="name">{msg => <div className={styles.errorText}>{msg}</div>}</ErrorMessage>
           <Field type="email" name="email" placeholder="Email" />
-          <ErrorMessage name="email">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+          <ErrorMessage name="email">{msg => <div className={styles.errorText}>{msg}</div>}</ErrorMessage>
           <Field type="password" name="password" placeholder="Mot de Passe" />
-          <ErrorMessage name="password">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+          <ErrorMessage name="password">{msg => <div className={styles.errorText}>{msg}</div>}</ErrorMessage>
           <button className={styles.btn} type="submit">S'inscrire</button>
         </Form>
       )}
