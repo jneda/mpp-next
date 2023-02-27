@@ -12,12 +12,7 @@ export default function SignForm() {
     password: "",
   });
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value }); //spread user pour ne pas perdre autres données lors de update
-  };
-
   const handleSubmit = async (userInput) => {
-    // e.preventDefault();
     console.log("[login]:", JSON.stringify(userInput));
 
     let response;
