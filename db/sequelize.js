@@ -24,7 +24,7 @@ const sequelize = new Sequelize("mypeacefulplace", "root", "", {
 
 sequelize
   .authenticate()
-  .then((result) => console.log("Connexion réussie : ", result))
+  .then((result) => console.log("Connexion réussie "))
   .catch((err) => console.error(`Echec: ${err}`));
 
 const QuoteSource = QuoteSourceModel(sequelize, DataTypes);
@@ -196,4 +196,5 @@ module.exports = {
     TaskCategory,
     User,
     UserStyle,
+    UserTasks
 };
