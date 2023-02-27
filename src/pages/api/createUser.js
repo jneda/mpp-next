@@ -2,11 +2,12 @@ import { Role, User } from "db/sequelize";
 const bcrypt = require("bcrypt");
 
 export default async function signUser(req, res) {
-  const hashPassword = await bcrypt.hash(req.body.password, 10);
+  const {name, email, password} = JSON.parse(req.body)
+  const hashPassword = await bcrypt.hash(password, 10);
 
   const user = await User.build({
-    name: req.body.name,
-    email: req.body.email,
+    name: name,
+    email: email,
     password: hashPassword,
   });
 
