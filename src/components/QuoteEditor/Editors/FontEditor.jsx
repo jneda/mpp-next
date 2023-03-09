@@ -55,6 +55,12 @@ export default function FontEditor(props) {
       item.classList.toggle(`${styles.translateList}`)};
   }
 
+  const handleFontSizeChange = (event) => {
+    const newSize = event.target.value;
+    props.onFontSizeChange(newSize, selectedText);
+  };
+
+
   return (
     <div
       style={{
@@ -76,9 +82,8 @@ export default function FontEditor(props) {
           <button className={styles.selectedBtn} id="author" disabled={selectedText == "author"} onClick={selectText}>Appliquer à l'auteur</button>
         </div>
         <div>
-          <input type="range" className={styles.range} id="fontSize-range" min="2" max="5" defaultValue="2" onInput={(event) => {
-             document.getElementById('display-fontSize-range').value= event.target.value;
-             const newSize = event.target.value;
+          <input type="range" className={styles.range} id="fontSize-range" min="2" max="5" defaultValue="2" onInput={handleFontSizeChange}/>
+             {/* const newSize = event.target.value;
              const quoteElement = document.getElementById("quote-element");
              const authorElement = document.getElementById("author-element");
              if(selectedText == "quote"){
@@ -86,7 +91,7 @@ export default function FontEditor(props) {
              } else {
               authorElement.style.fontSize = `${newSize}rem`;
              };
-             }}/>
+             }}/> */}
           <input type="text" id="display-fontSize-range" value="2" readOnly/>
         </div>
     </div>

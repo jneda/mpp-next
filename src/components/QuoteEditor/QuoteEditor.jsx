@@ -25,6 +25,18 @@ export default function QuoteEditor() {
     };
   
 
+  const handleFontSizeChange = (newSize, selectedText) => {
+
+    let fontProperty;
+    
+    if(selectedText == "quote"){
+      fontProperty = {contentFontSize:`${newSize}rem`}
+    } else {
+      fontProperty = {authorFontSize:`${newSize}rem`}
+    }
+    setViewStyle({...viewstyle, ...fontProperty});
+  };
+
   const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
 
   /** Enum-like object */
@@ -80,6 +92,7 @@ export default function QuoteEditor() {
     preview: null,
     setColor: <ColorEditor />,
     setFont: <FontEditor
+    onFontSizeChange={handleFontSizeChange}
     changeFontFunc = {modifyPolice} />,
     setImage: <ImageEditor />,
   };
