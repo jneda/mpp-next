@@ -9,6 +9,7 @@ import DiaryAddButton from "../DiaryAddButton/DiaryAddButton";
 export default function Diary(props) {
   const [page, setPage] = useState(true)
   const [color, setColor] = useState(['#fff', '#897b7b'])
+  const [editionMode, setEditionMode] = useState(false)
   let path = "backgrounds/bg01.jpg";
 
   function handleClickDiary(){
@@ -21,10 +22,14 @@ export default function Diary(props) {
     setColor(['#897b7b', '#fff'])
   }
 
+  function handleClickAdd(){
+    setEditionMode(true)
+  }
+
   console.log(props.userTasks)
   return (
     <>
-      <div
+      <div className={style.container}
         // className={styles.background}
         // style={{
         //   backgroundImage: `url(${path})`,
@@ -53,23 +58,26 @@ export default function Diary(props) {
         </div>
 
         { page ?
-          ( props.diaryNotes.userDiaryEntries.length == 0 ? 
-          <>
+          ( props.diaryNotes.userDiaryEntries.length > 0 ? 
             <DiaryPage page={page} diary={props.diaryNotes}/>
-            <DiaryAddButton />
-          </>
           :
           <div className={style.noNotes}>
             <h3>Notes personelles</h3>
             <p>Vous n'avez aucune note de journal <br /> pour le moment</p>
-            <DiaryAddButton />
           </div>
           )
           :
           <>
             <DiaryPage page={page} tasks={props.userTasks}/>
-            <DiaryAddButton />
+            <DiaryPage page={page} tasks={props.userTasks}/>
           </>
+        }
+      </div>
+      <div>
+        {editionMode ?
+          <DiaryPage page={page} setEditionMode={setEditionMode}/>
+        :
+          <DiaryAddButton handleClick={handleClickAdd} />
         }
       </div>
       <Navbar page={"diary"} />

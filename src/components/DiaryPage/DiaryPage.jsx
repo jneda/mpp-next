@@ -8,14 +8,27 @@ export default function DiaryPage(props) {
         setNotes(e.target.value)
     }
 
+    function handleClickValidate(){
+        fetch('api/createNote',{
+            method: 'POST',
+            body: JSON.stringify({note: notes, userId: 4})  /*userId*/
+        })
+        setNotes('')
+
+    }
+
+    function handleClickCancel(){
+        props.setEditionMode(false)
+    }
+
     const todayDate = new Date().toLocaleString().substring(0, 10);
     console.log(props.diary != undefined)
 
     return(
         <div className={styles.page}>
             <div className={styles.inters}>
-                <div className={styles.inter1}></div>
-                <div className={styles.inter2}></div>
+                <div className={styles.inter1} onClick={handleClickValidate}>V</div>
+                <div className={styles.inter2} onClick={handleClickCancel}>X</div>
                 <div className={styles.inter3}></div>
             </div>
             <div className={styles.marge}></div>
@@ -34,7 +47,6 @@ export default function DiaryPage(props) {
                 <>
                     <h1>{todayDate}</h1>
                     <textarea className={styles.textArea} onChange={handleChangesNotes} value={notes}></textarea>
-                    <button>Valider</button>
                 </>
                 :
                 <>

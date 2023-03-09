@@ -62,6 +62,12 @@
     justify-content: space-evenly;
 }
 
+.inters div{
+    line-height: 100%;
+    padding: 0.2em;
+    text-align: end;
+}
+
 .inters div:hover{
     transform: translateX(20%);
     transition: ease-in 0.3s;
@@ -84,47 +90,6 @@
     height: 10%;
     background-color: #fca444;
 }
-
-/*
-.btns div{
-    margin-top: 4vh;
-    width: 80vw;
-    height: 10vh;
-    max-width: 400px;
-    display: flex;
-    justify-content: center;
-    background-color: #897b7b;
-    border-radius: 30px;
-}
-
-.btns button{
-    width:50%;
-    border: none;
-    font-family: 'Lato', sans-serif;
-    font-size: 20px;
-}
-
-.journal{
-    border-radius: 30px 0 0 30px;
-}
-
-.todo{
-    border-radius: 0 30px 30px 0;
-}
-
-.btns{
-    position: relative;
-}
-
-.btns span{
-    z-index: -1;
-    position: absolute;
-    border-left  : 0.8em solid transparent;
-    border-right : 0.8em solid transparent;
-    border-top   : 1.6em solid #fca444;
-    transform: translateX(-50%);
-}*/
-
 
 
 .textArea{
