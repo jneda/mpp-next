@@ -7,22 +7,34 @@ import DiaryPage from "../DiaryPage/DiaryPage";
 import DiaryAddButton from "../DiaryAddButton/DiaryAddButton";
 
 export default function Diary(props) {
+
   const { diaryNotes, userTasks } = props;
   console.log("[Diary component] props:", props);
   console.log("number of diary entries:", diaryNotes.length);
 
+
   const [page, setPage] = useState(true);
   const [color, setColor] = useState(["#fff", "#897b7b"]);
+  const [editionMode, setEditionMode] = useState(false);
+  const [diaryContents, setDiaryContents] = useState(diaryNotes);
+  const [taskContents, setTaskContents] = useState(userTasks);
+  const [editingTasks, setEditingTasks] = useState(false)
   let path = "backgrounds/bg01.jpg";
+
+  console.log(userTasks)
 
   function handleClickDiary() {
     setPage(true);
     setColor(["#fff", "#897b7b"]);
+    setEditionMode(false);
+    setEditingTasks(false);
   }
 
   function handleClickTodo() {
     setPage(false);
     setColor(["#897b7b", "#fff"]);
+    setEditionMode(false);
+    setEditingTasks(false);
   }
 
   return (
@@ -95,36 +107,35 @@ export default function Diary(props) {
           ></span>
         </div>
 
+        <div>
+        {editionMode ?
+          <DiaryPage page={page} setEditionMode={setEditionMode} userId={props.userId} diaryContents={diaryContents} setDiaryContents={setDiaryContents}/>
+        :
+          <DiaryAddButton page={page} setEditionMode={setEditionMode} editingTasks={editingTasks} setEditingTasks={setEditingTasks} />
+        }
+      </div>
         {page ? (
-          diaryNotes.length > 0 ? (
-            <>
-              <DiaryPage page={page} diary={props.diaryNotes} />
-              <DiaryAddButton />
-            </>
-          ) : (
+          diaryNotes.length > 0 ? diaryContents.map(entry => (<DiaryPage key={entry.id} page={page} data={entry} />)) 
+          // (
+          //   <>
+          //     <DiaryPage page={page} diary={props.diaryNotes} />
+          //   </>
+          // )
+           : (
             <div className={style.noNotes}>
               <h3>Notes personnelles</h3>
               <p>
                 Vous n'avez aucune note de journal <br /> pour le moment
               </p>
-              <DiaryAddButton />
             </div>
           )
         ) : (
           <>
-            <DiaryPage page={page} tasks={props.userTasks} />
-            <DiaryAddButton />
+            <DiaryPage page={page} taskContents={taskContents} setTaskContents={setTaskContents} editingTasks={editingTasks} setEditingTasks={setEditingTasks} userId={props.userId}/>
           </>
         )}
       </div>
-      <div>
-        {editionMode ?
-          <DiaryPage page={page} setEditionMode={setEditionMode}/>
-        :
-          <DiaryAddButton handleClick={handleClickAdd} />
-        }
-      </div>
-      <Navbar page={"diary"} />
+      <Navbar page={"diary"}/>
     </>
   );
 }

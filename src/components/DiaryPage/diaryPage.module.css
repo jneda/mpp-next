@@ -2,7 +2,7 @@
 
 .page{
     position: relative;
-    margin-top: 10vh;
+    margin-top: 6vh;
     border-radius: 4% 10% 10% 4%;
     background-color: #DBd6d6;
     width: 80vw;
@@ -46,6 +46,7 @@
     border-radius: 0 10% 10% 0;
     z-index: 2;
 }
+
 
 .todolist{
     list-style: none;
@@ -103,4 +104,34 @@
     font-size: 16px;
     font-family: 'Lato', sans-serif;
     line-height: 20px;
+}
+
+.todoTitle{
+    text-align: center;
+}
+
+.todoTitle ~ ul li {
+    margin: 4vh 1vw;
+    list-style: none;
+    border-bottom: 1px solid #a92360;
+    display: grid;
+    grid-template-columns: 0.2fr 2.4fr 0.4fr;
+}
+
+.todoTitle ~ ul li div button{
+    border: none;
+    cursor: pointer;
+}
+
+.todoTitle ~ ul form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.todoTitle ~ ul form input{
+    background-color: inherit;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #a92360;
 }
