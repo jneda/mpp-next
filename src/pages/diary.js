@@ -36,3 +36,12 @@ export const getServerSideProps = withSessionSsr(
     };
   }
 );
+
+
+/*
+gestion des erreur route API
+style CSS
+definition des validation suprpession notes
+supprimer note de journal
+modifier note de journal
+*/

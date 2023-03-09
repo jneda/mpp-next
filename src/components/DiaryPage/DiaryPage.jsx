@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 export default function DiaryPage(props) {
     const [notes, setNotes] = useState('')
     const [newTask, setNewTask] = useState('')
-    const [taskList, setTaskList] = useState(props.diaryContents)
    
 
     function handleChangesNotes(e){
@@ -26,6 +25,7 @@ export default function DiaryPage(props) {
             props.setDiaryContents([{id: data.id, content: notes, date:todayDate}, ...props.diaryContents]);
         })
         setNotes('')
+        props.setEditionMode(false)
     }
 
     function handleClickCancel(){
@@ -43,6 +43,20 @@ export default function DiaryPage(props) {
         fetch('api/updateTask',{
             method: 'POST',
             body: JSON.stringify({checked: task.checked, id: id})
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+
+    function handleClickDeleteTask(e){
+        const id = e.target.parentNode.parentNode.id;
+        let tab = [...props.taskContents];
+        const taskIndex = tab.findIndex(task => task.id == id);
+        tab.splice(taskIndex, 1)
+        props.setTaskContents(tab)
+        fetch('api/deleteTask',{
+            method: 'DELETE',
+            body: JSON.stringify({id: id})
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -99,11 +113,11 @@ export default function DiaryPage(props) {
                 <h2 className={styles.todoTitle}>Ma to do list</h2>
                     <ul>
                         {props.taskContents ? props.taskContents.map(task =>(
-                            <li key={task.id}>
+                            <li key={task.id} id={task.id}>
                                 <input type="checkbox" name={task.id} checked={task.checked} onChange={(e) => handleChangeCheck(task, e)}/>       
                                 <span>{task.content}</span>
                                 <div>
-                                    <button>del</button>
+                                    <button onClick={e =>handleClickDeleteTask(e)}>del</button>
                                 </div>
                             </li>
                         ))
