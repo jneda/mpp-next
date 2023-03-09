@@ -13,9 +13,22 @@ export const getServerSideProps = withSessionSsr(
 
     const user = await User.findByPk(sessionUser.id);
 
-    const rawOption = { raw: true };
+    const rawOption = { raw: true }; 
     const entries = await user.getDiaryEntries({rawOption, order:[['date', 'DESC']]});
-    const tasks = await user.getTasks(rawOption);
+    let tasks = await user.getTasks();
+    tasks = tasks.map(task =>{
+      const {
+        id, 
+        content, 
+        userTasks:{ dataValues: { checked }}
+      } = task;
+      
+      return{
+        id,
+        content,
+        checked
+      };
+    })
     const id = user.id;
 
     return {

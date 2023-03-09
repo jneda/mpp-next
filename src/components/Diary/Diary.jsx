@@ -9,8 +9,8 @@ import DiaryAddButton from "../DiaryAddButton/DiaryAddButton";
 export default function Diary(props) {
 
   const { diaryNotes, userTasks } = props;
-  console.log("[Diary component] props:", props);
-  console.log("number of diary entries:", diaryNotes.length);
+  // console.log("[Diary component] props:", props);
+  // console.log("number of diary entries:", diaryNotes.length);
 
 
   const [page, setPage] = useState(true);
@@ -21,7 +21,7 @@ export default function Diary(props) {
   const [editingTasks, setEditingTasks] = useState(false)
   let path = "backgrounds/bg01.jpg";
 
-  console.log(userTasks)
+  console.log(diaryContents)
 
   function handleClickDiary() {
     setPage(true);

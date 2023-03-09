@@ -1,9 +1,11 @@
 import styles from './diaryPage.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function DiaryPage(props) {
     const [notes, setNotes] = useState('')
     const [newTask, setNewTask] = useState('')
+    const [taskList, setTaskList] = useState(props.diaryContents)
+   
 
     function handleChangesNotes(e){
         setNotes(e.target.value)
@@ -15,26 +17,48 @@ export default function DiaryPage(props) {
 
 
     function handleClickValidate(){
-        props.setDiaryContents(props.diaryContents, {id: Date.now(), content: notes, date:todayDate});  /*ne marche pas...*/
         fetch('api/createNote',{
             method: 'POST',
             body: JSON.stringify({note: notes, userId: props.userId}) 
         })
-        .then( _ => setNotes(''))
+        .then(res => res.json())
+        .then(data => {
+            props.setDiaryContents([{id: data.id, content: notes, date:todayDate}, ...props.diaryContents]);
+        })
+        setNotes('')
     }
 
     function handleClickCancel(){
         props.setEditionMode(false)
     }
 
+    function handleChangeCheck(task, e){       
+        const id = parseInt(e.target.name)
+        let tab = [...props.taskContents]
+        const taskIndex = tab.findIndex(task => (
+            task.id === id
+        ))
+        tab[taskIndex].checked = !task.checked
+        props.setTaskContents(tab)
+        fetch('api/updateTask',{
+            method: 'POST',
+            body: JSON.stringify({checked: task.checked, id: id})
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+
     function handleSubmitTask(e){
         e.preventDefault();
-        props.setTaskContents(props.taskContents, {id: Date.now(), content: newTask})
         fetch('api/createTask',{
             method: 'POST',
             body: JSON.stringify({content: newTask, userId: props.userId})
         })
-        .then(_ => setNewTask(''))
+        .then(res => res.json())
+        .then(data => {
+            props.setTaskContents([...props.taskContents, {id: data.data.taskId, content: newTask, checked: false}])
+        })
+        setNewTask('')
     }
 
     const todayDate = new Date().toLocaleString().substring(0, 10);
@@ -76,7 +100,7 @@ export default function DiaryPage(props) {
                     <ul>
                         {props.taskContents ? props.taskContents.map(task =>(
                             <li key={task.id}>
-                                <input type="checkbox" />       
+                                <input type="checkbox" name={task.id} checked={task.checked} onChange={(e) => handleChangeCheck(task, e)}/>       
                                 <span>{task.content}</span>
                                 <div>
                                     <button>del</button>

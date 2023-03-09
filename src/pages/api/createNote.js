@@ -7,6 +7,8 @@ export default async function createDiaryEntry(req,res){
         content: data.note,
         userId: data.userId
     })
-    const message = `Votre note a bien été enregistrée`;
-    res.status(200).json({message, data: data})
+    .then(entry =>{
+        const message = `Votre note a bien été enregistrée`;
+        res.status(200).json({message, id: entry.id, data: data})
+    })
 }
