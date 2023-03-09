@@ -1,7 +1,6 @@
 import Navbar from "../Navbar/Navbar";
 import { useState } from "react";
 
-import styles from "../Homepage/Homepage.module.css";
 import style from "./diary.module.css";
 import DiaryPage from "../DiaryPage/DiaryPage";
 import DiaryAddButton from "../DiaryAddButton/DiaryAddButton";
@@ -9,8 +8,8 @@ import DiaryAddButton from "../DiaryAddButton/DiaryAddButton";
 export default function Diary(props) {
 
   const { diaryNotes, userTasks } = props;
-  console.log("[Diary component] props:", props);
-  console.log("number of diary entries:", diaryNotes.length);
+  // console.log("[Diary component] props:", props);
+  // console.log("number of diary entries:", diaryNotes.length);
 
 
   const [page, setPage] = useState(true);
@@ -20,8 +19,6 @@ export default function Diary(props) {
   const [taskContents, setTaskContents] = useState(userTasks);
   const [editingTasks, setEditingTasks] = useState(false)
   let path = "backgrounds/bg01.jpg";
-
-  console.log(userTasks)
 
   function handleClickDiary() {
     setPage(true);
