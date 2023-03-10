@@ -41,10 +41,7 @@ export const getServerSideProps = withSessionSsr(
 /*
 gestion des erreur route API
 style CSS
-definition des validation suprpession notes
 utilisation des intercalaires
-supprimer note de journal
-modifier note de journal
+peut être vérifier si tache to do list existe déjà avant créer
 
-crée une note vide si appuie sur vert sur todolist mais pas sur journal
 */

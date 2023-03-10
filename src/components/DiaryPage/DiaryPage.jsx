@@ -56,6 +56,10 @@ export default function DiaryPage(props) {
         setOnEdit(false)
     }
 
+    function hancleClickCreateTask(){
+        props.setEditingTasks(true)
+    }
+
     function handleChangeCheck(task, e){       
         const id = parseInt(e.target.name)
         let tab = [...props.taskContents]
@@ -150,8 +154,8 @@ export default function DiaryPage(props) {
                     </>
                 :
                 <>
-                    <div className={styles.inter1}>to</div>
-                    <div className={styles.inter2}>do</div>
+                    <div className={styles.inter1} onClick={hancleClickCreateTask}>create</div>
+                    <div className={styles.inter2}>deleteAll</div>
                     <div className={styles.inter3}>list</div>
                 </>     
                 }
