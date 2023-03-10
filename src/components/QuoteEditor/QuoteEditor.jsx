@@ -24,6 +24,7 @@ export default function QuoteEditor() {
       bgColor: "#00000000",
     };
   
+    const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
 
   const handleFontSizeChange = (newSize, selectedText) => {
 
@@ -37,7 +38,21 @@ export default function QuoteEditor() {
     setViewStyle({...viewstyle, ...fontProperty});
   };
 
-  const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
+  const handleColorChange = (newColor, selectedText) => {
+
+    let fontProperty;
+    
+      if(selectedText == "quote"){
+        fontProperty = {fgColor:`${newColor}`}
+      } else {
+        fontProperty = {fgaColor:`${newColor}`}
+      }
+
+    setViewStyle({...viewstyle, ...fontProperty});
+  };
+
+
+
 
   /** Enum-like object */
   const Modes = Object.freeze({
@@ -90,7 +105,8 @@ export default function QuoteEditor() {
 
   const editors = {
     preview: null,
-    setColor: <ColorEditor />,
+    setColor: <ColorEditor
+    colorChange={handleColorChange}/>,
     setFont: <FontEditor
     onFontSizeChange={handleFontSizeChange}
     changeFontFunc = {modifyPolice} />,
