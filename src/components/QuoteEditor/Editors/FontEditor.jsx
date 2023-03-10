@@ -68,6 +68,10 @@ export default function FontEditor(props) {
    setFontSize(event.target.value)
   };
 
+  
+     const keyValues = Object.entries(fonts);
+
+
 
   return (
     <div
@@ -78,19 +82,19 @@ export default function FontEditor(props) {
       className={styles.editor}
       id="editor"
     >
-        <ul  className= {styles.policeItem} id="policeList">
-          <li  className={`${fonts.zeyada.className}`} onClick={setPolice}>{`Il est temps de rallumer les étoiles`}</li>
-          <li  className={`${fonts.merriweather.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-          <li  className={`${fonts.caveat.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-          <li  className={`${fonts.GreatVibes.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-        </ul>
+      
+       <ul className={`${styles.policeItem}`} id="policeList">
+       {keyValues.map(([key , value]) => {
+          return <li className={`${value.className}`}onClick={setPolice}>Dreams come true<span className={`${fonts.merriweather.className} ${styles.fontSpan}`}>{key.toUpperCase()}</span> </li>
+       })}
+       </ul>
         <div className={`${styles.arrow}`}onClick={setArrow}></div>
         <div>
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
         </div>
         <div  className={`${styles.sizePolice}`}>
-          <input type="range"step="0.1" className={styles.range} id="fontSize-range" name="fontSize-range" min="2" max="5" defaultValue="2" onInput={(event) => {
+          <input type="range"step="0.1" className={styles.range} id="fontSize-range" name="fontSize-range" min="1" max="5" defaultValue="2" onInput={(event) => {
             handleFontSizeChange(event);
             handleFontRange(event);
           }}/>
