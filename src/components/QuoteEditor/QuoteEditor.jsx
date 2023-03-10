@@ -11,11 +11,7 @@ import * as htmlToImage from "html-to-image";
 import styles from "./QuoteEditor.module.css";
 console.log(fonts);
 
-<<<<<<< HEAD
 export default function QuoteEditor({ backgrounds }) {
-  console.log("QuoteEditor component:", { backgrounds });
-=======
-export default function QuoteEditor() {
 
     // dummy style for testing
     const dummyStyle = {
@@ -31,7 +27,6 @@ export default function QuoteEditor() {
 
   const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
 
->>>>>>> marilyn/quotesModulations
   /** Enum-like object */
   const Modes = Object.freeze({
     PREVIEW: "preview",
@@ -40,25 +35,10 @@ export default function QuoteEditor() {
     SET_FONT: "setFont",
   });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> marilyn/quotesModulations
   //----------------------
   //Essai fonction modifyFont
   //-------------------------
 
-<<<<<<< HEAD
-  const modifyPolice = (clickedData, dataInChild) => {
-    var divText = document.getElementById("text-font-police");
-
-    // setUserPolice(clickedData);
-
-    divText.classList.replace(dataInChild, `${clickedData}`);
-    console.log(dataInChild);
-    // console.log(userPolice)
-  };
-=======
  
   const modifyPolice = (clickedData, selectedText) => {
     console.log("Coucou c'est la police", clickedData, selectedText);
@@ -88,7 +68,6 @@ export default function QuoteEditor() {
 
 
   }
->>>>>>> marilyn/quotesModulations
   /* const editors = {
     [Modes.PREVIEW]: null,
     [Modes.SET_COLOR]: <ColorEditor />,
@@ -99,14 +78,8 @@ export default function QuoteEditor() {
   const editors = {
     preview: null,
     setColor: <ColorEditor />,
-<<<<<<< HEAD
     setFont: <FontEditor changeFontFunc={modifyPolice} />,
     setImage: <ImageEditor backgrounds={backgrounds} />,
-=======
-    setFont: <FontEditor
-    changeFontFunc = {modifyPolice} />,
-    setImage: <ImageEditor />,
->>>>>>> marilyn/quotesModulations
   };
 
   const [mode, setMode] = useState(Modes.PREVIEW);

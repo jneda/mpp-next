@@ -3,9 +3,6 @@
   top: 50vh;
   left: 0;
   right: 0;
-<<<<<<< HEAD
-  bottom: 5rem;
-=======
   bottom: 0;
   transition: 0.6s;
 }
@@ -38,7 +35,6 @@
 
 .clickedArrow {
   transform: rotate(180deg);
->>>>>>> marilyn/quotesModulations
 }
 
 .testFontText {
@@ -47,7 +43,6 @@
 }
 
 .policeItem {
-<<<<<<< HEAD
   margin: 20px;
   cursor: pointer;
   font-size: 2em;
@@ -69,7 +64,6 @@
   max-width: 20vh;
   height: 100%;
   object-fit: contain;
-=======
   font-size: 2em;
 }
 
@@ -96,5 +90,4 @@
 
 .range {
   margin: 20px;
->>>>>>> marilyn/quotesModulations
 }
