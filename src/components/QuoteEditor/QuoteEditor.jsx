@@ -3,13 +3,35 @@ import Navbar from "../Navbar/Navbar";
 import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
+import fonts from "../Fonts";
+
 
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
+console.log(fonts);
 
+<<<<<<< HEAD
 export default function QuoteEditor({ backgrounds }) {
   console.log("QuoteEditor component:", { backgrounds });
+=======
+export default function QuoteEditor() {
+
+    // dummy style for testing
+    const dummyStyle = {
+      image: "/backgrounds/background-g3981561ff_1920.jpg",
+      contentFont: "GreatVibes",
+      contentFontSize: "2rem",
+      authorFont: "caveat",
+      authorFontSize: "2em",
+      fgColor: "white",
+      bgColor: "#00000000",
+    };
+  
+
+  const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
+
+>>>>>>> marilyn/quotesModulations
   /** Enum-like object */
   const Modes = Object.freeze({
     PREVIEW: "preview",
@@ -18,10 +40,15 @@ export default function QuoteEditor({ backgrounds }) {
     SET_FONT: "setFont",
   });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> marilyn/quotesModulations
   //----------------------
   //Essai fonction modifyFont
   //-------------------------
 
+<<<<<<< HEAD
   const modifyPolice = (clickedData, dataInChild) => {
     var divText = document.getElementById("text-font-police");
 
@@ -31,6 +58,37 @@ export default function QuoteEditor({ backgrounds }) {
     console.log(dataInChild);
     // console.log(userPolice)
   };
+=======
+ 
+  const modifyPolice = (clickedData, selectedText) => {
+    console.log("Coucou c'est la police", clickedData, selectedText);
+
+    const keyValues = Object.entries(fonts);
+
+    const fontNames = keyValues.map(([key , value]) => {
+     return clickedData === value.className ? key : null
+    });
+
+    const [fontName] = fontNames.filter(font => font!=null)
+
+
+
+    let fontProperty;
+
+    if(selectedText == "quote"){
+      fontProperty = {contentFont:fontName}
+    } else {
+      fontProperty = {authorFont:fontName}
+    }
+
+
+    setViewStyle({...viewstyle, ...fontProperty});
+
+    console.log({...viewstyle, ...fontProperty});
+
+
+  }
+>>>>>>> marilyn/quotesModulations
   /* const editors = {
     [Modes.PREVIEW]: null,
     [Modes.SET_COLOR]: <ColorEditor />,
@@ -41,8 +99,14 @@ export default function QuoteEditor({ backgrounds }) {
   const editors = {
     preview: null,
     setColor: <ColorEditor />,
+<<<<<<< HEAD
     setFont: <FontEditor changeFontFunc={modifyPolice} />,
     setImage: <ImageEditor backgrounds={backgrounds} />,
+=======
+    setFont: <FontEditor
+    changeFontFunc = {modifyPolice} />,
+    setImage: <ImageEditor />,
+>>>>>>> marilyn/quotesModulations
   };
 
   const [mode, setMode] = useState(Modes.PREVIEW);
@@ -111,19 +175,9 @@ export default function QuoteEditor({ backgrounds }) {
     content: "Sois fainéant, tu vivras content.",
     author: { name: "Coluche" },
   };
-  // dummy style for testing
-  const viewStyle = {
-    image: "/backgrounds/background-g3981561ff_1920.jpg",
-    contentFont: "serif",
-    contentFontSize: "2rem",
-    authorFont: "cursive",
-    authorFontSize: "2em",
-    fgColor: "white",
-    bgColor: "#00000000",
-  };
 
   // debug
-  console.log(mode, editors[mode]);
+  // console.log(mode, editors[mode]);
   /* for (const key of Object.keys(Modes)) {
     console.log(key);
     if (key !== mode) {
@@ -142,7 +196,7 @@ export default function QuoteEditor({ backgrounds }) {
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
-        viewStyle={viewStyle}
+        viewStyle={viewstyle}
         className={styles.quoteView}
         // onClick={getImage}
       />
