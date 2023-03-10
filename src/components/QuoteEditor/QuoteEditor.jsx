@@ -4,13 +4,12 @@ import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
 
-
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
 
-
-export default function QuoteEditor() {
+export default function QuoteEditor({ backgrounds }) {
+  console.log("QuoteEditor component:", { backgrounds });
   /** Enum-like object */
   const Modes = Object.freeze({
     PREVIEW: "preview",
@@ -19,21 +18,19 @@ export default function QuoteEditor() {
     SET_FONT: "setFont",
   });
 
-
   //----------------------
   //Essai fonction modifyFont
   //-------------------------
 
- 
   const modifyPolice = (clickedData, dataInChild) => {
-    var divText = document.getElementById("text-font-police")
+    var divText = document.getElementById("text-font-police");
 
     // setUserPolice(clickedData);
 
     divText.classList.replace(dataInChild, `${clickedData}`);
-    console.log(dataInChild)
+    console.log(dataInChild);
     // console.log(userPolice)
-  }
+  };
   /* const editors = {
     [Modes.PREVIEW]: null,
     [Modes.SET_COLOR]: <ColorEditor />,
@@ -44,9 +41,8 @@ export default function QuoteEditor() {
   const editors = {
     preview: null,
     setColor: <ColorEditor />,
-    setFont: <FontEditor
-    changeFontFunc = {modifyPolice} />,
-    setImage: <ImageEditor />,
+    setFont: <FontEditor changeFontFunc={modifyPolice} />,
+    setImage: <ImageEditor backgrounds={backgrounds} />,
   };
 
   const [mode, setMode] = useState(Modes.PREVIEW);
@@ -112,8 +108,7 @@ export default function QuoteEditor() {
 
   // dummy data for testing
   const quote = {
-    content:
-      "Sois fainéant, tu vivras content.",
+    content: "Sois fainéant, tu vivras content.",
     author: { name: "Coluche" },
   };
   // dummy style for testing

@@ -16,3 +16,21 @@
   cursor: pointer;
   font-size: 2em;
 }
+
+.imageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem auto;
+  justify-content: center;
+}
+
+.imageList li {
+  list-style: none;
+}
+
+.imagePreview {
+  max-width: 20vh;
+  height: 100%;
+  object-fit: contain;
+}

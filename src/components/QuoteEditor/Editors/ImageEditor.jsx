@@ -1,6 +1,7 @@
 import styles from "./Editor.module.css";
 
-export default function ImageEditor() {
+export default function ImageEditor({ backgrounds }) {
+  const basePath = "backgrounds/";
   return (
     <div
       style={{
@@ -9,7 +10,17 @@ export default function ImageEditor() {
       }}
       className={styles.editor}
     >
-      ImageEditor
+      <ul className={styles.imageList}>
+        {backgrounds.map((background) => (
+          <li key={background.id}>
+            <img
+              src={`${basePath}${background.path}`}
+              alt={background.path}
+              className={styles.imagePreview}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
