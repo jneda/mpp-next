@@ -10,10 +10,21 @@ export default function ColorEditor(props) {
     setSelectedText(e.target.id)
   } 
 
+  // const handleColorChange = (event) => {
+  //   const newColor = event.target.value;
+  //   props.colorChange(newColor, selectedText);
+  // };
+
   const handleColorChange = (event) => {
-    const newColor = event.target.value;
-    props.colorChange(newColor, selectedText);
+    const newColor = event.target.value
+    document.getElementById('color_front').style.backgroundColor = `${newColor}`;
+    props.colorChange(newColor, selectedText)
   };
+  
+  const changeSpanColor = (event) => {
+    document.getElementById('colour').click();
+  };
+  
   return (
     <div
       style={{
@@ -22,15 +33,22 @@ export default function ColorEditor(props) {
       }}
       className={styles.editor}
     >
-        <div>
-        <input type="color" id="head" name="head"
+        {/* <div>
+        <input className={`${styles.inputColor}`}type="color" id="head" name="head"
               defaultValue="#0000" onInput={handleColorChange}/>
         <label className={`${fonts.merriweather.className} ${styles.labelColor}`} htmlFor="head">Changer la Couleur</label>
-      </div>
+      </div> */}
+      <span className={`${styles.spanColor1}`}id="color_front" onClick={changeSpanColor}></span>
+      <input className={styles.inputColor1} type='color' defaultValue='#fefefe' id='colour' onInput={handleColorChange}></input>
       <div>
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
-        </div>
+      </div>
+      <p className={`${styles.textUnderColor} ${fonts.merriweather.className}`}>Cliquez sur le coeur pour changer la couleur</p>
     </div>
   );
 }
+
+
+
+

@@ -41,6 +41,7 @@ export default function QuoteEditor() {
 
   const handleColorChange = (newColor, selectedText) => {
 
+    console.log(newColor);
     let fontProperty;
     
       if(selectedText == "quote"){
