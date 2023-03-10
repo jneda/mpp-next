@@ -83,15 +83,6 @@ export default function FontEditor(props) {
         </div>
         <div>
           <input type="range" className={styles.range} id="fontSize-range" min="2" max="5" defaultValue="2" onInput={handleFontSizeChange}/>
-             {/* const newSize = event.target.value;
-             const quoteElement = document.getElementById("quote-element");
-             const authorElement = document.getElementById("author-element");
-             if(selectedText == "quote"){
-             quoteElement.style.fontSize = `${newSize}rem`;
-             } else {
-              authorElement.style.fontSize = `${newSize}rem`;
-             };
-             }}/> */}
           <input type="text" id="display-fontSize-range" value="2" readOnly/>
         </div>
     </div>
