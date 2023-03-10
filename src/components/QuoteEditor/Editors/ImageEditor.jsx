@@ -14,7 +14,7 @@ export default function ImageEditor({ backgrounds }) {
         {backgrounds.map((background) => (
           <li key={background.id}>
             <img
-              src={`${basePath}${background.path}`}
+              src={`${basePath}${background.imagePath}`}
               alt={background.path}
               className={styles.imagePreview}
             />
