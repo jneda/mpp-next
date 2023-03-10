@@ -11,7 +11,7 @@ import * as htmlToImage from "html-to-image";
 import styles from "./QuoteEditor.module.css";
 console.log(fonts);
 
-export default function QuoteEditor() {
+export default function QuoteEditor({ backgrounds }) {
 
     // dummy style for testing
     const dummyStyle = {
@@ -63,7 +63,6 @@ export default function QuoteEditor() {
     SET_COLOR: "setColor",
     SET_FONT: "setFont",
   });
-
 
   //----------------------
   //Essai fonction modifyFont
@@ -178,8 +177,7 @@ export default function QuoteEditor() {
 
   // dummy data for testing
   const quote = {
-    content:
-      "Sois fainéant, tu vivras content.",
+    content: "Sois fainéant, tu vivras content.",
     author: { name: "Coluche" },
   };
 

@@ -1,36 +1,63 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from 'yup';
 import styles from "./LogForm.module.css";
 
 export default function SignForm() {
+  const router = useRouter();
 
-    const[user, setUser] = useState({
-        email:"",
-        password:""
-    })
+  const handleSubmit = async (userInput) => {
+    console.log("[login]:", JSON.stringify(userInput));
 
-    const handleChange = (e) =>{
-        setUser({...user, [e.target.name]: e.target.value})     //spread user pour ne pas perdre autres données lors de update
+    let response;
+    try {
+      response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify(userInput),
+      });
+
+      if (response) {
+        // logging
+        const data = await response.json();
+        console.log(data);
+        // redirect
+        router.push("/homepage");
+      }
+    } catch (e) {
+      console.error(e);
     }
+  };
 
-    const handleSubmit = async(e) =>{
-        e.preventDefault();
-        
-        const response = await fetch('/api/logIn',{method: "POST", body: JSON.stringify(user)});        
-        setUser({email:"", password:""})              //equivalent de input.value="" après enregistrer formulaire
-
-        if (response) {
-          const data = await response.json();
-          console.log(data);
-        };
-    }
-
-    return (
-      <form className={styles.form} action="/api/logIn" method="post" onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" value={user.email} onChange={handleChange} />
-        <input type="password" name="password" placeholder="Mot de Passe" autoComplete="new-password" value={user.password} onChange={handleChange} />
-        <div>
-          <button className={styles.btn} type="submit">Se connecter</button>
-        </div>
-      </form>
-    );
-  }
+  return (
+    <Formik
+      initialValues={{ email: "", password: "" }}
+      validationSchema={Yup.object({
+        email: Yup.string().email("Adresse email invalide").required("Champ obligatoire"),
+        password: Yup.string().required("Champ obligatoire")
+      })}
+      onSubmit={handleSubmit}
+    >
+      {formik => (
+        <Form className={styles.form}>
+          <Field
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <ErrorMessage name="email">{msg => <div className={styles.errorText}>{msg}</div>}</ErrorMessage>
+          <Field
+            type="password"
+            name="password"
+            placeholder="Mot de Passe"
+          />
+          <ErrorMessage name="password">{msg => <div className={styles.errorText}>{msg}</div>}</ErrorMessage>
+          <div className={styles.buttonWrapper}>
+            <button className={styles.btn} type="submit">
+              Se connecter
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
+  );
+}

@@ -19,12 +19,12 @@ const FontModel = require("./models/font");
 const sequelize = new Sequelize("mypeacefulplace", "root", "", {
   host: "localhost",
   dialect: "mysql",
-  logging: false
+  logging: false,
 });
 
 sequelize
   .authenticate()
-  .then((result) => console.log("Connexion réussie : ", result))
+  .then((result) => console.log("Connexion réussie "))
   .catch((err) => console.error(`Echec: ${err}`));
 
 const QuoteSource = QuoteSourceModel(sequelize, DataTypes);
@@ -180,20 +180,22 @@ function initDb() {
 }
 
 module.exports = {
-    Author,
-    BgImage,
-    Color,
-    DiaryEntry,
-    Font,
-    Mood,
-    QuoteCategory,
-    QuoteList,
-    QuoteSource,
-    QuoteView,
-    QuoteViewStyle,
-    Role,
-    Task,
-    TaskCategory,
-    User,
-    UserStyle,
+  sequelize,
+  Author,
+  BgImage,
+  Color,
+  DiaryEntry,
+  Font,
+  Mood,
+  QuoteCategory,
+  QuoteList,
+  QuoteSource,
+  QuoteView,
+  QuoteViewStyle,
+  Role,
+  Task,
+  TaskCategory,
+  User,
+  UserStyle,
+  UserTasks,
 };
