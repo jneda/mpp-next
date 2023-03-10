@@ -15,6 +15,8 @@ export default function FontEditor(props) {
 
   const [ selectedText, setSelectedText ] = useState("quote")
 
+  const [ fontSize, setFontSize ] = useState(2)
+
   function setPolice(element) {
     // 1) Au clic j'appelle setPolice qui récupère l'élément cliqué
     // 2) setPolice appelle une autre fonction qui change le state clickedPolice
@@ -60,6 +62,10 @@ export default function FontEditor(props) {
     props.onFontSizeChange(newSize, selectedText);
   };
 
+  const handleFontRange = (event) => {
+   setFontSize(event.target.value)
+  };
+
 
   return (
     <div
@@ -78,12 +84,16 @@ export default function FontEditor(props) {
         </ul>
         <div className={`${styles.arrow}`}onClick={setArrow}></div>
         <div>
-          <button className={styles.selectedBtn} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Appliquer à la Quote</button> 
-          <button className={styles.selectedBtn} id="author" disabled={selectedText == "author"} onClick={selectText}>Appliquer à l'auteur</button>
+          <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
+          <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
         </div>
-        <div>
-          <input type="range" className={styles.range} id="fontSize-range" min="2" max="5" defaultValue="2" onInput={handleFontSizeChange}/>
-          <input type="text" id="display-fontSize-range" value="2" readOnly/>
+        <div  className={`${styles.sizePolice}`}>
+          <input type="range" className={styles.range} id="fontSize-range" name="fontSize-range" min="2" max="5" defaultValue="2" onInput={(event) => {
+            handleFontSizeChange(event);
+            handleFontRange(event);
+          }}/>
+          <label htmlFor="fontSize-range">Taille de la police :</label>
+          <input type="text"className={styles.labelRange} id="display-fontSize-range" value={fontSize} readOnly/>
         </div>
     </div>
   );

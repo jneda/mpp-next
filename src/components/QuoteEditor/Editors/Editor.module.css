@@ -1,4 +1,8 @@
 .editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   height: 50vh;
   top: 50vh;
@@ -44,10 +48,11 @@
 }
 
 .policeItem {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .policeItem li {
+  list-style: none;
   margin: 20px;
   cursor: pointer;
 }
@@ -72,6 +77,20 @@
   margin: 20px;
 }
 
+.labelRange {
+  width: 3em;
+  font-size: 1em;
+  border: none;
+  background-color: transparent;
+}
+
+
+.sizePolice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media screen and (min-width: 320px) and (max-width: 480px) {
 
   .editor {
