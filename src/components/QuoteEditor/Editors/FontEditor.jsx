@@ -48,11 +48,13 @@ export default function FontEditor(props) {
     const editor = document.getElementById("editor");
     const list = document.getElementById("policeList");
     const buttons = document.querySelectorAll(`.${styles.selectedBtn}`);
+    const labelRange = document.getElementById('labelRange');
 
     e.target.classList.toggle(`${styles.clickedArrow}`);
 
     editor.classList.toggle(`${styles.translateEditor}`);
     list.classList.toggle(`${styles.translateList}`);
+    labelRange.classList.toggle(`${styles.translateList}`);
     for ( let item of buttons) {
       item.classList.toggle(`${styles.translateList}`)};
   }
@@ -92,7 +94,7 @@ export default function FontEditor(props) {
             handleFontSizeChange(event);
             handleFontRange(event);
           }}/>
-          <label className={styles.labelRange} htmlFor="fontSize-range">{`Taille de la police : ${fontSize}`}</label>
+          <label className={`${styles.labelRange} ${fonts.merriweather.className}`}id="labelRange" htmlFor="fontSize-range">{`Taille de la police : ${fontSize}`}</label>
         </div>
     </div>
   );
