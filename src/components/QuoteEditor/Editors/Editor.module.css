@@ -94,6 +94,10 @@
 
 }
 
+.labelColor {
+  color: #A92360;
+}
+
 .selectedBtn:disabled {
   background-color: #A92360;
   color: #FFFF;
@@ -159,7 +163,7 @@
   .editor {
     position: absolute;
     height:55vh;
-    top: 37.3vh;
+    top: 35.2vh;
     left: 0;
     right: 0;
     bottom: 0;
@@ -189,7 +193,7 @@
   .editor {
     position: absolute;
     height:55vh;
-    top: 37vh;
+    top: 35.2vh;
     left: 0;
     right: 0;
     bottom: 0;
@@ -216,7 +220,7 @@
   .editor {
     position: absolute;
     height: 50vh;
-    top: 42.5vh;
+    top: 40.2vh;
     left: 0;
     right: 0;
     bottom: 0;
@@ -241,7 +245,7 @@
   .editor {
     position: absolute;
     height: 50vh;
-    top: 42.5vh;
+    top: 40.2vh;
     left: 0;
     right: 0;
     bottom: 0;
@@ -265,7 +269,7 @@
   .editor {
     position: absolute;
     height: 54vh;
-    top: 38.5vh;
+    top: 36.2vh;
     left: 0;
     right: 0;
     bottom: 0;
@@ -292,7 +296,7 @@
   .editor {
     position: absolute;
     height: 54vh;
-    top: 38.6vh;
+    top: 36.2vh;
     left: 0;
     right: 0;
     bottom: 0;

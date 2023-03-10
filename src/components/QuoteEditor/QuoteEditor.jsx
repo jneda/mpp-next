@@ -20,7 +20,8 @@ export default function QuoteEditor() {
       contentFontSize: "2rem",
       authorFont: "caveat",
       authorFontSize: "2em",
-      fgColor: "white",
+      fgColor: "#00000",
+      fgaColor:"#00000",
       bgColor: "#00000000",
     };
   

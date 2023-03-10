@@ -24,8 +24,8 @@ export default function ColorEditor(props) {
     >
         <div>
         <input type="color" id="head" name="head"
-              defaultValue="#e66465" onInput={handleColorChange}/>
-        <label htmlFor="head">Couleur</label>
+              defaultValue="#0000" onInput={handleColorChange}/>
+        <label className={`${fonts.merriweather.className} ${styles.labelColor}`} htmlFor="head">Changer la Couleur</label>
       </div>
       <div>
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
