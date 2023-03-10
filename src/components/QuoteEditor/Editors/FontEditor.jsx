@@ -88,12 +88,11 @@ export default function FontEditor(props) {
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
         </div>
         <div  className={`${styles.sizePolice}`}>
-          <input type="range" className={styles.range} id="fontSize-range" name="fontSize-range" min="2" max="5" defaultValue="2" onInput={(event) => {
+          <input type="range"step="0.1" className={styles.range} id="fontSize-range" name="fontSize-range" min="2" max="5" defaultValue="2" onInput={(event) => {
             handleFontSizeChange(event);
             handleFontRange(event);
           }}/>
-          <label htmlFor="fontSize-range">Taille de la police :</label>
-          <input type="text"className={styles.labelRange} id="display-fontSize-range" value={fontSize} readOnly/>
+          <label className={styles.labelRange} htmlFor="fontSize-range">{`Taille de la police : ${fontSize}`}</label>
         </div>
     </div>
   );
