@@ -109,13 +109,13 @@ export default function Diary(props) {
 
         <div>
         {editionMode ?
-          <DiaryPage page={page} setEditionMode={setEditionMode} userId={props.userId} diaryContents={diaryContents} setDiaryContents={setDiaryContents}/>
+          <DiaryPage page={page} editionMode={editionMode} setEditionMode={setEditionMode} userId={props.userId} diaryContents={diaryContents} setDiaryContents={setDiaryContents}/>
         :
           <DiaryAddButton page={page} setEditionMode={setEditionMode} editingTasks={editingTasks} setEditingTasks={setEditingTasks} />
         }
       </div>
         {page ? (
-          diaryNotes.length > 0 ? diaryContents.map(entry => (<DiaryPage key={entry.id} page={page} data={entry} />)) 
+          diaryNotes.length > 0 ? diaryContents.map(entry => (<DiaryPage key={entry.id} page={page} data={entry} diaryContents={diaryContents} setDiaryContents={setDiaryContents} />)) 
           // (
           //   <>
           //     <DiaryPage page={page} diary={props.diaryNotes} />

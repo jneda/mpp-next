@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 export default function DiaryPage(props) {
     const [notes, setNotes] = useState('')
     const [newTask, setNewTask] = useState('')
+    const [onEdit, setOnEdit] = useState(false)
    
 
     function handleChangesNotes(e){
@@ -25,11 +26,34 @@ export default function DiaryPage(props) {
             props.setDiaryContents([{id: data.id, content: notes, date:todayDate}, ...props.diaryContents]);
         })
         setNotes('')
-        props.setEditionMode(false)
+        if(props.editionMode){
+            props.setEditionMode(false)
+        }
+    }
+
+    function handleClickValidateEdition(){
+        const id = props.data.id;
+        let tab = [...props.diaryContents]
+        const nodeIndex = tab.findIndex(note => note.id == id)
+        tab.splice(nodeIndex, 1)
+        const date = props.data.date.substring(0, 10).split('-').reverse().join('/')
+        props.setDiaryContents([{id:id, content: notes, date: date} ,...tab])
+
+        fetch('api/updateNote',{
+            method: 'PUT',
+            body: JSON.stringify({noteId: id, content: notes})
+        })
+        .then( _ =>{
+            setNotes('')
+            setOnEdit(false)
+        })
     }
 
     function handleClickCancel(){
-        props.setEditionMode(false)
+        if(props.editionMode){
+            props.setEditionMode(false)
+        }
+        setOnEdit(false)
     }
 
     function handleChangeCheck(task, e){       
@@ -41,22 +65,45 @@ export default function DiaryPage(props) {
         tab[taskIndex].checked = !task.checked
         props.setTaskContents(tab)
         fetch('api/updateTask',{
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({checked: task.checked, id: id})
         })
         .then(res => res.json())
         .then(data => console.log(data))
     }
 
+    function handleClickEditionNote(){
+        setOnEdit(true)
+        setNotes(props.data.content)
+    }
+
+    function handleChangesEditionNotes(e){
+        setNotes(e.target.value)
+    }
+
+
+    function handleClickDeleteNote(){
+        const noteId = props.data.id;
+        let tab = [...props.diaryContents];
+        const nodeIndex = tab.findIndex(note => note.id == noteId);
+        tab.splice(nodeIndex, 1)
+        props.setDiaryContents(tab)
+        fetch('api/deleteNote',{
+            method: 'DELETE',
+            body: JSON.stringify({id: noteId})
+        })
+    }
+
     function handleClickDeleteTask(e){
-        const id = e.target.parentNode.parentNode.id;
+        const taskId = e.target.parentNode.parentNode.id;
+        const userId = props.userId;
         let tab = [...props.taskContents];
-        const taskIndex = tab.findIndex(task => task.id == id);
+        const taskIndex = tab.findIndex(task => task.id == taskId);
         tab.splice(taskIndex, 1)
         props.setTaskContents(tab)
         fetch('api/deleteTask',{
             method: 'DELETE',
-            body: JSON.stringify({id: id})
+            body: JSON.stringify({taskId: taskId, userId: userId})
         })
         .then(res => res.json())
         .then(data => console.log(data))
@@ -81,9 +128,33 @@ export default function DiaryPage(props) {
     return(
         <div className={styles.page}>
             <div className={styles.inters}>
-                <div className={styles.inter1} onClick={handleClickValidate} >V</div>
-                <div className={styles.inter2} onClick={handleClickCancel}>X</div>
-                <div className={styles.inter3}></div>
+                {props.editionMode ?
+                    <>
+                    <div className={styles.inter1} onClick={handleClickValidate} >V</div>
+                    <div className={styles.inter2} onClick={handleClickCancel}>X</div>
+                    <div className={styles.inter3}></div>
+                    </>
+                :
+                onEdit ?
+                    <>
+                    <div className={styles.inter1} onClick={handleClickValidateEdition} >V</div>
+                    <div className={styles.inter2} onClick={handleClickCancel}>X</div>
+                    <div className={styles.inter3}></div>
+                    </>
+                :
+                props.page ? 
+                    <>
+                    <div className={styles.inter1}></div>
+                    <div className={styles.inter2} onClick={handleClickDeleteNote}>Suppr</div>
+                    <div className={styles.inter3} onClick={handleClickEditionNote}>Edit</div>
+                    </>
+                :
+                <>
+                    <div className={styles.inter1}>to</div>
+                    <div className={styles.inter2}>do</div>
+                    <div className={styles.inter3}>list</div>
+                </>     
+                }
             </div>
             <div className={styles.marge}></div>
             <div className={styles.decor}>
@@ -101,7 +172,11 @@ export default function DiaryPage(props) {
                     props.data ?
                     <>
                         <h1>{props.data.date.substring(0, 10).split('-').reverse().join('/')}</h1>
-                        <textarea className={styles.textArea} onChange={handleChangesNotes} value={props.data.content}></textarea>
+                        {onEdit ?
+                            <textarea className={styles.textArea} onChange={handleChangesEditionNotes} value={notes}></textarea>
+                        :
+                            <p id={props.data.id} className={styles.pData}>{props.data.content}</p>
+                        }
                     </>
                     :
                     <>
@@ -114,7 +189,7 @@ export default function DiaryPage(props) {
                     <ul>
                         {props.taskContents ? props.taskContents.map(task =>(
                             <li key={task.id} id={task.id}>
-                                <input type="checkbox" name={task.id} checked={task.checked} onChange={(e) => handleChangeCheck(task, e)}/>       
+                                <input type="checkbox" className={styles.check} name={task.id} checked={task.checked} onChange={(e) => handleChangeCheck(task, e)}/>       
                                 <span>{task.content}</span>
                                 <div>
                                     <button onClick={e =>handleClickDeleteTask(e)}>del</button>
