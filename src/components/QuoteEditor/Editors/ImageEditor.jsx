@@ -1,14 +1,31 @@
 import styles from "./Editor.module.css";
+import { useState } from "react";
 
-export default function ImageEditor({ backgrounds }) {
+export default function ImageEditor({ backgrounds, ...props }) {
   const basePath = "backgrounds/";
+
+  const [ clickedBackground, setClickedBackground ] = useState("/backgrounds/background-g3981561ff_1920.jpg")
+
+  function setBackground(element) {
+
+    setClickedBackground(() => {
+      const newClickedBackground =  element.target.getAttribute("src");
+      props.changeBackground(newClickedBackground);
+      // setActualPolice(newClickedPolice);
+      return newClickedBackground;
+      
+    });
+
+  }
+
+
   return (
     <div
       style={{
-        background: "hotpink",
+        background: "rgba(232,97,131,0.3561799719887955)",
         color: "white",
       }}
-      className={styles.editor}
+      className={styles.editorImage}
     >
       <ul className={styles.imageList}>
         {backgrounds.map((background) => (
@@ -17,6 +34,7 @@ export default function ImageEditor({ backgrounds }) {
               src={`${basePath}${background.imagePath}`}
               alt={background.path}
               className={styles.imagePreview}
+              onClick={setBackground}
             />
           </li>
         ))}

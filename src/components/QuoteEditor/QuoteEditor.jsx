@@ -53,7 +53,15 @@ export default function QuoteEditor({ backgrounds }) {
     setViewStyle({...viewstyle, ...fontProperty});
   };
 
+ const handleChangeBackground = (newClickedBackground) => {
+  console.log(newClickedBackground);
 
+  let newBackground;
+
+  newBackground = {image:`${newClickedBackground}`};
+
+  setViewStyle({...viewstyle, ...newBackground});
+ }
 
 
   /** Enum-like object */
@@ -111,7 +119,9 @@ export default function QuoteEditor({ backgrounds }) {
     setFont: <FontEditor
     onFontSizeChange={handleFontSizeChange}
     changeFontFunc = {modifyPolice} />,
-    setImage: <ImageEditor />,
+    setImage: <ImageEditor 
+    changeBackground={handleChangeBackground}
+    backgrounds={backgrounds}/>,
   };
 
   const [mode, setMode] = useState(Modes.PREVIEW);
