@@ -16,48 +16,6 @@
   transform: translateY(-40vh);
 }
 
-.translateEditor {
- height: 60px;
- transform: translateY(32vh);
-}
-
-.translateList {
-  display: none;
-}
-.arrow {
-  display: block;
-  position: absolute;
-  right: 20px;
-  top: 0px;
-  width: 40px;
-  height: 25px;
-  background: #FFFF;
-  margin: 16px;
-  clip-path: polygon(19% 0, 51% 57%, 82% 0, 100% 0, 52% 100%, 0 0);
-  transition: 0.6s;
-}
-
-.arrow:hover {
-  cursor: pointer;
-  background:#A92360;
-}
-
-.clickedArrow {
-  transform: rotate(180deg);
-}
-
-.testFontText {
-  margin: 20px;
-  font-size: 2em;
-}
-
-.policeItem {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
-  align-content: center;
-}
-
 /* .imageList {
   display: flex;
   flex-wrap: wrap;
@@ -107,6 +65,42 @@
 }
 
 
+.translateEditor {
+ height: 60px;
+ transform: translateY(32vh);
+}
+
+.translateList {
+  display: none;
+}
+.arrow {
+  display: block;
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  width: 40px;
+  height: 25px;
+  background: #FFFF;
+  margin: 16px;
+  clip-path: polygon(19% 0, 51% 57%, 82% 0, 100% 0, 52% 100%, 0 0);
+  transition: 0.6s;
+}
+
+.arrow:hover {
+  cursor: pointer;
+  background:#A92360;
+}
+
+.clickedArrow {
+  transform: rotate(180deg);
+}
+
+.policeItem {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
 .policeItem > :nth-child(odd):last-child {
   grid-column-end: span 2;
 }
@@ -117,7 +111,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 2em;
   list-style: none;
   margin: 10px;
   cursor: pointer;

@@ -207,7 +207,8 @@ export default function QuoteEditor({ backgrounds }) {
 
   return (
     <>
-      <button onClick={getImage}>Click me</button>
+      <button className={styles.downloadBtn} onClick={getImage}>
+        <span></span><span></span></button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
