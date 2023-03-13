@@ -156,7 +156,7 @@ export default function DiaryPage(props) {
                 <>
                     <div className={styles.inter1} onClick={hancleClickCreateTask}>create</div>
                     <div className={styles.inter2}>deleteAll</div>
-                    <div className={styles.inter3}>list</div>
+                    <div className={styles.inter3}>ChooseInList</div>
                 </>     
                 }
             </div>
