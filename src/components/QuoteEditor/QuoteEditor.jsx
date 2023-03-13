@@ -34,7 +34,7 @@ export default function QuoteEditor({ backgrounds }) {
   // font actions
 
   const modifyPolice = (clickedData, selectedText) => {
-    console.log("Coucou c'est la police", clickedData, selectedText);
+    // console.log("Coucou c'est la police", clickedData, selectedText);
 
     const keyValues = Object.entries(fonts);
 
@@ -54,7 +54,7 @@ export default function QuoteEditor({ backgrounds }) {
 
     setViewStyle({ ...viewstyle, ...fontProperty });
 
-    console.log({ ...viewstyle, ...fontProperty });
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
   };
 
   const handleFontSizeChange = (newSize, selectedText) => {
@@ -66,6 +66,8 @@ export default function QuoteEditor({ backgrounds }) {
       fontProperty = { authorFontSize: `${newSize}rem` };
     }
     setViewStyle({ ...viewstyle, ...fontProperty });
+
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
   };
 
   // color action
@@ -81,6 +83,8 @@ export default function QuoteEditor({ backgrounds }) {
     }
 
     setViewStyle({ ...viewstyle, ...fontProperty });
+
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
   };
 
   // background image action
@@ -92,6 +96,29 @@ export default function QuoteEditor({ backgrounds }) {
 
     setViewStyle({ ...viewstyle, ...newBackground });
   };
+
+  // save action
+
+  async function saveViewStyle() {
+    try {
+      const node = document.querySelector("article");
+      console.log(node);
+      // save preview image to disk
+      const png = await htmlToImage.toPng(node);
+      console.log(JSON.stringify({ png }));
+      const response = await fetch("api/saveQuoteView", {
+        method: "POST",
+        body: JSON.stringify({ png }),
+        headers: {
+          "Content-Type": false,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    // save view style to database
+  }
 
   // editor mode selection
 
@@ -123,7 +150,7 @@ export default function QuoteEditor({ backgrounds }) {
   };
 
   function handleModeChange(modeName) {
-    console.log(`I need to switch to ${modeName} mode!`);
+    // console.log(`I need to switch to ${modeName} mode!`);
     let newMode = Modes.PREVIEW;
     switch (modeName) {
       case "setImage":
@@ -145,6 +172,8 @@ export default function QuoteEditor({ backgrounds }) {
   function getImage() {
     console.log("coucou !");
     const node = document.querySelector("article");
+    console.log(node);
+    // allow user to download PNG file
     htmlToImage
       .toPng(node)
       .then(function (dataUrl) {
@@ -160,6 +189,7 @@ export default function QuoteEditor({ backgrounds }) {
         console.error("oops, something went wrong!", error);
       });
   }
+
   // util function
   function getCard() {
     const quoteView = document.querySelector(".quote-view");
@@ -185,7 +215,8 @@ export default function QuoteEditor({ backgrounds }) {
 
   return (
     <>
-      <button className={styles.downloadBtn} onClick={getImage}>
+      {/* <button className={styles.downloadBtn} onClick={getImage}> */}
+      <button className={styles.downloadBtn} onClick={saveViewStyle}>
         <span></span>
         <span></span>
       </button>

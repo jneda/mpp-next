@@ -1,7 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-
-import { BgImage } from "db/sequelize";
 import { sequelize } from "../../db/sequelize";
 
 const rootFolder = path.normalize(__dirname + "../../..");
