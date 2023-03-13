@@ -29,3 +29,12 @@ export const getServerSideProps = withSessionSsr(
     };
   }
 );
+
+
+/*
+gestion des erreur route API
+style CSS
+utilisation des intercalaires
+peut être vérifier si tache to do list existe déjà avant créer
+
+*/

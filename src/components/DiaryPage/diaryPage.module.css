@@ -47,6 +47,13 @@
     z-index: 2;
 }
 
+.pData{
+    margin-top: 3vh;
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px;
+}
+
 
 .todolist{
     list-style: none;
@@ -77,13 +84,13 @@
 .inter1{
     width: 95%;
     height: 20%;
-    background-color: #d33258;
+    background-color: #61c89e;
 }
 
 .inter2{
     width: 90%;
     height: 15%;
-    background-color: #61c89e;
+    background-color: #d33258;
 }
 
 .inter3{
@@ -116,6 +123,7 @@
     border-bottom: 1px solid #a92360;
     display: grid;
     grid-template-columns: 0.2fr 2.4fr 0.4fr;
+    align-items: center;
 }
 
 .todoTitle ~ ul li div button{
@@ -135,3 +143,65 @@
     outline: none;
     border-bottom: 1px solid #a92360;
 }
+
+
+
+
+
+
+
+
+
+.check {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    appearance: none;
+    background-color: #bbb;
+    transition: all .3s;
+   }
+   
+   .check::before {
+    content: '';
+    position: absolute;
+    border: solid #fff;
+    display: block;
+    width: .3em;
+    height: .6em;
+    border-width: 0 .2em .2em 0;
+    z-index: 1;
+    opacity: 0;
+    right: calc(50% - .3em);
+    top: calc(50% - .6em);
+    transform: rotate(0deg);
+    transition: all .3s;
+    transform-origin: center center;
+   }
+   
+   .check:checked {
+    animation: a .3s ease-in forwards;
+    background-color: #a92360;
+   }
+   
+   .check:checked::before {
+    opacity: 1;
+    transform: rotate(405deg);
+   }
+   
+   @keyframes a {
+    0% {
+     opacity: 1;
+     transform: scale(1) rotateY(0deg);
+    }
+   
+    50% {
+     opacity: 0;
+     transform: scale(.8) rotateY(180deg);
+    }
+   
+    100% {
+     opacity: 1;
+     transform: scale(1) rotateY(360deg);
+    }
+   }
