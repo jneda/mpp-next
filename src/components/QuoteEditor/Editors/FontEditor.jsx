@@ -15,6 +15,8 @@ export default function FontEditor(props) {
 
   const [ selectedText, setSelectedText ] = useState("quote")
 
+  const [ fontSize, setFontSize ] = useState(2)
+
   function setPolice(element) {
     // 1) Au clic j'appelle setPolice qui récupère l'élément cliqué
     // 2) setPolice appelle une autre fonction qui change le state clickedPolice
@@ -46,48 +48,57 @@ export default function FontEditor(props) {
     const editor = document.getElementById("editor");
     const list = document.getElementById("policeList");
     const buttons = document.querySelectorAll(`.${styles.selectedBtn}`);
+    const labelRange = document.getElementById('labelRange');
 
     e.target.classList.toggle(`${styles.clickedArrow}`);
 
     editor.classList.toggle(`${styles.translateEditor}`);
     list.classList.toggle(`${styles.translateList}`);
+    labelRange.classList.toggle(`${styles.translateList}`);
     for ( let item of buttons) {
       item.classList.toggle(`${styles.translateList}`)};
   }
 
+  const handleFontSizeChange = (event) => {
+    const newSize = event.target.value;
+    props.onFontSizeChange(newSize, selectedText);
+  };
+
+  const handleFontRange = (event) => {
+   setFontSize(event.target.value)
+  };
+
+  
+     const keyValues = Object.entries(fonts);
+
+
+
   return (
     <div
       style={{
-        background: "rgba(232,97,131,0.3561799719887955)",
+        background: "rgba(255,255,255,0.4)",
         color: "white",
       }}
       className={styles.editor}
       id="editor"
     >
-        <ul  className= {styles.policeItem} id="policeList">
-          <li  className={`${fonts.zeyada.className}`} onClick={setPolice}>{`Il est temps de rallumer les étoiles`}</li>
-          <li  className={`${fonts.merriweather.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-          <li  className={`${fonts.caveat.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-          <li  className={`${fonts.GreatVibes.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-        </ul>
+      
+       <ul className={`${styles.policeItem}`} id="policeList">
+       {keyValues.map(([key , value]) => {
+          return <li className={`${value.className}`}onClick={setPolice}>Dreams come true<span className={`${fonts.merriweather.className} ${styles.fontSpan}`}>{key.toUpperCase()}</span> </li>
+       })}
+       </ul>
         <div className={`${styles.arrow}`}onClick={setArrow}></div>
         <div>
-          <button className={styles.selectedBtn} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Appliquer à la Quote</button> 
-          <button className={styles.selectedBtn} id="author" disabled={selectedText == "author"} onClick={selectText}>Appliquer à l'auteur</button>
+          <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
+          <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
         </div>
-        <div>
-          <input type="range" className={styles.range} id="fontSize-range" min="2" max="5" defaultValue="2" onInput={(event) => {
-             document.getElementById('display-fontSize-range').value= event.target.value;
-             const newSize = event.target.value;
-             const quoteElement = document.getElementById("quote-element");
-             const authorElement = document.getElementById("author-element");
-             if(selectedText == "quote"){
-             quoteElement.style.fontSize = `${newSize}rem`;
-             } else {
-              authorElement.style.fontSize = `${newSize}rem`;
-             };
-             }}/>
-          <input type="text" id="display-fontSize-range" value="2" readOnly/>
+        <div  className={`${styles.sizePolice}`}>
+          <input type="range"step="0.1" className={styles.range} id="fontSize-range" name="fontSize-range" min="1" max="5" defaultValue="2" onInput={(event) => {
+            handleFontSizeChange(event);
+            handleFontRange(event);
+          }}/>
+          <label className={`${styles.labelRange} ${fonts.merriweather.className}`}id="labelRange" htmlFor="fontSize-range">{`Taille de la police : ${fontSize}`}</label>
         </div>
     </div>
   );

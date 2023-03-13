@@ -20,12 +20,49 @@ export default function QuoteEditor({ backgrounds }) {
       contentFontSize: "2rem",
       authorFont: "caveat",
       authorFontSize: "2em",
-      fgColor: "white",
+      fgColor: "#00000",
+      fgaColor:"#00000",
       bgColor: "#00000000",
     };
   
+    const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
 
-  const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
+  const handleFontSizeChange = (newSize, selectedText) => {
+
+    let fontProperty;
+    
+    if(selectedText == "quote"){
+      fontProperty = {contentFontSize:`${newSize}rem`}
+    } else {
+      fontProperty = {authorFontSize:`${newSize}rem`}
+    }
+    setViewStyle({...viewstyle, ...fontProperty});
+  };
+
+  const handleColorChange = (newColor, selectedText) => {
+
+    console.log(newColor);
+    let fontProperty;
+    
+      if(selectedText == "quote"){
+        fontProperty = {fgColor:`${newColor}`}
+      } else {
+        fontProperty = {fgaColor:`${newColor}`}
+      }
+
+    setViewStyle({...viewstyle, ...fontProperty});
+  };
+
+ const handleChangeBackground = (newClickedBackground) => {
+  console.log(newClickedBackground);
+
+  let newBackground;
+
+  newBackground = {image:`${newClickedBackground}`};
+
+  setViewStyle({...viewstyle, ...newBackground});
+ }
+
 
   /** Enum-like object */
   const Modes = Object.freeze({
@@ -77,9 +114,14 @@ export default function QuoteEditor({ backgrounds }) {
 
   const editors = {
     preview: null,
-    setColor: <ColorEditor />,
-    setFont: <FontEditor changeFontFunc={modifyPolice} />,
-    setImage: <ImageEditor backgrounds={backgrounds} />,
+    setColor: <ColorEditor
+    colorChange={handleColorChange}/>,
+    setFont: <FontEditor
+    onFontSizeChange={handleFontSizeChange}
+    changeFontFunc = {modifyPolice} />,
+    setImage: <ImageEditor 
+    changeBackground={handleChangeBackground}
+    backgrounds={backgrounds}/>,
   };
 
   const [mode, setMode] = useState(Modes.PREVIEW);
@@ -165,7 +207,8 @@ export default function QuoteEditor({ backgrounds }) {
 
   return (
     <>
-      <button onClick={getImage}>Click me</button>
+      <button className={styles.downloadBtn} onClick={getImage}>
+        <span></span><span></span></button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}

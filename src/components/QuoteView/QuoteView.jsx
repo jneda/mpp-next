@@ -12,6 +12,7 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
     authorFont,
     authorFontSize,
     fgColor,
+    fgaColor,
     bgColor
   } = viewStyle;
 
@@ -31,7 +32,7 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
           className={`${styles.quoteContent} ${fonts[contentFont].className}`}
           style={{
             fontSize: contentFontSize,
-            fontColor: fgColor
+            color: fgColor
           }}
           id="quote-element"
         >
@@ -42,7 +43,7 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
           className={`${styles.quoteAuthor} ${fonts[authorFont].className}`}
           style={{
             fontSize: authorFontSize,
-            fontColor: fgColor
+            color: fgaColor
           }}
         >
           {quote.author.name}
