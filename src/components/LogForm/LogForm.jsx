@@ -20,8 +20,11 @@ export default function SignForm() {
         // logging
         const data = await response.json();
         console.log(data);
+
         // redirect
         router.push("/homepage");
+
+        // give user feedback
       }
     } catch (e) {
       console.error(e);
