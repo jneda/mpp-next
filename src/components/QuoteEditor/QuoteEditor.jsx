@@ -47,7 +47,6 @@ export default function QuoteEditor({ backgrounds }) {
       .then((res) => res.json())
       .then((data) => {
         const quote = data.data;
-        console.log(quote.author.name);
         setQuote({
           id: quote.id,
           content: quote.content,
