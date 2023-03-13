@@ -18,6 +18,7 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
 
   console.log("Quoteview Content Font", contentFont);
 
+
   return (
     <article
       id={id}
@@ -46,7 +47,7 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
             color: fgaColor
           }}
         >
-          {quote.author.name}
+          {quote.author}
         </p>
       </blockquote>
     </article>

@@ -27,6 +27,30 @@ export default function QuoteEditor({ backgrounds }) {
   
     const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
 
+    const [ quote, setQuote ] = useState({
+      content:"",
+      author:""
+    }); 
+    
+    // const quote = {
+    // content: "Sois fainéant, tu vivras content.",
+    // author: { name: "Coluche" }}
+
+    useEffect(() =>
+    handleRandomQuote, [])
+
+  const handleRandomQuote = () => {
+      fetch('api/getRandomQuote')
+      .then(res => res.json())
+      .then(data => {
+        const quote = data.data;
+        console.log(quote.author.name);
+        setQuote({
+          id:quote.id,
+          content:quote.content,
+          author:quote.author.name
+        })})}
+
   const handleFontSizeChange = (newSize, selectedText) => {
 
     let fontProperty;
@@ -186,10 +210,7 @@ export default function QuoteEditor({ backgrounds }) {
   }
 
   // dummy data for testing
-  const quote = {
-    content: "Sois fainéant, tu vivras content.",
-    author: { name: "Coluche" },
-  };
+
 
   // debug
   // console.log(mode, editors[mode]);
@@ -209,6 +230,7 @@ export default function QuoteEditor({ backgrounds }) {
     <>
       <button className={styles.downloadBtn} onClick={getImage}>
         <span></span><span></span></button>
+        <button onClick={handleRandomQuote}>RandomQuote</button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
