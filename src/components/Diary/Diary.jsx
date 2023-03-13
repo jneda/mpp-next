@@ -1,7 +1,6 @@
 import Navbar from "../Navbar/Navbar";
 import { useState } from "react";
 
-import styles from "../Homepage/Homepage.module.css";
 import style from "./diary.module.css";
 import DiaryPage from "../DiaryPage/DiaryPage";
 import DiaryAddButton from "../DiaryAddButton/DiaryAddButton";

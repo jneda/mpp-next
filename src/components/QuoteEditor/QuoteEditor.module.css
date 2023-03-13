@@ -3,6 +3,40 @@
   height: 100vh;
 }
 
-.button {
+/* .button {
   position: fixed;
+} */
+
+.downloadBtn {
+  position: absolute;
+  margin: 2em;
+  padding: 0;
+  background-color: rgba(243, 240, 247, 0.301);
+  border: none;
+  width: 8vh;
+  height: 8vh;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 10px 13px -7px #000000;
+}
+
+.downloadBtn:hover{
+  box-shadow: 0px 10px 13px -7px #000000;
+}
+
+.downloadBtn span:nth-child(1) {
+  margin: 0 auto;
+  background-color: rgb(0, 0, 0);
+  display: block;
+  width: 20px;
+  height: 20px;
+  clip-path: polygon(0 59%, 28% 58%, 28% 0, 69% 0, 69% 58%, 100% 58%, 48% 100%);
+}
+
+.downloadBtn span:nth-child(2) {
+display: block;
+width: 20px;
+  height: 3px;
+  margin: 0 auto;
+  background-color: rgb(0, 0, 0);
 }

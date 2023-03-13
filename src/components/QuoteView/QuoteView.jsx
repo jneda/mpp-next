@@ -1,11 +1,8 @@
 import styles from "./QuoteView.module.css";
 import { useState } from "react";
 import { Courgette } from '@next/font/google'
+import fonts from "../Fonts";
 
-const courgette = Courgette({
-  subsets: ['latin'],
-  weight: '400'
-})
 
 export default function QuoteView({ id, quote, viewStyle, className }) {
   const {
@@ -15,11 +12,11 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
     authorFont,
     authorFontSize,
     fgColor,
+    fgaColor,
     bgColor
   } = viewStyle;
 
-
-  const [ defaultPolice, setDefaultPolice] = useState(`${courgette.className}`)
+  console.log("Quoteview Content Font", contentFont);
 
   return (
     <article
@@ -32,22 +29,21 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
     >
       <blockquote className={styles.blockquote}>
         <p
-          id="text-font-police"
-          className={`${styles.quoteContent} ${defaultPolice}`}
+          className={`${styles.quoteContent} ${fonts[contentFont].className}`}
           style={{
-            // fontFamily: contentFont,
             fontSize: contentFontSize,
-            fontColor: fgColor
+            color: fgColor
           }}
+          id="quote-element"
         >
           {quote.content}
         </p>
         <p
-          className={styles.quoteAuthor}
+        id="author-element"
+          className={`${styles.quoteAuthor} ${fonts[authorFont].className}`}
           style={{
-            fontFamily: authorFont,
             fontSize: authorFontSize,
-            fontColor: fgColor
+            color: fgaColor
           }}
         >
           {quote.author.name}

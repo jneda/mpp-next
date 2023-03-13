@@ -3,14 +3,67 @@ import Navbar from "../Navbar/Navbar";
 import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
+import fonts from "../Fonts";
 
 
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
+console.log(fonts);
+
+export default function QuoteEditor({ backgrounds }) {
+
+    // dummy style for testing
+    const dummyStyle = {
+      image: "/backgrounds/background-g3981561ff_1920.jpg",
+      contentFont: "GreatVibes",
+      contentFontSize: "2rem",
+      authorFont: "caveat",
+      authorFontSize: "2em",
+      fgColor: "#00000",
+      fgaColor:"#00000",
+      bgColor: "#00000000",
+    };
+  
+    const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
+
+  const handleFontSizeChange = (newSize, selectedText) => {
+
+    let fontProperty;
+    
+    if(selectedText == "quote"){
+      fontProperty = {contentFontSize:`${newSize}rem`}
+    } else {
+      fontProperty = {authorFontSize:`${newSize}rem`}
+    }
+    setViewStyle({...viewstyle, ...fontProperty});
+  };
+
+  const handleColorChange = (newColor, selectedText) => {
+
+    console.log(newColor);
+    let fontProperty;
+    
+      if(selectedText == "quote"){
+        fontProperty = {fgColor:`${newColor}`}
+      } else {
+        fontProperty = {fgaColor:`${newColor}`}
+      }
+
+    setViewStyle({...viewstyle, ...fontProperty});
+  };
+
+ const handleChangeBackground = (newClickedBackground) => {
+  console.log(newClickedBackground);
+
+  let newBackground;
+
+  newBackground = {image:`${newClickedBackground}`};
+
+  setViewStyle({...viewstyle, ...newBackground});
+ }
 
 
-export default function QuoteEditor() {
   /** Enum-like object */
   const Modes = Object.freeze({
     PREVIEW: "preview",
@@ -19,20 +72,38 @@ export default function QuoteEditor() {
     SET_FONT: "setFont",
   });
 
-
   //----------------------
   //Essai fonction modifyFont
   //-------------------------
 
  
-  const modifyPolice = (clickedData, dataInChild) => {
-    var divText = document.getElementById("text-font-police")
+  const modifyPolice = (clickedData, selectedText) => {
+    console.log("Coucou c'est la police", clickedData, selectedText);
 
-    // setUserPolice(clickedData);
+    const keyValues = Object.entries(fonts);
 
-    divText.classList.replace(dataInChild, `${clickedData}`);
-    console.log(dataInChild)
-    // console.log(userPolice)
+    const fontNames = keyValues.map(([key , value]) => {
+     return clickedData === value.className ? key : null
+    });
+
+    const [fontName] = fontNames.filter(font => font!=null)
+
+
+
+    let fontProperty;
+
+    if(selectedText == "quote"){
+      fontProperty = {contentFont:fontName}
+    } else {
+      fontProperty = {authorFont:fontName}
+    }
+
+
+    setViewStyle({...viewstyle, ...fontProperty});
+
+    console.log({...viewstyle, ...fontProperty});
+
+
   }
   /* const editors = {
     [Modes.PREVIEW]: null,
@@ -43,10 +114,14 @@ export default function QuoteEditor() {
 
   const editors = {
     preview: null,
-    setColor: <ColorEditor />,
+    setColor: <ColorEditor
+    colorChange={handleColorChange}/>,
     setFont: <FontEditor
+    onFontSizeChange={handleFontSizeChange}
     changeFontFunc = {modifyPolice} />,
-    setImage: <ImageEditor />,
+    setImage: <ImageEditor 
+    changeBackground={handleChangeBackground}
+    backgrounds={backgrounds}/>,
   };
 
   const [mode, setMode] = useState(Modes.PREVIEW);
@@ -112,23 +187,12 @@ export default function QuoteEditor() {
 
   // dummy data for testing
   const quote = {
-    content:
-      "Sois fainéant, tu vivras content.",
+    content: "Sois fainéant, tu vivras content.",
     author: { name: "Coluche" },
-  };
-  // dummy style for testing
-  const viewStyle = {
-    image: "/backgrounds/background-g3981561ff_1920.jpg",
-    contentFont: "serif",
-    contentFontSize: "2rem",
-    authorFont: "cursive",
-    authorFontSize: "2em",
-    fgColor: "white",
-    bgColor: "#00000000",
   };
 
   // debug
-  console.log(mode, editors[mode]);
+  // console.log(mode, editors[mode]);
   /* for (const key of Object.keys(Modes)) {
     console.log(key);
     if (key !== mode) {
@@ -143,11 +207,12 @@ export default function QuoteEditor() {
 
   return (
     <>
-      <button onClick={getImage}>Click me</button>
+      <button className={styles.downloadBtn} onClick={getImage}>
+        <span></span><span></span></button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
-        viewStyle={viewStyle}
+        viewStyle={viewstyle}
         className={styles.quoteView}
         // onClick={getImage}
       />
