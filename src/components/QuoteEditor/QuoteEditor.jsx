@@ -36,6 +36,19 @@ export default function QuoteEditor({ backgrounds }) {
     // content: "Sois fainéant, tu vivras content.",
     // author: { name: "Coluche" }}
 
+    
+  useEffect(() =>
+  handleRandomBackground, [])
+
+  const handleRandomBackground = () => {
+    let randomBg = backgrounds[Math.floor(Math.random()*20)].imagePath;
+    console.log(randomBg);
+    let newImage = {
+      image:`/backgrounds/${randomBg}`
+    };
+    setViewStyle({...viewstyle, ...newImage});
+  }
+
     useEffect(() =>
     handleRandomQuote, [])
 

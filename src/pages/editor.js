@@ -17,6 +17,7 @@ export async function getServerSideProps() {
   // make data understandable by to the front end
   backgrounds = backgrounds.map((background) => background.toJSON());
 
+
   return {
     props: {
       backgrounds,

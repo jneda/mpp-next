@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function ImageEditor({ backgrounds, ...props }) {
   const basePath = "backgrounds/";
 
-  const [ clickedBackground, setClickedBackground ] = useState("/backgrounds/background-g3981561ff_1920.jpg")
+  const [ clickedBackground, setClickedBackground ] = useState("/backgrounds/background-g3981561ff_1920.jpg");
 
   function setBackground(element) {
 
