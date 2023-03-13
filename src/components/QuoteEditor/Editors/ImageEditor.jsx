@@ -22,7 +22,7 @@ export default function ImageEditor({ backgrounds, ...props }) {
   return (
     <div
       style={{
-        background: "rgba(232,97,131,0.3561799719887955)",
+        background: "rgba(255,255,255,0.4)",
         color: "white",
       }}
       className={styles.editorImage}

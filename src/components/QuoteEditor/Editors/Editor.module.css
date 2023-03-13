@@ -16,6 +16,20 @@
   transform: translateY(-40vh);
 }
 
+.editorColor{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 40vh;
+  top: 50.5vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.6s;
+}
+
 /* .imageList {
   display: flex;
   flex-wrap: wrap;
@@ -80,7 +94,7 @@
   top: 0px;
   width: 40px;
   height: 25px;
-  background: #FFFF;
+  background: #000000;
   margin: 16px;
   clip-path: polygon(19% 0, 51% 57%, 82% 0, 100% 0, 52% 100%, 0 0);
   transition: 0.6s;
@@ -99,6 +113,9 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  height: 25vh;
+  top: 7vh;
+  margin-bottom: 5vh;
 }
 
 .policeItem > :nth-child(odd):last-child {
@@ -115,13 +132,10 @@
   list-style: none;
   margin: 10px;
   cursor: pointer;
+  color: #000000;
 }
 
-.policeItem li:hover {
-  color: #A92360;
-}
-
-.policeItem li:active {
+.policeItem li:hover, .policeItem li:visited, .policeItem li:focus {
   color: #A92360;
 }
 
@@ -165,7 +179,8 @@
 }
 
 .range::-webkit-slider-runnable-track {
-  background-color: #b8739d;
+  background-color: #ffffff;
+  border: #000000 1px solid;
   border-radius: 0.5rem;
   height: 0.5rem;
 }
@@ -208,7 +223,7 @@
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  top: 100px;
+  top: -20vh;
   left: 6.5rem;
 }
 
@@ -228,7 +243,7 @@ margin-bottom: 100px;
 .textUnderColor{
   position: absolute;
   bottom: 3em;
-  color: #A92360;
+  color: #000000;
   text-align: center;
   font-style: italic;
 }
@@ -237,7 +252,7 @@ margin-bottom: 100px;
 
   .editor {
     position: absolute;
-    height:55vh;
+    height:55.3vh;
     top: 35.2vh;
     left: 0;
     right: 0;
@@ -247,7 +262,7 @@ margin-bottom: 100px;
   
   .translateEditor {
     height: 60px;
-    transform: translateY(48vh);
+    transform: translateY(48.25vh);
    }
 
    .translateList {
