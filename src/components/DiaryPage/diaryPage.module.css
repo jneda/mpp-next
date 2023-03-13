@@ -2,7 +2,7 @@
 
 .page{
     position: relative;
-    margin-top: 10vh;
+    margin-top: 6vh;
     border-radius: 4% 10% 10% 4%;
     background-color: #DBd6d6;
     width: 80vw;
@@ -47,6 +47,7 @@
     z-index: 2;
 }
 
+
 .todolist{
     list-style: none;
 }
@@ -60,6 +61,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.inters div{
+    line-height: 100%;
+    padding: 0.2em;
+    text-align: end;
 }
 
 .inters div:hover{
@@ -85,47 +92,6 @@
     background-color: #fca444;
 }
 
-/*
-.btns div{
-    margin-top: 4vh;
-    width: 80vw;
-    height: 10vh;
-    max-width: 400px;
-    display: flex;
-    justify-content: center;
-    background-color: #897b7b;
-    border-radius: 30px;
-}
-
-.btns button{
-    width:50%;
-    border: none;
-    font-family: 'Lato', sans-serif;
-    font-size: 20px;
-}
-
-.journal{
-    border-radius: 30px 0 0 30px;
-}
-
-.todo{
-    border-radius: 0 30px 30px 0;
-}
-
-.btns{
-    position: relative;
-}
-
-.btns span{
-    z-index: -1;
-    position: absolute;
-    border-left  : 0.8em solid transparent;
-    border-right : 0.8em solid transparent;
-    border-top   : 1.6em solid #fca444;
-    transform: translateX(-50%);
-}*/
-
-
 
 .textArea{
     margin-top: 3vh;
@@ -138,4 +104,34 @@
     font-size: 16px;
     font-family: 'Lato', sans-serif;
     line-height: 20px;
+}
+
+.todoTitle{
+    text-align: center;
+}
+
+.todoTitle ~ ul li {
+    margin: 4vh 1vw;
+    list-style: none;
+    border-bottom: 1px solid #a92360;
+    display: grid;
+    grid-template-columns: 0.2fr 2.4fr 0.4fr;
+}
+
+.todoTitle ~ ul li div button{
+    border: none;
+    cursor: pointer;
+}
+
+.todoTitle ~ ul form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.todoTitle ~ ul form input{
+    background-color: inherit;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #a92360;
 }

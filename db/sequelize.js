@@ -19,7 +19,7 @@ const FontModel = require("./models/font");
 const sequelize = new Sequelize("mypeacefulplace", "root", "", {
   host: "localhost",
   dialect: "mysql",
-  logging: false
+  logging: false,
 });
 
 sequelize
@@ -180,21 +180,22 @@ function initDb() {
 }
 
 module.exports = {
-    Author,
-    BgImage,
-    Color,
-    DiaryEntry,
-    Font,
-    Mood,
-    QuoteCategory,
-    QuoteList,
-    QuoteSource,
-    QuoteView,
-    QuoteViewStyle,
-    Role,
-    Task,
-    TaskCategory,
-    User,
-    UserStyle,
-    UserTasks
+  sequelize,
+  Author,
+  BgImage,
+  Color,
+  DiaryEntry,
+  Font,
+  Mood,
+  QuoteCategory,
+  QuoteList,
+  QuoteSource,
+  QuoteView,
+  QuoteViewStyle,
+  Role,
+  Task,
+  TaskCategory,
+  User,
+  UserStyle,
+  UserTasks,
 };

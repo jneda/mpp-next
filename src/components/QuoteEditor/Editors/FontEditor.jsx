@@ -1,49 +1,19 @@
 import styles from "./Editor.module.css";
-import { Courgette } from '@next/font/google';
-import { Merriweather } from '@next/font/google';
-import { Caveat } from '@next/font/google';
-import { Zeyada } from '@next/font/google';
-import { Great_Vibes } from '@next/font/google';
 import { useState, useEffect } from "react";
-
-
-
-
-const courgette = Courgette({
-  subsets: ['latin'],
-  weight: '400'
-})
-
-const GreatVibes = Great_Vibes({
-  subsets: ['latin'],
-  weight: '400'
-})
-
-const zeyada = Zeyada({
-  subsets: ['latin'],
-  weight: '400'
-})
-
-const merriweather = Merriweather({
-  subsets: ['latin'],
-  weight: '400'
-})
-
-const caveat = Caveat({
-  subsets: ['latin'],
-  weight: '400'
-})
+import fonts from "@/components/Fonts";
 
 
 
 //Faire un tableau de polices et mapper pour créer les li
 
 export default function FontEditor(props) {
-  const [ defaultPolice, setDefaultPolice] = useState(`${courgette.className}`)
+  const [ defaultPolice, setDefaultPolice] = useState(`${fonts.courgette.className}`)
   //Dans le state j'appelle la classe correspondant à la font de la li cliquée qui sera placée dans la div citation
-  const [ actualPolice, setActualPolice ] = useState(defaultPolice)
+  // const [ actualPolice, setActualPolice ] = useState(defaultPolice)
 
-  const [ clickedPolice, setClickedPolice ] = useState(actualPolice)
+  const [ clickedPolice, setClickedPolice ] = useState(null)
+
+  const [ selectedText, setSelectedText ] = useState("quote")
 
   function setPolice(element) {
     // 1) Au clic j'appelle setPolice qui récupère l'élément cliqué
@@ -55,35 +25,70 @@ export default function FontEditor(props) {
     // 6) la fonction retourne obligatoirement la nouvelle valeur cliquée
     setClickedPolice(() => {
       const newClickedPolice =  element.target.classList[0];
-      callToParent(newClickedPolice, actualPolice);
-      setActualPolice(newClickedPolice);
+      props.changeFontFunc(newClickedPolice, selectedText);
+      // setActualPolice(newClickedPolice);
       return newClickedPolice;
       
     });
 
   }
 
-  function callToParent(clickedPolice, actualPolice) {
+  // function callToParent(clickedPolice) {
     
-    props.changeFontFunc(clickedPolice, actualPolice);
-  }
+    
+  // }
 
+  function selectText(e) {
+    setSelectedText(e.target.id)
+  } 
+
+  function setArrow(e) {
+    const editor = document.getElementById("editor");
+    const list = document.getElementById("policeList");
+    const buttons = document.querySelectorAll(`.${styles.selectedBtn}`);
+
+    e.target.classList.toggle(`${styles.clickedArrow}`);
+
+    editor.classList.toggle(`${styles.translateEditor}`);
+    list.classList.toggle(`${styles.translateList}`);
+    for ( let item of buttons) {
+      item.classList.toggle(`${styles.translateList}`)};
+  }
 
   return (
     <div
       style={{
-        background: "hotpink",
+        background: "rgba(232,97,131,0.3561799719887955)",
         color: "white",
       }}
       className={styles.editor}
+      id="editor"
     >
-        <ul>
-          <li  className={`${zeyada.className} ${styles.policeItem}`} onClick={setPolice}>{`Il est temps de rallumer les étoiles`}</li>
-          <li  className={`${merriweather.className} ${styles.policeItem}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-          <li  className={`${caveat.className} ${styles.policeItem}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
-          <li  className={`${GreatVibes.className} ${styles.policeItem}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
+        <ul  className= {styles.policeItem} id="policeList">
+          <li  className={`${fonts.zeyada.className}`} onClick={setPolice}>{`Il est temps de rallumer les étoiles`}</li>
+          <li  className={`${fonts.merriweather.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
+          <li  className={`${fonts.caveat.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
+          <li  className={`${fonts.GreatVibes.className}`} onClick={setPolice}>Il est temps de rallumer les étoiles</li>
         </ul>
-      FontEditor
+        <div className={`${styles.arrow}`}onClick={setArrow}></div>
+        <div>
+          <button className={styles.selectedBtn} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Appliquer à la Quote</button> 
+          <button className={styles.selectedBtn} id="author" disabled={selectedText == "author"} onClick={selectText}>Appliquer à l'auteur</button>
+        </div>
+        <div>
+          <input type="range" className={styles.range} id="fontSize-range" min="2" max="5" defaultValue="2" onInput={(event) => {
+             document.getElementById('display-fontSize-range').value= event.target.value;
+             const newSize = event.target.value;
+             const quoteElement = document.getElementById("quote-element");
+             const authorElement = document.getElementById("author-element");
+             if(selectedText == "quote"){
+             quoteElement.style.fontSize = `${newSize}rem`;
+             } else {
+              authorElement.style.fontSize = `${newSize}rem`;
+             };
+             }}/>
+          <input type="text" id="display-fontSize-range" value="2" readOnly/>
+        </div>
     </div>
   );
 }
