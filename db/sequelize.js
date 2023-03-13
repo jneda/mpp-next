@@ -16,15 +16,15 @@ const BgImageModel = require("./models/bgImage");
 const ColorModel = require("./models/color");
 const FontModel = require("./models/font");
 
-const sequelize = new Sequelize("mypeacefulplace", "root", "root", {
+const sequelize = new Sequelize("mypeacefulplace", "root", "", {
   host: "localhost",
   dialect: "mysql",
-  logging: true
+  logging: false,
 });
 
 sequelize
   .authenticate()
-  .then((result) => console.log("Connexion réussie : ", result))
+  .then((result) => console.log("Connexion réussie "))
   .catch((err) => console.error(`Echec: ${err}`));
 
 const QuoteSource = QuoteSourceModel(sequelize, DataTypes);
@@ -182,20 +182,22 @@ function initDb() {
 // initDb()
 
 module.exports = {
-    Author,
-    BgImage,
-    Color,
-    DiaryEntry,
-    Font,
-    Mood,
-    QuoteCategory,
-    QuoteList,
-    QuoteSource,
-    QuoteView,
-    QuoteViewStyle,
-    Role,
-    Task,
-    TaskCategory,
-    User,
-    UserStyle,
+  sequelize,
+  Author,
+  BgImage,
+  Color,
+  DiaryEntry,
+  Font,
+  Mood,
+  QuoteCategory,
+  QuoteList,
+  QuoteSource,
+  QuoteView,
+  QuoteViewStyle,
+  Role,
+  Task,
+  TaskCategory,
+  User,
+  UserStyle,
+  UserTasks,
 };

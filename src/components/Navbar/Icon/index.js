@@ -1,5 +1,5 @@
-import Heart from "./heart";
-import Logo from "./logo";
+import Heart from "./Heart";
+import Logo from "./Logo";
 import Palette from "./Palette";
 import Quill from "./Quill";
 import QuoteRight from "./QuoteRight";

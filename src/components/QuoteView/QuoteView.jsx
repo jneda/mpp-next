@@ -1,6 +1,10 @@
 import styles from "./QuoteView.module.css";
+import { useState } from "react";
+import { Courgette } from '@next/font/google'
+import fonts from "../Fonts";
 
-export default function QuoteView({ quote, viewStyle }) {
+
+export default function QuoteView({ id, quote, viewStyle, className }) {
   const {
     image,
     contentFont,
@@ -8,12 +12,17 @@ export default function QuoteView({ quote, viewStyle }) {
     authorFont,
     authorFontSize,
     fgColor,
+    fgaColor,
     bgColor
   } = viewStyle;
 
+  console.log("Quoteview Content Font", contentFont);
+
+
   return (
     <article
-      className={styles.quoteView}
+      id={id}
+      className={`${className} ${styles.quoteView}`}
       style={{
         backgroundImage: `url(${image})`,
         backgroundColor: bgColor
@@ -21,24 +30,24 @@ export default function QuoteView({ quote, viewStyle }) {
     >
       <blockquote className={styles.blockquote}>
         <p
-          className={styles.quoteContent}
+          className={`${styles.quoteContent} ${fonts[contentFont].className}`}
           style={{
-            fontFamily: contentFont,
             fontSize: contentFontSize,
-            fontColor: fgColor
+            color: fgColor
           }}
+          id="quote-element"
         >
           {quote.content}
         </p>
         <p
-          className={styles.quoteAuthor}
+        id="author-element"
+          className={`${styles.quoteAuthor} ${fonts[authorFont].className}`}
           style={{
-            fontFamily: authorFont,
             fontSize: authorFontSize,
-            fontColor: fgColor
+            color: fgaColor
           }}
         >
-          {quote.author.name}
+          {quote.author}
         </p>
       </blockquote>
     </article>

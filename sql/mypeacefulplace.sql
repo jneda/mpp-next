@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le : mer. 08 fév. 2023 à 12:08
--- Version du serveur : 8.0.30
--- Version de PHP : 8.1.10
+-- Host: localhost:3306
+-- Generation Time: Feb 26, 2023 at 04:51 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,22 +18,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `mypeacefulplace`
+-- Database: `mypeacefulplace`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `authors`
+-- Table structure for table `authors`
 --
 
 CREATE TABLE `authors` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Déchargement des données de la table `authors`
+-- Dumping data for table `authors`
 --
 
 INSERT INTO `authors` (`id`, `name`) VALUES
@@ -44,77 +44,85 @@ INSERT INTO `authors` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `bgimages`
+-- Table structure for table `bgimages`
 --
 
 CREATE TABLE `bgimages` (
   `id` int NOT NULL,
-  `imagePath` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `imageCredit` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `imagePath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `imageCredit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `colors`
+-- Table structure for table `colors`
 --
 
 CREATE TABLE `colors` (
   `id` int NOT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `diaryentries`
+-- Table structure for table `diaryentries`
 --
 
 CREATE TABLE `diaryentries` (
   `id` int NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_520_ci,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   `date` datetime NOT NULL,
   `update` datetime NOT NULL,
   `userId` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+--
+-- Dumping data for table `diaryentries`
+--
+
+INSERT INTO `diaryentries` (`id`, `content`, `date`, `update`, `userId`) VALUES
+(1, 'Bonjour tout le monde !', '2023-02-26 15:16:44', '2023-02-26 15:16:44', 1),
+(2, 'Note: penser à écrire des notes.', '2023-02-26 15:16:44', '2023-02-26 15:16:44', 1);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fonts`
+-- Table structure for table `fonts`
 --
 
 CREATE TABLE `fonts` (
   `id` int NOT NULL,
-  `fontPath` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `fontPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `moods`
+-- Table structure for table `moods`
 --
 
 CREATE TABLE `moods` (
   `id` int NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quotecategories`
+-- Table structure for table `quotecategories`
 --
 
 CREATE TABLE `quotecategories` (
   `id` int NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quotelistquoteviews`
+-- Table structure for table `quotelistquoteviews`
 --
 
 CREATE TABLE `quotelistquoteviews` (
@@ -125,19 +133,19 @@ CREATE TABLE `quotelistquoteviews` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quotelists`
+-- Table structure for table `quotelists`
 --
 
 CREATE TABLE `quotelists` (
   `id` int NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `userId` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quotesourcequotecategories`
+-- Table structure for table `quotesourcequotecategories`
 --
 
 CREATE TABLE `quotesourcequotecategories` (
@@ -148,18 +156,18 @@ CREATE TABLE `quotesourcequotecategories` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quotesources`
+-- Table structure for table `quotesources`
 --
 
 CREATE TABLE `quotesources` (
   `id` int NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `authorId` int DEFAULT NULL,
   `userId` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Déchargement des données de la table `quotesources`
+-- Dumping data for table `quotesources`
 --
 
 INSERT INTO `quotesources` (`id`, `content`, `authorId`, `userId`) VALUES
@@ -170,12 +178,12 @@ INSERT INTO `quotesources` (`id`, `content`, `authorId`, `userId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quoteviews`
+-- Table structure for table `quoteviews`
 --
 
 CREATE TABLE `quoteviews` (
   `id` int NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date` datetime NOT NULL,
   `quoteSourceId` int DEFAULT NULL,
   `quoteViewStyleId` int DEFAULT NULL,
@@ -185,12 +193,12 @@ CREATE TABLE `quoteviews` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quoteviewstyles`
+-- Table structure for table `quoteviewstyles`
 --
 
 CREATE TABLE `quoteviewstyles` (
   `id` int NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `contentFontSize` int NOT NULL,
   `authorFontSize` int NOT NULL,
   `bgImageId` int DEFAULT NULL,
@@ -206,42 +214,58 @@ CREATE TABLE `quoteviewstyles` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
   `id` int NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `label`) VALUES
+(1, 'admin'),
+(2, 'user');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `taskcategories`
+-- Table structure for table `taskcategories`
 --
 
 CREATE TABLE `taskcategories` (
   `id` int NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tasks`
+-- Table structure for table `tasks`
 --
 
 CREATE TABLE `tasks` (
   `id` int NOT NULL,
-  `content` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `approved` tinyint(1) DEFAULT '0',
   `taskCategoryId` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `content`, `approved`, `taskCategoryId`) VALUES
+(1, 'Promener les poubelles', 0, NULL),
+(2, 'Sortir le chien', 0, NULL);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `usermoods`
+-- Table structure for table `usermoods`
 --
 
 CREATE TABLE `usermoods` (
@@ -253,7 +277,7 @@ CREATE TABLE `usermoods` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `userquotelists`
+-- Table structure for table `userquotelists`
 --
 
 CREATE TABLE `userquotelists` (
@@ -264,28 +288,39 @@ CREATE TABLE `userquotelists` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `avatar` blob,
   `roleId` int DEFAULT NULL,
   `userStyleId` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `roleId`, `userStyleId`) VALUES
+(1, 'toto', 'toto@youpi.fr', '$2b$10$RSMAzwGnbm9xGL6Wyli1BeUX2IlnWptyG/DN0jnXqzDwpw.LaUDcC', NULL, NULL, NULL),
+(2, 'otto', 'otto@youpi.fr', '$2b$10$EhAx1H2cFUYyRUXqmXklmuyUZZTo7vRLdSgy2NnU./.cIA9T190N2', NULL, NULL, NULL),
+(3, 'dark_sasuke', 'kevin@dtc.lol', '$2b$10$BR4Oyiu8pX/SqVCv7rJLIeIURut/.R/jlUQwqL2EbA57iRIdsztIm', NULL, NULL, NULL),
+(4, 'xena', 'xena@cmp.dtg', '$2b$10$sUPLaHbPvwe.gro1bjlEPeqKhP/Up0NJPrDyKj1SjzOcXkGq99Zd2', NULL, NULL, NULL),
+(5, 'gabrielle', 'gabi@love.etc', '$2b$10$SdEH1QrCaAw5jBiH.b.Dwu.a04Z2JMHVRiKHuk8hSnbrhFZOZN8/a', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `userstyles`
+-- Table structure for table `userstyles`
 --
 
 CREATE TABLE `userstyles` (
   `id` int NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `bgImageId` int DEFAULT NULL,
   `fgColorId` int DEFAULT NULL,
   `bgColorId` int DEFAULT NULL
@@ -294,7 +329,7 @@ CREATE TABLE `userstyles` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `usertasks`
+-- Table structure for table `usertasks`
 --
 
 CREATE TABLE `usertasks` (
@@ -304,75 +339,83 @@ CREATE TABLE `usertasks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
--- Index pour les tables déchargées
+-- Dumping data for table `usertasks`
+--
+
+INSERT INTO `usertasks` (`taskId`, `userId`, `checked`) VALUES
+(1, 1, 0),
+(2, 1, 0);
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `authors`
+-- Indexes for table `authors`
 --
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `bgimages`
+-- Indexes for table `bgimages`
 --
 ALTER TABLE `bgimages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `colors`
+-- Indexes for table `colors`
 --
 ALTER TABLE `colors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `diaryentries`
+-- Indexes for table `diaryentries`
 --
 ALTER TABLE `diaryentries`
   ADD PRIMARY KEY (`id`),
   ADD KEY `userId` (`userId`);
 
 --
--- Index pour la table `fonts`
+-- Indexes for table `fonts`
 --
 ALTER TABLE `fonts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `moods`
+-- Indexes for table `moods`
 --
 ALTER TABLE `moods`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `quotecategories`
+-- Indexes for table `quotecategories`
 --
 ALTER TABLE `quotecategories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `quotelistquoteviews`
+-- Indexes for table `quotelistquoteviews`
 --
 ALTER TABLE `quotelistquoteviews`
   ADD PRIMARY KEY (`quoteListId`,`quoteViewId`),
   ADD KEY `quoteViewId` (`quoteViewId`);
 
 --
--- Index pour la table `quotelists`
+-- Indexes for table `quotelists`
 --
 ALTER TABLE `quotelists`
   ADD PRIMARY KEY (`id`),
   ADD KEY `userId` (`userId`);
 
 --
--- Index pour la table `quotesourcequotecategories`
+-- Indexes for table `quotesourcequotecategories`
 --
 ALTER TABLE `quotesourcequotecategories`
   ADD PRIMARY KEY (`quoteSourceId`,`quoteCategoryId`),
   ADD KEY `quoteCategoryId` (`quoteCategoryId`);
 
 --
--- Index pour la table `quotesources`
+-- Indexes for table `quotesources`
 --
 ALTER TABLE `quotesources`
   ADD PRIMARY KEY (`id`),
@@ -380,7 +423,7 @@ ALTER TABLE `quotesources`
   ADD KEY `userId` (`userId`);
 
 --
--- Index pour la table `quoteviews`
+-- Indexes for table `quoteviews`
 --
 ALTER TABLE `quoteviews`
   ADD PRIMARY KEY (`id`),
@@ -389,7 +432,7 @@ ALTER TABLE `quoteviews`
   ADD KEY `userId` (`userId`);
 
 --
--- Index pour la table `quoteviewstyles`
+-- Indexes for table `quoteviewstyles`
 --
 ALTER TABLE `quoteviewstyles`
   ADD PRIMARY KEY (`id`),
@@ -403,40 +446,40 @@ ALTER TABLE `quoteviewstyles`
   ADD KEY `bgFontId` (`bgFontId`);
 
 --
--- Index pour la table `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `taskcategories`
+-- Indexes for table `taskcategories`
 --
 ALTER TABLE `taskcategories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `tasks`
+-- Indexes for table `tasks`
 --
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `taskCategoryId` (`taskCategoryId`);
 
 --
--- Index pour la table `usermoods`
+-- Indexes for table `usermoods`
 --
 ALTER TABLE `usermoods`
   ADD PRIMARY KEY (`moodId`,`userId`),
   ADD KEY `userId` (`userId`);
 
 --
--- Index pour la table `userquotelists`
+-- Indexes for table `userquotelists`
 --
 ALTER TABLE `userquotelists`
   ADD PRIMARY KEY (`quoteListId`,`userId`),
   ADD KEY `userId` (`userId`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -444,7 +487,7 @@ ALTER TABLE `users`
   ADD KEY `userStyleId` (`userStyleId`);
 
 --
--- Index pour la table `userstyles`
+-- Indexes for table `userstyles`
 --
 ALTER TABLE `userstyles`
   ADD PRIMARY KEY (`id`),
@@ -453,118 +496,118 @@ ALTER TABLE `userstyles`
   ADD KEY `bgColorId` (`bgColorId`);
 
 --
--- Index pour la table `usertasks`
+-- Indexes for table `usertasks`
 --
 ALTER TABLE `usertasks`
   ADD PRIMARY KEY (`taskId`,`userId`),
   ADD KEY `userId` (`userId`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `authors`
+-- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT pour la table `bgimages`
+-- AUTO_INCREMENT for table `bgimages`
 --
 ALTER TABLE `bgimages`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `colors`
+-- AUTO_INCREMENT for table `colors`
 --
 ALTER TABLE `colors`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `diaryentries`
+-- AUTO_INCREMENT for table `diaryentries`
 --
 ALTER TABLE `diaryentries`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `fonts`
+-- AUTO_INCREMENT for table `fonts`
 --
 ALTER TABLE `fonts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `moods`
+-- AUTO_INCREMENT for table `moods`
 --
 ALTER TABLE `moods`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `quotecategories`
+-- AUTO_INCREMENT for table `quotecategories`
 --
 ALTER TABLE `quotecategories`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `quotelists`
+-- AUTO_INCREMENT for table `quotelists`
 --
 ALTER TABLE `quotelists`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `quotesources`
+-- AUTO_INCREMENT for table `quotesources`
 --
 ALTER TABLE `quotesources`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `quoteviews`
+-- AUTO_INCREMENT for table `quoteviews`
 --
 ALTER TABLE `quoteviews`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `quoteviewstyles`
+-- AUTO_INCREMENT for table `quoteviewstyles`
 --
 ALTER TABLE `quoteviewstyles`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `taskcategories`
+-- AUTO_INCREMENT for table `taskcategories`
 --
 ALTER TABLE `taskcategories`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `tasks`
+-- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `userstyles`
+-- AUTO_INCREMENT for table `userstyles`
 --
 ALTER TABLE `userstyles`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `diaryentries`
+-- Constraints for table `diaryentries`
 --
 ALTER TABLE `diaryentries`
   ADD CONSTRAINT `diaryentries_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -575,14 +618,14 @@ ALTER TABLE `diaryentries`
   ADD CONSTRAINT `diaryentries_ibfk_6` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `quotelistquoteviews`
+-- Constraints for table `quotelistquoteviews`
 --
 ALTER TABLE `quotelistquoteviews`
   ADD CONSTRAINT `quotelistquoteviews_ibfk_1` FOREIGN KEY (`quoteListId`) REFERENCES `quotelists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `quotelistquoteviews_ibfk_2` FOREIGN KEY (`quoteViewId`) REFERENCES `quoteviews` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `quotelists`
+-- Constraints for table `quotelists`
 --
 ALTER TABLE `quotelists`
   ADD CONSTRAINT `quotelists_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -593,14 +636,14 @@ ALTER TABLE `quotelists`
   ADD CONSTRAINT `quotelists_ibfk_6` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `quotesourcequotecategories`
+-- Constraints for table `quotesourcequotecategories`
 --
 ALTER TABLE `quotesourcequotecategories`
   ADD CONSTRAINT `quotesourcequotecategories_ibfk_1` FOREIGN KEY (`quoteSourceId`) REFERENCES `quotesources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `quotesourcequotecategories_ibfk_2` FOREIGN KEY (`quoteCategoryId`) REFERENCES `quotecategories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `quotesources`
+-- Constraints for table `quotesources`
 --
 ALTER TABLE `quotesources`
   ADD CONSTRAINT `quotesources_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `authors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -621,7 +664,7 @@ ALTER TABLE `quotesources`
   ADD CONSTRAINT `quotesources_ibfk_9` FOREIGN KEY (`authorId`) REFERENCES `authors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `quoteviews`
+-- Constraints for table `quoteviews`
 --
 ALTER TABLE `quoteviews`
   ADD CONSTRAINT `quoteviews_ibfk_1` FOREIGN KEY (`quoteSourceId`) REFERENCES `quotesources` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -644,7 +687,7 @@ ALTER TABLE `quoteviews`
   ADD CONSTRAINT `quoteviews_ibfk_9` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `quoteviewstyles`
+-- Constraints for table `quoteviewstyles`
 --
 ALTER TABLE `quoteviewstyles`
   ADD CONSTRAINT `quoteviewstyles_ibfk_1` FOREIGN KEY (`bgImageId`) REFERENCES `bgimages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -697,7 +740,7 @@ ALTER TABLE `quoteviewstyles`
   ADD CONSTRAINT `quoteviewstyles_ibfk_9` FOREIGN KEY (`bgImageId`) REFERENCES `bgimages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `tasks`
+-- Constraints for table `tasks`
 --
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`taskCategoryId`) REFERENCES `taskcategories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -708,21 +751,21 @@ ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_6` FOREIGN KEY (`taskCategoryId`) REFERENCES `taskcategories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `usermoods`
+-- Constraints for table `usermoods`
 --
 ALTER TABLE `usermoods`
   ADD CONSTRAINT `usermoods_ibfk_1` FOREIGN KEY (`moodId`) REFERENCES `moods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usermoods_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `userquotelists`
+-- Constraints for table `userquotelists`
 --
 ALTER TABLE `userquotelists`
   ADD CONSTRAINT `userquotelists_ibfk_1` FOREIGN KEY (`quoteListId`) REFERENCES `quotelists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `userquotelists_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -743,7 +786,7 @@ ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_9` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `userstyles`
+-- Constraints for table `userstyles`
 --
 ALTER TABLE `userstyles`
   ADD CONSTRAINT `userstyles_ibfk_1` FOREIGN KEY (`bgImageId`) REFERENCES `bgimages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -775,7 +818,7 @@ ALTER TABLE `userstyles`
   ADD CONSTRAINT `userstyles_ibfk_9` FOREIGN KEY (`bgColorId`) REFERENCES `colors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `usertasks`
+-- Constraints for table `usertasks`
 --
 ALTER TABLE `usertasks`
   ADD CONSTRAINT `usertasks_ibfk_1` FOREIGN KEY (`taskId`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
