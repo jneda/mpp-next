@@ -183,6 +183,8 @@ function initDb() {
   return sequelize.sync();
 }
 
+// initDb()
+
 module.exports = {
   sequelize,
   Author,

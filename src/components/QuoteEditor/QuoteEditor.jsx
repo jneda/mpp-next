@@ -8,7 +8,7 @@ import fonts from "../Fonts";
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
-// console.log(fonts);
+console.log(fonts);
 
 // dummy data for testing
 const quote = {
@@ -28,8 +28,33 @@ const dummyStyle = {
   bgColor: "#00000000",
 };
 
+// main function
+
 export default function QuoteEditor({ backgrounds }) {
+  const [quote, setQuote] = useState({
+    content: "",
+    author: "",
+  });
+  
   const [viewstyle, setViewStyle] = useState({ ...dummyStyle });
+
+  // get random quote on load
+
+  useEffect(() => handleRandomQuote, []);
+
+  const handleRandomQuote = () => {
+    fetch("api/getRandomQuote")
+      .then((res) => res.json())
+      .then((data) => {
+        const quote = data.data;
+        console.log(quote.author.name);
+        setQuote({
+          id: quote.id,
+          content: quote.content,
+          author: quote.author.name,
+        });
+      });
+  };
 
   // font actions
 
@@ -220,6 +245,7 @@ export default function QuoteEditor({ backgrounds }) {
         <span></span>
         <span></span>
       </button>
+      <button onClick={handleRandomQuote}>RandomQuote</button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
