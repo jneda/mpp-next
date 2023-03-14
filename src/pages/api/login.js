@@ -14,15 +14,15 @@ export async function loginRoute(req, res) {
 
     // unhappy paths
     if (!user) {
-      const message = `Aucun utilisateur ne correspond à cette adresse email.`;
-      return res.status(404).json({ message });
+      const message = `Identifiant ou mot de passe invalide.`;
+      return res.status(401).json({ message });
     }
 
     user = user.toJSON();
     
     const passwordVerify = await bcrypt.compare(password, user.password);
     if (!passwordVerify) {
-      const message = `Le mot de passe est incorrect.`;
+      const message = `Identifiant ou mot de passe invalide.`;
       return res.status(401).json({ message });
     }
 
@@ -32,7 +32,7 @@ export async function loginRoute(req, res) {
     req.session.user = user;
     await req.session.save();
 
-    const message = `L'utilisateur a été connecté avec succès.`;
+    const message = `Connexion réussi.`;
     return res.status(200).json({ message, data: user });
   } catch (error) {
     console.error(error.message);

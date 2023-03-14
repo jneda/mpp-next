@@ -1,3 +1,5 @@
+import Toast from '@/components/Toast/Toast'
+import MessageContext from '@/context/MsgContext'
 import '@/styles/globals.css'
 import { Courgette } from '@next/font/google'
 
@@ -8,8 +10,13 @@ const courgette = Courgette({
 })
 
 export default function App({ Component, pageProps }) {
+
   return (
-  <main>
-    <Component {...pageProps} />
-  </main>
-)}
+    <main>
+      <MessageContext>
+        <Toast />
+        <Component {...pageProps} />
+      </MessageContext>
+    </main> 
+  )
+}

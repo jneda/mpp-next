@@ -22,10 +22,10 @@ export default async function signUser(req, res) {
     let userWithoutPassword = user.toJSON();
     delete userWithoutPassword.password;
 
-    const message = `Inscription réussie! Vous êtes maintenant enregistré en tant qu'utilisateur.`;
+    const message = `Inscription réussie!`;
     res.status(200).json({ message, data: userWithoutPassword });
   } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({ message: "Erreur serveur." });
+    console.error(error);
+    return res.status(500).json({ message: "Erreur serveur. Réessayer dans quelques instants." });
   }
 }
