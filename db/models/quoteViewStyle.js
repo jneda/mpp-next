@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) =>{
             }
         },
         contentFontSize:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false
         },
         authorFontSize:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false,
         }
     },
