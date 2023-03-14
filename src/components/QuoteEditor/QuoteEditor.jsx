@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as htmlToImage from "html-to-image";
 
 import { useEffect, useState } from "react";
+import { useContext } from "react";
 
 import fonts from "../Fonts";
 
@@ -9,6 +10,7 @@ import Navbar from "../Navbar/Navbar";
 import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
+import { MessageData } from "@/context/MsgContext";
 
 import styles from "./QuoteEditor.module.css";
 // console.log(fonts);
@@ -40,6 +42,8 @@ export default function QuoteEditor({ backgrounds, userId }) {
   });
 
   const [viewstyle, setViewStyle] = useState({ ...dummyStyle });
+
+  const { infoMessage, setInfoMessage } = useContext(MessageData);
 
   // get random quote on load
 
@@ -162,6 +166,13 @@ export default function QuoteEditor({ backgrounds, userId }) {
         method: "POST",
         body: formData,
       });
+
+      if (response.ok) {
+        const { message } = await response.json();
+        setInfoMessage(message);
+      } else {
+        setInfoMessage("Votre mise en forme n'a pas pu être enregistrée...");
+      }
     } catch (error) {
       console.error(error);
     }

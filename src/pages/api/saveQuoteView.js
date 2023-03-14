@@ -105,7 +105,7 @@ export default async function saveQuoteView(req, res) {
       });
 
       res.status(200).json({
-        message: "Rien n'est pété. :)",
+        message: "Votre mise en forme a été enregistrée !",
         quoteView: quoteView.toJSON(),
       });
     });
