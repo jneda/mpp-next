@@ -137,11 +137,6 @@ export default function QuoteEditor({ backgrounds }) {
 
   // save action
 
-  function getUploadFormData(e) {
-    e.preventDefault();
-    console.log(e.target);
-  }
-
   async function saveViewStyle() {
     try {
       // generate image file from the DOM
