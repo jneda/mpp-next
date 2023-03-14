@@ -16,7 +16,7 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
     bgColor
   } = viewStyle;
 
-  console.log("Quoteview Content Font", contentFont);
+  // console.log("Quoteview Content Font", contentFont);
 
 
   return (

@@ -3,7 +3,7 @@ import { BgImage } from "db/sequelize";
 import QuoteEditor from "@/components/QuoteEditor/QuoteEditor";
 
 export default function ({ backgrounds }) {
-  console.log("Editor page client side:", backgrounds);
+  // console.log("Editor page client side:", backgrounds);
   return <QuoteEditor backgrounds={backgrounds} />;
 }
 
