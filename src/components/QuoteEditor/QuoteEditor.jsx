@@ -5,36 +5,40 @@ import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
 import fonts from "../Fonts";
 
-
 import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
 console.log(fonts);
 
+// dummy data for testing
+const quote = {
+  content: "Il fait chaud ici!",
+  author: { name: "Giordano Bruno" },
+};
+
+// dummy style for testing
+const dummyStyle = {
+  image: "/backgrounds/marguerite-729510_1920.jpg",
+  contentFont: "GreatVibes",
+  contentFontSize: "2rem",
+  authorFont: "caveat",
+  authorFontSize: "2em",
+  fgColor: "#00000",
+  fgaColor: "#00000",
+  bgColor: "#00000000",
+};
+
+// main function
+
 export default function QuoteEditor({ backgrounds }) {
-
-    // dummy style for testing
-    const dummyStyle = {
-      image: "/backgrounds/background-g3981561ff_1920.jpg",
-      contentFont: "GreatVibes",
-      contentFontSize: "2rem",
-      authorFont: "caveat",
-      authorFontSize: "2em",
-      fgColor: "#00000",
-      fgaColor:"#00000",
-      bgColor: "#00000000",
-    };
+  const [quote, setQuote] = useState({
+    content: "",
+    author: "",
+  });
   
-    const [ viewstyle, setViewStyle ] = useState({...dummyStyle});
+  const [viewstyle, setViewStyle] = useState({ ...dummyStyle });
 
-    const [ quote, setQuote ] = useState({
-      content:"",
-      author:""
-    }); 
-    
-    // const quote = {
-    // content: "Sois fainéant, tu vivras content.",
-    // author: { name: "Coluche" }}
+  // get random quote on load
 
     
   useEffect(() =>
@@ -53,53 +57,108 @@ export default function QuoteEditor({ backgrounds }) {
     handleRandomQuote, [])
 
   const handleRandomQuote = () => {
-      fetch('api/getRandomQuote')
-      .then(res => res.json())
-      .then(data => {
+    fetch("api/getRandomQuote")
+      .then((res) => res.json())
+      .then((data) => {
         const quote = data.data;
-        console.log(quote.author.name);
         setQuote({
-          id:quote.id,
-          content:quote.content,
-          author:quote.author.name
-        })})}
+          id: quote.id,
+          content: quote.content,
+          author: quote.author.name,
+        });
+      });
+  };
+
+  // font actions
+
+  const modifyPolice = (clickedData, selectedText) => {
+    // console.log("Coucou c'est la police", clickedData, selectedText);
+
+    const keyValues = Object.entries(fonts);
+
+    const fontNames = keyValues.map(([key, value]) => {
+      return clickedData === value.className ? key : null;
+    });
+
+    const [fontName] = fontNames.filter((font) => font != null);
+
+    let fontProperty;
+
+    if (selectedText == "quote") {
+      fontProperty = { contentFont: fontName };
+    } else {
+      fontProperty = { authorFont: fontName };
+    }
+
+    setViewStyle({ ...viewstyle, ...fontProperty });
+
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
+  };
 
   const handleFontSizeChange = (newSize, selectedText) => {
-
     let fontProperty;
-    
-    if(selectedText == "quote"){
-      fontProperty = {contentFontSize:`${newSize}rem`}
+
+    if (selectedText == "quote") {
+      fontProperty = { contentFontSize: `${newSize}rem` };
     } else {
-      fontProperty = {authorFontSize:`${newSize}rem`}
+      fontProperty = { authorFontSize: `${newSize}rem` };
     }
-    setViewStyle({...viewstyle, ...fontProperty});
+    setViewStyle({ ...viewstyle, ...fontProperty });
+
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
   };
+
+  // color action
 
   const handleColorChange = (newColor, selectedText) => {
-
-    console.log(newColor);
+    // console.log(newColor);
     let fontProperty;
-    
-      if(selectedText == "quote"){
-        fontProperty = {fgColor:`${newColor}`}
-      } else {
-        fontProperty = {fgaColor:`${newColor}`}
-      }
 
-    setViewStyle({...viewstyle, ...fontProperty});
+    if (selectedText == "quote") {
+      fontProperty = { fgColor: `${newColor}` };
+    } else {
+      fontProperty = { fgaColor: `${newColor}` };
+    }
+
+    setViewStyle({ ...viewstyle, ...fontProperty });
+
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
   };
 
- const handleChangeBackground = (newClickedBackground) => {
-  console.log(newClickedBackground);
+  // background image action
 
-  let newBackground;
+  const handleChangeBackground = (newClickedBackground) => {
+    // console.log(newClickedBackground);
 
-  newBackground = {image:`${newClickedBackground}`};
+    const newBackground = { image: `${newClickedBackground}` };
 
-  setViewStyle({...viewstyle, ...newBackground});
- }
+    setViewStyle({ ...viewstyle, ...newBackground });
+  };
 
+  // save action
+
+  async function saveViewStyle() {
+    try {
+      const node = document.querySelector("article");
+      console.log(node);
+      // save preview image to disk
+      const png = await htmlToImage.toPng(node);
+      console.log(JSON.stringify({ png }));
+      const response = await fetch("api/saveQuoteView", {
+        method: "POST",
+        body: JSON.stringify({ png }),
+        headers: {
+          "Content-Type": false,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    // save view style to database
+  }
+
+  // editor mode selection
 
   /** Enum-like object */
   const Modes = Object.freeze({
@@ -109,62 +168,27 @@ export default function QuoteEditor({ backgrounds }) {
     SET_FONT: "setFont",
   });
 
-  //----------------------
-  //Essai fonction modifyFont
-  //-------------------------
-
- 
-  const modifyPolice = (clickedData, selectedText) => {
-    console.log("Coucou c'est la police", clickedData, selectedText);
-
-    const keyValues = Object.entries(fonts);
-
-    const fontNames = keyValues.map(([key , value]) => {
-     return clickedData === value.className ? key : null
-    });
-
-    const [fontName] = fontNames.filter(font => font!=null)
-
-
-
-    let fontProperty;
-
-    if(selectedText == "quote"){
-      fontProperty = {contentFont:fontName}
-    } else {
-      fontProperty = {authorFont:fontName}
-    }
-
-
-    setViewStyle({...viewstyle, ...fontProperty});
-
-    console.log({...viewstyle, ...fontProperty});
-
-
-  }
-  /* const editors = {
-    [Modes.PREVIEW]: null,
-    [Modes.SET_COLOR]: <ColorEditor />,
-    [Modes.SET_FONT]: <FontEditor />,
-    [Modes.SET_IMAGE]: <ImageEditor />,
-  }; */
+  const [mode, setMode] = useState(Modes.PREVIEW);
 
   const editors = {
     preview: null,
-    setColor: <ColorEditor
-    colorChange={handleColorChange}/>,
-    setFont: <FontEditor
-    onFontSizeChange={handleFontSizeChange}
-    changeFontFunc = {modifyPolice} />,
-    setImage: <ImageEditor 
-    changeBackground={handleChangeBackground}
-    backgrounds={backgrounds}/>,
+    setColor: <ColorEditor colorChange={handleColorChange} />,
+    setFont: (
+      <FontEditor
+        onFontSizeChange={handleFontSizeChange}
+        changeFontFunc={modifyPolice}
+      />
+    ),
+    setImage: (
+      <ImageEditor
+        changeBackground={handleChangeBackground}
+        backgrounds={backgrounds}
+      />
+    ),
   };
 
-  const [mode, setMode] = useState(Modes.PREVIEW);
-
   function handleModeChange(modeName) {
-    console.log(`I need to switch to ${modeName} mode!`);
+    // console.log(`I need to switch to ${modeName} mode!`);
     let newMode = Modes.PREVIEW;
     switch (modeName) {
       case "setImage":
@@ -186,6 +210,8 @@ export default function QuoteEditor({ backgrounds }) {
   function getImage() {
     console.log("coucou !");
     const node = document.querySelector("article");
+    console.log(node);
+    // allow user to download PNG file
     htmlToImage
       .toPng(node)
       .then(function (dataUrl) {
@@ -201,6 +227,7 @@ export default function QuoteEditor({ backgrounds }) {
         console.error("oops, something went wrong!", error);
       });
   }
+
   // util function
   function getCard() {
     const quoteView = document.querySelector(".quote-view");
@@ -222,36 +249,22 @@ export default function QuoteEditor({ backgrounds }) {
     console.log(sizes);
   }
 
-  // dummy data for testing
-
-
-  // debug
-  // console.log(mode, editors[mode]);
-  /* for (const key of Object.keys(Modes)) {
-    console.log(key);
-    if (key !== mode) {
-      console.log(`%c${key} does not match ${mode}`, "color: red;");
-    }
-    if (key === mode) {
-      console.log(`%c${key} matches ${mode}!`, "color: green;");
-    }
-  } */
-
   const editor = editors[mode];
 
   return (
     <>
-      <button className={styles.downloadBtn} onClick={getImage}>
-        <span></span><span></span></button>
-        <button onClick={handleRandomQuote}>RandomQuote</button>
+      {/* <button className={styles.downloadBtn} onClick={getImage}> */}
+      <button className={styles.downloadBtn} onClick={saveViewStyle}>
+        <span></span>
+        <span></span>
+      </button>
+      <button onClick={handleRandomQuote}>RandomQuote</button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
         viewStyle={viewstyle}
         className={styles.quoteView}
-        // onClick={getImage}
       />
-      {/* <ImageEditor /> */}
       {editor}
       <Navbar page={"editor"} />
     </>

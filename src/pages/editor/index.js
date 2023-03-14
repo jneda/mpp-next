@@ -8,6 +8,7 @@ export default function ({ backgrounds }) {
 }
 
 export async function getServerSideProps() {
+  
   let backgrounds = await BgImage.findAll();
   // do we need to seed the database?
   if (backgrounds.length === 0) {

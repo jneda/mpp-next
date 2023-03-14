@@ -125,6 +125,7 @@ User.belongsToMany(Task, { through: UserTasks });
 
 QuoteViewStyle.hasMany(QuoteView);
 QuoteView.belongsTo(QuoteViewStyle);
+
 UserStyle.hasMany(User);
 User.belongsTo(UserStyle);
 UserStyle.belongsTo(BgImage);
@@ -135,6 +136,7 @@ BgImage.hasMany(UserStyle);
 Color.hasMany(UserStyle, {
   foreignKey: "fgColorId",
 });
+
 QuoteViewStyle.belongsTo(BgImage);
 QuoteViewStyle.belongsTo(Font, {
   foreignKey: "contentFontId",
@@ -149,12 +151,14 @@ Font.hasMany(QuoteViewStyle, {
 Color.hasMany(QuoteViewStyle, {
   foreignKey: "fgFontId",
 });
+
 QuoteList.belongsTo(User);
 User.hasMany(QuoteList);
 QuoteView.belongsTo(User);
 User.hasMany(QuoteView);
 QuoteViewStyle.belongsTo(User);
 User.hasMany(QuoteViewStyle);
+
 QuoteViewStyle.belongsTo(Font, {
   foreignKey: "authorFontId",
 });
