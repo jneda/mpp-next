@@ -1,14 +1,17 @@
+import { v4 as uuidv4 } from "uuid";
+import * as htmlToImage from "html-to-image";
+
 import { useEffect, useState } from "react";
+
+import fonts from "../Fonts";
+
 import Navbar from "../Navbar/Navbar";
 import QuoteView from "../QuoteView/QuoteView";
 import Toolbar from "./Toolbar";
 import { ColorEditor, FontEditor, ImageEditor } from "./Editors";
-import fonts from "../Fonts";
-
-import * as htmlToImage from "html-to-image";
 
 import styles from "./QuoteEditor.module.css";
-console.log(fonts);
+// console.log(fonts);
 
 // dummy data for testing
 const quote = {
@@ -35,26 +38,23 @@ export default function QuoteEditor({ backgrounds }) {
     content: "",
     author: "",
   });
-  
+
   const [viewstyle, setViewStyle] = useState({ ...dummyStyle });
 
   // get random quote on load
 
-    
-  useEffect(() =>
-  handleRandomBackground, [])
+  useEffect(() => handleRandomBackground, []);
 
   const handleRandomBackground = () => {
-    let randomBg = backgrounds[Math.floor(Math.random()*20)].imagePath;
-    console.log(randomBg);
+    let randomBg = backgrounds[Math.floor(Math.random() * 20)].imagePath;
+    // console.log(randomBg);
     let newImage = {
-      image:`/backgrounds/${randomBg}`
+      image: `/backgrounds/${randomBg}`,
     };
-    setViewStyle({...viewstyle, ...newImage});
-  }
+    setViewStyle({ ...viewstyle, ...newImage });
+  };
 
-    useEffect(() =>
-    handleRandomQuote, [])
+  useEffect(() => handleRandomQuote, []);
 
   const handleRandomQuote = () => {
     fetch("api/getRandomQuote")
@@ -137,20 +137,32 @@ export default function QuoteEditor({ backgrounds }) {
 
   // save action
 
+  function getUploadFormData(e) {
+    e.preventDefault();
+    console.log(e.target);
+  }
+
   async function saveViewStyle() {
     try {
+      // generate image file from the DOM
       const node = document.querySelector("article");
-      console.log(node);
-      // save preview image to disk
-      const png = await htmlToImage.toPng(node);
-      console.log(JSON.stringify({ png }));
-      const response = await fetch("api/saveQuoteView", {
+      const blob = await htmlToImage.toBlob(node);
+
+      const uniqueFileName = `${uuidv4()}.png`;
+      const pngFile = new File([blob], uniqueFileName, { type: "image/png" });
+      // console.log(pngFile);
+
+      // build a FormData object to send to the back-end
+      const formData = new FormData();
+      formData.append("quoteView", pngFile, uniqueFileName);
+      // console.log(formData);
+
+      console.log(viewstyle);
+
+      /* const response = await fetch("api/saveQuoteView", {
         method: "POST",
-        body: JSON.stringify({ png }),
-        headers: {
-          "Content-Type": false,
-        },
-      });
+        body: formData,
+      }); */
     } catch (error) {
       console.error(error);
     }

@@ -1,25 +1,28 @@
 import fs from "fs";
 import path from "path";
 
+import formidable from "formidable";
+
+// prevent Next from consuming form data
+export const config = {
+  api: { bodyParser: false },
+};
+
 export default async function saveQuoteView(req, res) {
+  console.log(req.body);
   try {
-    // parse data URL to get PNG as base 64 data
-    const { png: dataURL } = JSON.parse(req.body);
-    const base64data = dataURL.replace("data:image/png;base64,", "");
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files) => {
+      if (err) throw err;
+      const oldPath = files.quoteView.filepath;
+      const newPath = "public/quoteviews/" + files.quoteView.originalFilename;
+      // console.log(`File would be saved as ${newPath}`);
 
-    // try and find where to save that as an image file...
-    // const staticDir = path.normalize(__dirname + "../../../public/quoteviews");
-
-    const saved = fs.writeFile("./public/quoteviews/out.png", base64data, "base64", (err) =>
-      console.error(err)
-    );
-    console.log("saved", saved);
-
-    if (saved === undefined) {
-      throw new Error("Failed to save file to disk.");
-    }
-
-    res.status(200).send();
+      fs.rename(oldPath, newPath, (err) => {
+        if (err) throw err;
+        res.status(200).json({ "message": `File saved at ${newPath}` });
+      });
+    });    
   } catch (error) {
     console.error(error);
     res.status(500).send();
