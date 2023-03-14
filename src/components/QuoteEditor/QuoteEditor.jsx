@@ -33,7 +33,7 @@ const dummyStyle = {
 
 // main function
 
-export default function QuoteEditor({ backgrounds }) {
+export default function QuoteEditor({ backgrounds, userId }) {
   const [quote, setQuote] = useState({
     content: "",
     author: "",
@@ -46,6 +46,8 @@ export default function QuoteEditor({ backgrounds }) {
   useEffect(() => handleRandomBackground, []);
 
   const handleRandomBackground = () => {
+    if (backgrounds.length === 0) return;
+
     let randomBg = backgrounds[Math.floor(Math.random() * 20)].imagePath;
     // console.log(randomBg);
     let newImage = {
@@ -150,14 +152,16 @@ export default function QuoteEditor({ backgrounds }) {
       // build a FormData object to send to the back-end
       const formData = new FormData();
       formData.append("quoteView", pngFile, uniqueFileName);
-      // console.log(formData);
+      formData.append("styles", JSON.stringify(viewstyle));
+      formData.append("userId", userId);
+      formData.append("quoteSourceId", quote.id);
 
-      console.log(viewstyle);
+      console.log(formData);
 
-      /* const response = await fetch("api/saveQuoteView", {
+      const response = await fetch("api/saveQuoteView", {
         method: "POST",
         body: formData,
-      }); */
+      });
     } catch (error) {
       console.error(error);
     }
