@@ -10,7 +10,7 @@ export const config = {
 };
 
 export default async function saveQuoteView(req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
@@ -72,7 +72,7 @@ export default async function saveQuoteView(req, res) {
       // make a dummy label
       // use preview image UUID for this!!!
       const label = previewFileName.split(".")[0];
-      console.log("label", label);
+      // console.log("label", label);
 
       const userId = fields.userId;
 
@@ -93,7 +93,7 @@ export default async function saveQuoteView(req, res) {
         throw new Error("Failed to save quote view style. :(");
       }
 
-      console.log(fields.quoteSourceId);
+      // console.log(fields.quoteSourceId);
 
       // finally, save all that stuff into QuoteView
       const quoteView = await QuoteView.create({
