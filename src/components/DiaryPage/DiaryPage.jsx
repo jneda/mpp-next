@@ -1,11 +1,13 @@
-import styles from './diaryPage.module.css'
-import { useState, useEffect } from 'react'
+import styles from './diaryPage.module.css';
+import { useState, useContext } from 'react';
+import { MessageData } from '@/context/MsgContext';
 
 export default function DiaryPage(props) {
     const [notes, setNotes] = useState('')
     const [newTask, setNewTask] = useState('')
     const [onEdit, setOnEdit] = useState(false)
-   
+
+   const  {infoMessage, setInfoMessage} = useContext(MessageData)
 
     function handleChangesNotes(e){
         setNotes(e.target.value)
@@ -16,22 +18,31 @@ export default function DiaryPage(props) {
     }
 
 
-    function handleClickValidate(){
-        fetch('api/createNote',{
+    async function handleClickValidate(){
+        if(notes.trim().length === 0){
+            return alert('Votre note de journal est vide.')
+        }
+        const response = await fetch('api/createNote',{
             method: 'POST',
             body: JSON.stringify({note: notes, userId: props.userId}) 
         })
-        .then(res => res.json())
-        .then(data => {
-            props.setDiaryContents([{id: data.id, content: notes, date:todayDate}, ...props.diaryContents]);
-        })
+        const data = await response.json();
+        if(!response.ok){
+            setInfoMessage(data.message)
+            return;
+        }
+        props.setDiaryContents([{id: data.id, content: notes, date:todayDate}, ...props.diaryContents]);
+        
         setNotes('')
         if(props.editionMode){
             props.setEditionMode(false)
         }
     }
 
-    function handleClickValidateEdition(){
+    async function handleClickValidateEdition(){
+        if(notes.trim().length === 0){
+            return alert('Votre note de journal est vide.')
+        }
         const id = props.data.id;
         let tab = [...props.diaryContents]
         const nodeIndex = tab.findIndex(note => note.id == id)
@@ -39,14 +50,18 @@ export default function DiaryPage(props) {
         const date = props.data.date.substring(0, 10).split('-').reverse().join('/')
         props.setDiaryContents([{id:id, content: notes, date: date} ,...tab])
 
-        fetch('api/updateNote',{
+        const response = await fetch('api/updateNote',{
             method: 'PUT',
             body: JSON.stringify({noteId: id, content: notes})
         })
-        .then( _ =>{
-            setNotes('')
-            setOnEdit(false)
-        })
+        if(!response.ok){
+            const data = await response.json()
+            setInfoMessage(data.message)
+            return;
+        }
+        setNotes('')
+        setOnEdit(false)
+        
     }
 
     function handleClickCancel(){
@@ -60,7 +75,7 @@ export default function DiaryPage(props) {
         props.setEditingTasks(true)
     }
 
-    function handleChangeCheck(task, e){       
+    async function handleChangeCheck(task, e){       
         const id = parseInt(e.target.name)
         let tab = [...props.taskContents]
         const taskIndex = tab.findIndex(task => (
@@ -68,12 +83,14 @@ export default function DiaryPage(props) {
         ))
         tab[taskIndex].checked = !task.checked
         props.setTaskContents(tab)
-        fetch('api/updateTask',{
+        const response = await fetch('api/updateTask',{
             method: 'PUT',
             body: JSON.stringify({checked: task.checked, id: id})
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        if(!response.ok){
+            const data = await response.json()
+            setInfoMessage(data.message)
+        }
     }
 
     function handleClickEditionNote(){
@@ -86,44 +103,74 @@ export default function DiaryPage(props) {
     }
 
 
-    function handleClickDeleteNote(){
+    async function handleClickDeleteNote(){
         const noteId = props.data.id;
         let tab = [...props.diaryContents];
         const nodeIndex = tab.findIndex(note => note.id == noteId);
         tab.splice(nodeIndex, 1)
         props.setDiaryContents(tab)
-        fetch('api/deleteNote',{
+        const response = await fetch('api/deleteNote',{
             method: 'DELETE',
             body: JSON.stringify({id: noteId})
         })
+        const data = await response.json()
+        setInfoMessage(data.message)
     }
 
-    function handleClickDeleteTask(e){
+    async function handleClickDeleteTask(e){
         const taskId = e.target.parentNode.parentNode.id;
         const userId = props.userId;
         let tab = [...props.taskContents];
         const taskIndex = tab.findIndex(task => task.id == taskId);
         tab.splice(taskIndex, 1)
         props.setTaskContents(tab)
-        fetch('api/deleteTask',{
+        const response = await fetch('api/deleteTask',{
             method: 'DELETE',
             body: JSON.stringify({taskId: taskId, userId: userId})
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        const data = await response.json()
+        setInfoMessage(data.message)
     }
 
-    function handleSubmitTask(e){
+    async function handleClickDeleteAllTasks(){
+        const userId = props.userId;
+        props.setTaskContents([]);
+        const response = await fetch('api/deleteAllTasks',{
+            method: "DELETE",
+            body: JSON.stringify({userId: userId})
+        })
+        const data = await response.json();
+        setInfoMessage(data.message)
+
+
+    }
+
+    async function handleSubmitTask(e){
         e.preventDefault();
-        fetch('api/createTask',{
+        if(newTask.trim().length === 0){
+            return alert("Il n'y a aucune tâche à ajouter");
+        }
+        let alreadyOnList = false;
+        props.taskContents.map(task =>{
+            if(task.content == newTask){
+                alreadyOnList = true;
+            }
+        })
+        if(alreadyOnList){
+            return alert("Vous avez déjà enregistré cette tâche.");
+        }
+        const response = await fetch('api/createTask',{
             method: 'POST',
             body: JSON.stringify({content: newTask, userId: props.userId})
         })
-        .then(res => res.json())
-        .then(data => {
-            props.setTaskContents([...props.taskContents, {id: data.data.taskId, content: newTask, checked: false}])
-        })
+        const data = await response.json();
+        if(!response.ok){
+            setInfoMessage(data.message)
+            return;
+        }
+        props.setTaskContents([...props.taskContents, {id: data.id, content: newTask, checked: false}]);
         setNewTask('')
+        props.setEditingTasks(false)
     }
 
     const todayDate = new Date().toLocaleString().substring(0, 10);
@@ -155,8 +202,8 @@ export default function DiaryPage(props) {
                 :
                 <>
                     <div className={styles.inter1} onClick={hancleClickCreateTask}>create</div>
-                    <div className={styles.inter2}>deleteAll</div>
-                    <div className={styles.inter3}>list</div>
+                    <div className={styles.inter2} onClick={handleClickDeleteAllTasks}>deleteAll</div>
+                    <div className={styles.inter3}>ChooseInList</div>
                 </>     
                 }
             </div>
@@ -202,7 +249,7 @@ export default function DiaryPage(props) {
                         ))
                         :
                         <>
-                            <p>Il n'y a encore aucune tâche pour le moment.</p>
+                            Il n'y a encore aucune tâche pour le moment.
                         </>
                         }
                         {props.editingTasks && 

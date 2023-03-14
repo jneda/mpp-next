@@ -8,7 +8,7 @@ export default async function deleteTask(req,res){
         const noteDeleted = entry;
         return DiaryEntry.destroy({where: { id: data.id}})
         .then(_ =>{
-            const message = `La note de journal à bien été supprimée.`;
+            const message = `Note de journal supprimée.`;
             return res.status(200).json({message, data:noteDeleted})
         }) 
     }) 

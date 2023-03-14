@@ -3,11 +3,18 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import styles from "./LogForm.module.css";
 
+import { MessageData } from "@/context/MsgContext";
+import { useContext } from "react";
+
 export default function SignForm() {
+
+  const  {infoMessage, setInfoMessage} = useContext(MessageData)
+
+  
   const router = useRouter();
 
   const handleSubmit = async (userInput) => {
-    console.log("[login]:", JSON.stringify(userInput));
+    // console.log("[login]:", JSON.stringify(userInput));
 
     let response;
     try {
@@ -15,23 +22,23 @@ export default function SignForm() {
         method: "POST",
         body: JSON.stringify(userInput),
       });
-
-      if (response) {
-        // logging
-        const data = await response.json();
-        console.log(data);
-
+      const data = await response.json();
+      if(!response.ok){
+        setInfoMessage(data.message)
+        return;
+      }
+      setInfoMessage(data.message)
         // redirect
         router.push("/homepage");
-
-        // give user feedback
       }
-    } catch (e) {
+     catch (e) {
+      setInfoMessage('Erreur lors de la tentative de connexion')
       console.error(e);
     }
   };
 
   return (
+    <>
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={Yup.object({
@@ -62,5 +69,6 @@ export default function SignForm() {
         </Form>
       )}
     </Formik>
+    </>
   );
 }

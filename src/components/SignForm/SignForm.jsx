@@ -1,10 +1,18 @@
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./SignForm.module.css";
+import { MessageData } from "@/context/MsgContext";
+
 
 export default function SignForm() {
   const router = useRouter();
+  const  {infoMessage, setInfoMessage} = useContext(MessageData)
+
+  if(infoMessage != undefined){
+    setTimeout(()=>{setInfoMessage()}, 2000)
+  }
 
   const handleSubmit = async (userInput) => {
     
@@ -12,6 +20,8 @@ export default function SignForm() {
     let response;
     try {
       response = await fetch('/api/createUser', { method: "POST", body: JSON.stringify(userInput) });
+      const data = await response.json();
+      setInfoMessage(data.message)
     } catch (err) {
       console.error(err);
     }
@@ -20,12 +30,15 @@ export default function SignForm() {
 
     if (!response.ok) {
       // handle error
+      console.log(response)
       return;
     }
 
     // log in
     try {
       response = await fetch("/api/login", { method: "POST", body: JSON.stringify(userInput) });
+      const data = await response.json();
+      setInfoMessage(data.message)
     } catch (err) {
       console.error(err);
     }
@@ -39,6 +52,7 @@ export default function SignForm() {
   };
 
   return (
+    <>
     <Formik
       initialValues={{ name: "", email: "", password: "" }}
       validationSchema={Yup.object({
@@ -60,7 +74,7 @@ export default function SignForm() {
         </Form>
       )}
     </Formik>
-
+    </>
   );
 }
 
