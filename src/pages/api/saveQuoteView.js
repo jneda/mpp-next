@@ -25,6 +25,7 @@ export default async function saveQuoteView(req, res) {
     });    
   } catch (error) {
     console.error(error);
-    res.status(500).send();
+    const message = "Erreur lors de l'enregistrement du fichier."
+    res.status(500).json({message});
   }
 }

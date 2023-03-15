@@ -4,7 +4,7 @@ import { Courgette } from '@next/font/google'
 import fonts from "../Fonts";
 
 
-export default function QuoteView({ id, quote, viewStyle, className }) {
+export default function QuoteView({ mode, setMode, id, quote, viewStyle, className }) {
   const {
     image,
     contentFont,
@@ -18,6 +18,12 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
 
   // console.log("Quoteview Content Font", contentFont);
 
+  function handleClickHideMode(){
+    if(mode != 'preview'){
+      setMode('preview')
+    }
+  }
+
 
   return (
     <article
@@ -27,6 +33,7 @@ export default function QuoteView({ id, quote, viewStyle, className }) {
         backgroundImage: `url(${image})`,
         backgroundColor: bgColor
       }}
+      onClick={handleClickHideMode}
     >
       <blockquote className={styles.blockquote}>
         <p

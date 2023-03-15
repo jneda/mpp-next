@@ -85,7 +85,7 @@ export default function FontEditor(props) {
       
        <ul className={`${styles.policeItem}`} id="policeList">
        {keyValues.map(([key , value]) => {
-          return <li className={`${value.className}`}onClick={setPolice}>Dreams come true<span className={`${fonts.merriweather.className} ${styles.fontSpan}`}>{key.toUpperCase()}</span> </li>
+          return <li key={key} className={`${value.className}`}onClick={setPolice}>Dreams come true<span className={`${fonts.merriweather.className} ${styles.fontSpan}`}>{key.toUpperCase()}</span> </li>
        })}
        </ul>
         <div className={`${styles.arrow}`}onClick={setArrow}></div>

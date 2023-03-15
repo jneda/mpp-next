@@ -56,17 +56,22 @@ export default function QuoteEditor({ backgrounds }) {
 
   useEffect(() => handleRandomQuote, []);
 
-  const handleRandomQuote = () => {
-    fetch("api/getRandomQuote")
-      .then((res) => res.json())
-      .then((data) => {
-        const quote = data.data;
-        setQuote({
-          id: quote.id,
-          content: quote.content,
-          author: quote.author.name,
-        });
-      });
+  const handleRandomQuote = async() => {
+    const response = await fetch("api/getRandomQuote")
+    const data = await response.json()
+    const quote = data.data;
+    if(!response.ok){
+      setQuote({
+        content: "Il fait chaud ici!",
+        author: "Giordano Bruno"
+      })
+      return;
+    }
+    setQuote({
+      id: quote.id,
+      content: quote.content,
+      author: quote.author.name,
+    });
   };
 
   // font actions
@@ -260,14 +265,18 @@ export default function QuoteEditor({ backgrounds }) {
 
   return (
     <>
-      {/* <button className={styles.downloadBtn} onClick={getImage}> */}
-      <button className={styles.downloadBtn} onClick={saveViewStyle}>
+      <button className={styles.downloadBtn} onClick={getImage}>
         <span></span>
         <span></span>
+      </button>
+      <button className={`${styles.downloadBtn} ${styles.onBottom}`} onClick={saveViewStyle}>
+        <div></div>
       </button>
       <button onClick={handleRandomQuote}>RandomQuote</button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
+        mode={mode}
+        setMode={setMode}
         quote={quote}
         viewStyle={viewstyle}
         className={styles.quoteView}
