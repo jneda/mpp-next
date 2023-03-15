@@ -142,6 +142,7 @@ BgImage.hasMany(QuoteViewStyle);
 
 QuoteViewStyle.belongsTo(Font, {
   foreignKey: "contentFontId",
+  as: "contentFont",
 });
 Font.hasMany(QuoteViewStyle, {
   foreignKey: "contentFontId",
@@ -149,6 +150,7 @@ Font.hasMany(QuoteViewStyle, {
 
 QuoteViewStyle.belongsTo(Color, {
   foreignKey: "contentColorId",
+  as: "contentColor",
 });
 Color.hasMany(QuoteViewStyle, {
   foreignKey: "contentColorId",
@@ -156,6 +158,7 @@ Color.hasMany(QuoteViewStyle, {
 
 QuoteViewStyle.belongsTo(Font, {
   foreignKey: "authorFontId",
+  as: "authorFont",
 });
 Font.hasMany(QuoteViewStyle, {
   foreignKey: "authorFontId",
@@ -163,6 +166,7 @@ Font.hasMany(QuoteViewStyle, {
 
 QuoteViewStyle.belongsTo(Color, {
   foreignKey: "authorColorId",
+  as: "authorColor",
 });
 Color.hasMany(QuoteViewStyle, {
   foreignKey: "authorColorId",
@@ -174,7 +178,6 @@ QuoteView.belongsTo(User);
 User.hasMany(QuoteView);
 QuoteViewStyle.belongsTo(User);
 User.hasMany(QuoteViewStyle);
-
 
 UserStyle.belongsTo(Color, {
   foreignKey: "bgColorId",

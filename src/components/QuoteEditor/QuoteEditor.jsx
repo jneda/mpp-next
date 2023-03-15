@@ -15,39 +15,45 @@ import { MessageData } from "@/context/MsgContext";
 import styles from "./QuoteEditor.module.css";
 // console.log(fonts);
 
-// dummy data for testing
-const quote = {
-  content: "Il fait chaud ici!",
-  author: { name: "Giordano Bruno" },
-};
-
-// dummy style for testing
-const dummyStyle = {
-  image: "/backgrounds/marguerite-729510_1920.jpg",
-  contentFont: "GreatVibes",
-  contentFontSize: "2rem",
-  authorFont: "caveat",
-  authorFontSize: "2em",
-  fgColor: "#00000",
-  fgaColor: "#00000",
-  bgColor: "#00000000",
-};
-
 // main function
 
-export default function QuoteEditor({ backgrounds, userId }) {
-  const [quote, setQuote] = useState({
-    content: "",
-    author: "",
-  });
+export default function QuoteEditor(props) {
+  console.log(`INFO QuoteEditor data:`);
+  console.log(props);
 
-  const [viewstyle, setViewStyle] = useState({ ...dummyStyle });
+  const userId = props.id;
+  const random = props.random;
+  const backgrounds = props.backgrounds || [];
+  const debug = props.debug || null;
+
+  if (debug) console.log(`INFO ${JSON.stringify(debug, null, 1)}`);
+
+  console.log(`INFO props.quote:`);
+  console.log(props.quote);
+
+  const [quote, setQuote] = useState(props.quote);
+  console.log(
+    `INFO quote state initialized: ${JSON.stringify(quote, null, 1)}`
+  );
+
+  console.log(
+    `INFO props.viewStyle: ${JSON.stringify(props.viewStyle, null, 1)}`
+  );
+
+  const [viewStyle, setViewStyle] = useState(props.viewStyle);
+  console.log(
+    `INFO viewStyle state initialized: ${JSON.stringify(viewStyle, null, 1)}`
+  );
 
   const { infoMessage, setInfoMessage } = useContext(MessageData);
 
   // get random quote on load
 
-  useEffect(() => handleRandomBackground, []);
+  if (random) {
+    useEffect(() => handleRandomBackground, []);
+
+    useEffect(() => handleRandomQuote, []);
+  }
 
   const handleRandomBackground = () => {
     if (backgrounds.length === 0) return;
@@ -55,12 +61,10 @@ export default function QuoteEditor({ backgrounds, userId }) {
     let randomBg = backgrounds[Math.floor(Math.random() * 20)].imagePath;
     // console.log(randomBg);
     let newImage = {
-      image: `/backgrounds/${randomBg}`,
+      bgImage: `/backgrounds/${randomBg}`,
     };
-    setViewStyle({ ...viewstyle, ...newImage });
+    setViewStyle({ ...viewStyle, ...newImage });
   };
-
-  useEffect(() => handleRandomQuote, []);
 
   const handleRandomQuote = () => {
     fetch("api/getRandomQuote")
@@ -96,9 +100,9 @@ export default function QuoteEditor({ backgrounds, userId }) {
       fontProperty = { authorFont: fontName };
     }
 
-    setViewStyle({ ...viewstyle, ...fontProperty });
+    setViewStyle({ ...viewStyle, ...fontProperty });
 
-    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewStyle, null, 1)}`);
   };
 
   const handleFontSizeChange = (newSize, selectedText) => {
@@ -109,9 +113,9 @@ export default function QuoteEditor({ backgrounds, userId }) {
     } else {
       fontProperty = { authorFontSize: `${newSize}rem` };
     }
-    setViewStyle({ ...viewstyle, ...fontProperty });
+    setViewStyle({ ...viewStyle, ...fontProperty });
 
-    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewStyle, null, 1)}`);
   };
 
   // color action
@@ -126,9 +130,9 @@ export default function QuoteEditor({ backgrounds, userId }) {
       fontProperty = { fgaColor: `${newColor}` };
     }
 
-    setViewStyle({ ...viewstyle, ...fontProperty });
+    setViewStyle({ ...viewStyle, ...fontProperty });
 
-    // console.log(`[QuoteEditor]: ${JSON.stringify(viewstyle, null, 1)}`);
+    // console.log(`[QuoteEditor]: ${JSON.stringify(viewStyle, null, 1)}`);
   };
 
   // background image action
@@ -136,9 +140,9 @@ export default function QuoteEditor({ backgrounds, userId }) {
   const handleChangeBackground = (newClickedBackground) => {
     // console.log(newClickedBackground);
 
-    const newBackground = { image: `${newClickedBackground}` };
+    const newBackground = { bgImage: `${newClickedBackground}` };
 
-    setViewStyle({ ...viewstyle, ...newBackground });
+    setViewStyle({ ...viewStyle, ...newBackground });
   };
 
   // save action
@@ -156,7 +160,7 @@ export default function QuoteEditor({ backgrounds, userId }) {
       // build a FormData object to send to the back-end
       const formData = new FormData();
       formData.append("quoteView", pngFile, uniqueFileName);
-      formData.append("styles", JSON.stringify(viewstyle));
+      formData.append("styles", JSON.stringify(viewStyle));
       formData.append("userId", userId);
       formData.append("quoteSourceId", quote.id);
 
@@ -250,28 +254,11 @@ export default function QuoteEditor({ backgrounds, userId }) {
       });
   }
 
-  // util function
-  function getCard() {
-    const quoteView = document.querySelector(".quote-view");
-    const quoteContent = document.querySelector(".quote-content");
-    const quoteAuthor = document.querySelector(".quote-author");
-
-    const width = quoteView.offsetWidth;
-    const height = quoteView.offsetHeight;
-
-    const contentFontSize = window.getComputedStyle(quoteContent).fontSize;
-    const authorFontSize = window.getComputedStyle(quoteAuthor).fontSize;
-
-    const sizes = {
-      width: width,
-      height: height,
-      contentFontSize: contentFontSize,
-      authorFontSize: authorFontSize,
-    };
-    console.log(sizes);
-  }
-
   const editor = editors[mode];
+
+  console.log(
+    `Sending props to QuoteView: ${JSON.stringify(viewStyle, null, 1)}`
+  );
 
   return (
     <>
@@ -284,7 +271,7 @@ export default function QuoteEditor({ backgrounds, userId }) {
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         quote={quote}
-        viewStyle={viewstyle}
+        viewStyle={viewStyle}
         className={styles.quoteView}
       />
       {editor}

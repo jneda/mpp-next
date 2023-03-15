@@ -4,11 +4,10 @@ import { BgImage, User } from "db/sequelize";
 import QuoteEditor from "@/components/QuoteEditor/QuoteEditor";
 
 export default function (props) {
-  // console.log("Editor page client side:", backgrounds);
+  console.log("Editor page client side:", props);
   return (
     <QuoteEditor
-      userId={props.userId}
-      backgrounds={props.backgrounds ? props.backgrounds : []}
+      props={props}
     />
   );
 }
@@ -36,6 +35,8 @@ export const getServerSideProps = withSessionSsr(
         props: {
           backgrounds,
           userId,
+          random: true,
+          test: "Hello?"
         },
       };
     } catch (error) {
