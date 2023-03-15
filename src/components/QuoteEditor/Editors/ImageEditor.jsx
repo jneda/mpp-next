@@ -11,7 +11,7 @@ export default function ImageEditor({ backgrounds, ...props }) {
   function setBackground(element) {
 
     setClickedBackground(() => {
-      const newClickedBackground =  element.target.getAttribute("name");
+      const newClickedBackground =  element.target.getAttribute("src");
       props.changeBackground(newClickedBackground);
       // setActualPolice(newClickedPolice);
       return newClickedBackground;
@@ -30,7 +30,7 @@ export default function ImageEditor({ backgrounds, ...props }) {
     >
       <ul className={styles.imageList}>
         {backgrounds.map((background) => (
-          <li key={background.id} name={`${basePath}${background.imagePath}`} /*style={{backgroundImage: `url(${basePath}${background.imagePath})`, backgroundSize: 'cover', backgroundPosition: 'center'}} onClick={setBackground} */>
+          <li key={background.id} name={`${basePath}${background.imagePath}`}>
             <img
               src={`${basePath}${background.imagePath}`}
               alt={background.path}

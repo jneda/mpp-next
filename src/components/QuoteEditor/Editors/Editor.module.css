@@ -187,48 +187,6 @@
   cursor: default;
 }
 
-/*Range Reset*/
-.range {
-  -webkit-appearance: none;
-   appearance: none;
-   background: transparent;
-   cursor: pointer;
-   width: 12rem;
-   margin: 20px;
-}
-
-/* Removes default focus */
-.range:focus {
- outline: none;
-}
-
-.range::-webkit-slider-runnable-track {
-  background-color: #ffffff;
-  border: #000000 1px solid;
-  border-radius: 0.5rem;
-  height: 0.5rem;
-}
-
-/* slider thumb */
-.range::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-   appearance: none;
-   margin-top: -10px; /* Centers thumb on the track */
-
-   /*custom styles*/
-   background: #A92360;
-   height: 1.8rem;
-   width: 1rem;
-   border-radius: 5px;
-}
-
-.labelRange {
-  text-align: center;
-  width: 12em;
-  font-size: 0.8em;
-  border: none;
-  background-color: transparent;
-}
 
 
 .sizePolice {
