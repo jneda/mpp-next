@@ -2,7 +2,6 @@ import fs from "fs";
 import formidable from "formidable";
 
 import { BgImage, Color, Font, QuoteView, QuoteViewStyle } from "db/sequelize";
-import quoteViewStyle from "db/models/quoteViewStyle";
 
 // prevent Next from consuming form data
 export const config = {
@@ -40,8 +39,18 @@ export default async function saveQuoteView(req, res) {
         fgaColor: authorColor,
       } = styles;
 
+      // parse font sizes
+      contentFontSize = toFloat(contentFontSize);
+      authorFontSize = toFloat(authorFontSize);
+
       // get background image id
+
+      // console.log("INFO imagePath is:", imagePath);
+
       const imageFile = imagePath.replace("/backgrounds/", "");
+
+      // console.log("INFO imageFile is:", imageFile);
+
       const bgImage = await BgImage.findOne({
         where: { imagePath: imageFile },
       });
@@ -66,34 +75,52 @@ export default async function saveQuoteView(req, res) {
       // console.log("contentColorId", contentColorId);
 
       // get author color id
-      const authorColorId = await getColorId(contentColor);
+      const authorColorId = await getColorId(authorColor);
       // console.log("authorColorId", authorColorId);
 
       // make a dummy label
-      // use preview image UUID for this!!!
+      // use preview image UUID for this
       const label = previewFileName.split(".")[0];
       // console.log("label", label);
 
       const userId = fields.userId;
 
-      // save all that stuff to database
-      const quoteViewStyle = await QuoteViewStyle.create({
-        userId,
-        label,
-        contentFontSize: toFloat(contentFontSize),
-        authorFontSize: toFloat(authorFontSize),
-        bgImageId,
-        contentFontId,
-        authorFontId,
-        contentColorId,
-        authorColorId,
+      // does this style already exist?
+      // NB: we'll be ignoring the label for now
+      let quoteViewStyle = await QuoteViewStyle.findOne({
+        where: {
+          userId: userId,
+          contentFontSize: contentFontSize,
+          authorFontSize: authorFontSize,
+          bgImageId: bgImageId,
+          contentFontId: contentFontId,
+          authorFontId: authorFontId,
+          contentColorId: contentColorId,
+          authorColorId: authorColorId,
+        },
       });
 
-      if (!quoteViewStyle) {
-        throw new Error("Failed to save quote view style. :(");
-      }
+      // console.log("INFO Query for quoteViewStyle returned:");
+      // console.log(quoteViewStyle);
 
-      // console.log(fields.quoteSourceId);
+      if (quoteViewStyle == null) {
+        // save all that stuff to database
+        quoteViewStyle = await QuoteViewStyle.create({
+          userId,
+          label,
+          contentFontSize: contentFontSize,
+          authorFontSize: authorFontSize,
+          bgImageId,
+          contentFontId,
+          authorFontId,
+          contentColorId,
+          authorColorId,
+        });
+
+        if (!quoteViewStyle) {
+          throw new Error("Failed to save quote view style. :(");
+        }
+      }
 
       // finally, save all that stuff into QuoteView
       const quoteView = await QuoteView.create({
