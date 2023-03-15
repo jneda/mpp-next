@@ -123,9 +123,6 @@ const UserTasks = sequelize.define(
 Task.belongsToMany(User, { through: UserTasks });
 User.belongsToMany(Task, { through: UserTasks });
 
-QuoteViewStyle.hasMany(QuoteView);
-QuoteView.belongsTo(QuoteViewStyle);
-
 UserStyle.hasMany(User);
 User.belongsTo(UserStyle);
 UserStyle.belongsTo(BgImage);
@@ -137,19 +134,38 @@ Color.hasMany(UserStyle, {
   foreignKey: "fgColorId",
 });
 
+QuoteViewStyle.hasMany(QuoteView);
+QuoteView.belongsTo(QuoteViewStyle);
+
 QuoteViewStyle.belongsTo(BgImage);
+BgImage.hasMany(QuoteViewStyle);
+
 QuoteViewStyle.belongsTo(Font, {
   foreignKey: "contentFontId",
 });
-QuoteViewStyle.belongsTo(Color, {
-  foreignKey: "fgColorId",
-});
-BgImage.hasMany(QuoteViewStyle);
 Font.hasMany(QuoteViewStyle, {
   foreignKey: "contentFontId",
 });
+
+QuoteViewStyle.belongsTo(Color, {
+  foreignKey: "contentColorId",
+});
 Color.hasMany(QuoteViewStyle, {
-  foreignKey: "fgFontId",
+  foreignKey: "contentColorId",
+});
+
+QuoteViewStyle.belongsTo(Font, {
+  foreignKey: "authorFontId",
+});
+Font.hasMany(QuoteViewStyle, {
+  foreignKey: "authorFontId",
+});
+
+QuoteViewStyle.belongsTo(Color, {
+  foreignKey: "authorColorId",
+});
+Color.hasMany(QuoteViewStyle, {
+  foreignKey: "authorColorId",
 });
 
 QuoteList.belongsTo(User);
@@ -159,18 +175,7 @@ User.hasMany(QuoteView);
 QuoteViewStyle.belongsTo(User);
 User.hasMany(QuoteViewStyle);
 
-QuoteViewStyle.belongsTo(Font, {
-  foreignKey: "authorFontId",
-});
-Font.hasMany(QuoteViewStyle, {
-  foreignKey: "authorFontId",
-});
-QuoteViewStyle.belongsTo(Color, {
-  foreignKey: "bgColorId",
-});
-Color.hasMany(QuoteViewStyle, {
-  foreignKey: "bgFontId",
-});
+
 UserStyle.belongsTo(Color, {
   foreignKey: "bgColorId",
 });
@@ -179,11 +184,11 @@ Color.hasMany(UserStyle, {
 });
 
 function initDb() {
-  // return sequelize.sync({ alter: true });
+  return sequelize.sync({ alter: true });
   return sequelize.sync();
 }
 
-// initDb()
+//initDb()
 
 module.exports = {
   sequelize,

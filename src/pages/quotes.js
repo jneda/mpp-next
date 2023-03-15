@@ -1,30 +1,36 @@
 import Navbar from "@/components/Navbar/Navbar";
 import QuoteGallery from "@/components/QuoteGallery/QuoteGallery";
-import { Author, QuoteSource } from "db/sequelize";
+import quoteView from "db/models/quoteView";
+import { QuoteView } from "db/sequelize";
 
-export default function ({ quoteSources }) {
-  // show raw data for sequelize testing purposes
+export default function (props) {
+  if (props.error || props.quoteViews == null) {
+    return <p>Une erreur est survenue... 🫢</p>;
+  }
 
-  const quotes = quoteSources.map(quoteSource => <li key={quoteSource.id}>{quoteSource.content} - {quoteSource.author.name}</li>);
-  // return <QuoteGallery />;
-  return (
-    <>
-      <ul>
-        {quotes}
-      </ul>
-      <Navbar page="quotes" />
-    </>
-  );
+  return <QuoteGallery quoteCards={props.quoteViews} />;
 }
 
 export async function getStaticProps() {
+  try {
+    const quoteViews = await QuoteView.findAll();
+    const processedQuoteViews = quoteViews.map((quoteView) => ({
+      ...quoteView.toJSON(),
+      date: quoteView.date.toString(),
+    }));
 
-  const quoteSourcesData = await QuoteSource.findAll({ include: Author });
-  const quoteSources = quoteSourcesData.map(quoteSourceData => quoteSourceData.toJSON());
+    return {
+      props: {
+        quoteViews: processedQuoteViews,
+      },
+    };
+  } catch (error) {
+    console.log(error);
 
-  return {
-    props: {
-      quoteSources: quoteSources
-    }
-  };
+    return {
+      props: {
+        error: "Failed to fetch quotes from database.",
+      },
+    };
+  }
 }
