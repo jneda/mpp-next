@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 14 mars 2023 à 14:59
+-- Généré le : mer. 15 mars 2023 à 08:40
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -95,7 +95,10 @@ CREATE TABLE `colors` (
 
 INSERT INTO `colors` (`id`, `color`) VALUES
 (1, '#00000'),
-(2, '#00000');
+(2, '#00000'),
+(3, '#ffffff'),
+(4, '#b7ec93'),
+(5, '#fefffd');
 
 -- --------------------------------------------------------
 
@@ -137,7 +140,8 @@ CREATE TABLE `fonts` (
 
 INSERT INTO `fonts` (`id`, `fontPath`) VALUES
 (1, 'GreatVibes'),
-(2, 'caveat');
+(2, 'caveat'),
+(3, 'courgette');
 
 -- --------------------------------------------------------
 
@@ -237,7 +241,14 @@ CREATE TABLE `quoteviews` (
 --
 
 INSERT INTO `quoteviews` (`id`, `image`, `date`, `quoteSourceId`, `quoteViewStyleId`, `userId`) VALUES
-(2, '7318106f-0aa0-43c5-b80f-21e56ae9de65.png', '2023-03-14 14:58:32', 3, 3, 1);
+(2, '7318106f-0aa0-43c5-b80f-21e56ae9de65.png', '2023-03-14 14:58:32', 3, 3, 1),
+(3, 'afe75a18-96b1-48cf-b368-fb07fd73862c.png', '2023-03-14 15:03:22', 3, 4, 1),
+(4, 'aa701519-aa72-4787-a5e6-3bebe49957fc.png', '2023-03-14 15:32:35', 2, 5, 1),
+(5, '3587b7b9-493a-469a-9d90-605335e53769.png', '2023-03-15 08:02:25', 3, 6, 1),
+(6, 'dc561a4d-02e3-4963-a644-db160755edcb.png', '2023-03-15 08:02:31', 3, 7, 1),
+(7, '44b73045-5118-4782-b252-df593c09420a.png', '2023-03-15 08:03:37', 3, 8, 1),
+(8, '6ce60d80-a4fe-4a14-84df-8bac2b84b611.png', '2023-03-15 08:10:33', 3, 9, 1),
+(9, '5ba1924c-34ef-4b40-a29b-928cd907a5eb.png', '2023-03-15 08:10:50', 3, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -265,7 +276,13 @@ CREATE TABLE `quoteviewstyles` (
 INSERT INTO `quoteviewstyles` (`id`, `label`, `contentFontSize`, `authorFontSize`, `bgImageId`, `contentFontId`, `userId`, `authorFontId`, `contentColorId`, `authorColorId`) VALUES
 (1, 'valentin-beauvais-kDaxao_v_5o-unsplash', 2, 2, 18, 1, 1, 2, 1, 1),
 (2, '3010cdfd-0a4d-41c9-9da9-010a709924e5', 2, 2, 5, 1, 1, 2, 1, 1),
-(3, '7318106f-0aa0-43c5-b80f-21e56ae9de65', 2, 2, 5, 1, 1, 2, 1, 1);
+(3, '7318106f-0aa0-43c5-b80f-21e56ae9de65', 2, 2, 5, 1, 1, 2, 1, 1),
+(4, 'afe75a18-96b1-48cf-b368-fb07fd73862c', 2, 2, 5, 1, 1, 2, 1, 1),
+(5, 'aa701519-aa72-4787-a5e6-3bebe49957fc', 4.8, 5, 10, 1, 1, 3, 3, 3),
+(6, '3587b7b9-493a-469a-9d90-605335e53769', 3.8, 5, 7, 1, 1, 2, 4, 5),
+(7, 'dc561a4d-02e3-4963-a644-db160755edcb', 3.8, 5, 7, 1, 1, 2, 4, 5),
+(8, '44b73045-5118-4782-b252-df593c09420a', 3.8, 5, 7, 1, 1, 2, 4, 5),
+(9, '6ce60d80-a4fe-4a14-84df-8bac2b84b611', 2, 2, 14, 1, 1, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -584,7 +601,7 @@ ALTER TABLE `bgimages`
 -- AUTO_INCREMENT pour la table `colors`
 --
 ALTER TABLE `colors`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `diaryentries`
@@ -596,7 +613,7 @@ ALTER TABLE `diaryentries`
 -- AUTO_INCREMENT pour la table `fonts`
 --
 ALTER TABLE `fonts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `moods`
@@ -626,13 +643,13 @@ ALTER TABLE `quotesources`
 -- AUTO_INCREMENT pour la table `quoteviews`
 --
 ALTER TABLE `quoteviews`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `quoteviewstyles`
 --
 ALTER TABLE `quoteviewstyles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
