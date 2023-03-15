@@ -53,3 +53,18 @@ width: 20px;
   background-color: #000000;
   clip-path: polygon(13% 61%, 29% 91%, 84% 46%, 77% 36%, 30% 70%, 22% 55%);
 }
+
+.onRight{
+  margin-left: 14vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onRight > div{
+  background-color: #000000;
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+  clip-path: polygon(20% 25%, 90% 25%, 90% 75%, 75% 75%, 75% 100%, 50% 75%, 20% 75%);
+}

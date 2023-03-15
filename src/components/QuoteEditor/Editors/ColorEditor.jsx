@@ -1,4 +1,6 @@
-import styles from "./Editor.module.css";
+// import styles from "./Editor.module.css";
+import styles from "./editorStyles.module.css"
+
 import { useState, useEffect } from "react";
 import fonts from "@/components/Fonts";
 
@@ -31,16 +33,11 @@ export default function ColorEditor(props) {
         background: "rgba(255,255,255,0.4)",
         color: "white",
       }}
-      className={styles.editorColor}
+      className={`${styles.editor} ${styles.center} ${styles.padd}`}
     >
-        {/* <div>
-        <input className={`${styles.inputColor}`}type="color" id="head" name="head"
-              defaultValue="#0000" onInput={handleColorChange}/>
-        <label className={`${fonts.merriweather.className} ${styles.labelColor}`} htmlFor="head">Changer la Couleur</label>
-      </div> */}
       <span className={`${styles.spanColor1}`}id="color_front" onClick={changeSpanColor}></span>
       <input className={styles.inputColor1} type='color' defaultValue='#fefefe' id='colour' onInput={handleColorChange}></input>
-      <div>
+      <div className={styles.btnsDiv}>
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
       </div>

@@ -52,7 +52,7 @@ export default function QuoteEditor({ backgrounds, userId }) {
   const handleRandomBackground = () => {
     if (backgrounds.length === 0) return;
 
-    let randomBg = backgrounds[Math.floor(Math.random() * 20)].imagePath;
+    let randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)].imagePath;
     // console.log(randomBg);
     let newImage = {
       image: `/backgrounds/${randomBg}`,
@@ -287,7 +287,9 @@ export default function QuoteEditor({ backgrounds, userId }) {
       <button className={`${styles.downloadBtn} ${styles.onBottom}`} onClick={saveViewStyle}>
         <div></div>
       </button>
-      <button onClick={handleRandomQuote}>RandomQuote</button>
+      <button onClick={handleRandomQuote} className={`${styles.downloadBtn} ${styles.onRight}`}>
+        <div></div>
+      </button>
       <Toolbar onModeChange={handleModeChange} />
       <QuoteView
         mode={mode}

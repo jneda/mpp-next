@@ -184,11 +184,12 @@ Color.hasMany(UserStyle, {
 });
 
 function initDb() {
-  return sequelize.sync({ alter: true });
-  return sequelize.sync();
+  return sequelize.sync({ alter: true })
+  .then(_ => console.log('syncho réussi'));
+  // return sequelize.sync();
 }
 
-//initDb()
+// initDb()
 
 module.exports = {
   sequelize,

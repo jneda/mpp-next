@@ -1,5 +1,7 @@
-import styles from "./Editor.module.css";
-import { useState, useEffect } from "react";
+// import styles from "./Editor.module.css";
+import styles from "./editorStyles.module.css"
+
+import { useState } from "react";
 import fonts from "@/components/Fonts";
 
 
@@ -73,23 +75,53 @@ export default function FontEditor(props) {
 
 
 
+  // return (
+  //   <div
+  //     style={{
+  //       background: "rgba(255,255,255,0.4)",
+  //       color: "white",
+  //     }}
+  //     className={styles.editor}
+  //     id="editor"
+  //   >
+      
+  //      <ul className={`${styles.policeItem}`} id="policeList">
+  //      {keyValues.map(([key , value]) => {
+  //         return <li key={key} className={`${value.className}`}onClick={setPolice}>Dreams come true<span className={`${fonts.merriweather.className} ${styles.fontSpan}`}>{key.toUpperCase()}</span> </li>
+  //      })}
+  //      </ul>
+  //       <div className={`${styles.arrow}`}onClick={setArrow}></div>
+  //       <div>
+  //         <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
+  //         <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
+  //       </div>
+  //       <div  className={`${styles.sizePolice}`}>
+  //         <input type="range"step="0.1" className={styles.range} id="fontSize-range" name="fontSize-range" min="1" max="5" defaultValue="2" onInput={(event) => {
+  //           handleFontSizeChange(event);
+  //           handleFontRange(event);
+  //         }}/>
+  //         <label className={`${styles.labelRange} ${fonts.merriweather.className}`}id="labelRange" htmlFor="fontSize-range">{`Taille de la police : ${fontSize}`}</label>
+  //       </div>
+  //   </div>
+  // );
+
   return (
     <div
       style={{
         background: "rgba(255,255,255,0.4)",
         color: "white",
       }}
-      className={styles.editor}
+      className={`${styles.editor} ${styles.center}`}
       id="editor"
     >
       
-       <ul className={`${styles.policeItem}`} id="policeList">
+       <ul className={`${styles.policeList}`} id="policeList">
        {keyValues.map(([key , value]) => {
           return <li key={key} className={`${value.className}`}onClick={setPolice}>Dreams come true<span className={`${fonts.merriweather.className} ${styles.fontSpan}`}>{key.toUpperCase()}</span> </li>
        })}
        </ul>
         <div className={`${styles.arrow}`}onClick={setArrow}></div>
-        <div>
+        <div className={styles.btnsDiv}>
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`} id="quote" disabled={selectedText == "quote"} onClick={selectText}>Citation</button> 
           <button className={`${fonts.merriweather.className} ${styles.selectedBtn}`}  id="author" disabled={selectedText == "author"} onClick={selectText}>Auteur</button>
         </div>

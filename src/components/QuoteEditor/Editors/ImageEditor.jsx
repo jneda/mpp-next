@@ -1,4 +1,6 @@
-import styles from "./Editor.module.css";
+// import styles from "./Editor.module.css";
+import styles from "./editorStyles.module.css";
+
 import { useState } from "react";
 
 export default function ImageEditor({ backgrounds, ...props }) {
@@ -9,7 +11,7 @@ export default function ImageEditor({ backgrounds, ...props }) {
   function setBackground(element) {
 
     setClickedBackground(() => {
-      const newClickedBackground =  element.target.getAttribute("src");
+      const newClickedBackground =  element.target.getAttribute("name");
       props.changeBackground(newClickedBackground);
       // setActualPolice(newClickedPolice);
       return newClickedBackground;
@@ -18,18 +20,17 @@ export default function ImageEditor({ backgrounds, ...props }) {
 
   }
 
-
   return (
     <div
       style={{
         background: "rgba(255,255,255,0.4)",
         color: "white",
       }}
-      className={styles.editorImage}
+      className={styles.editor}
     >
       <ul className={styles.imageList}>
         {backgrounds.map((background) => (
-          <li key={background.id}>
+          <li key={background.id} name={`${basePath}${background.imagePath}`} /*style={{backgroundImage: `url(${basePath}${background.imagePath})`, backgroundSize: 'cover', backgroundPosition: 'center'}} onClick={setBackground} */>
             <img
               src={`${basePath}${background.imagePath}`}
               alt={background.path}
