@@ -1,5 +1,6 @@
 import fs from "fs";
 import formidable from "formidable";
+import mv from "mv";
 
 import { BgImage, Color, Font, QuoteView, QuoteViewStyle } from "db/sequelize";
 
@@ -22,7 +23,12 @@ export default async function saveQuoteView(req, res) {
       // console.log(`File would be saved as ${newPath}`);
 
       // save file to public/quoteviews
-      await fs.promises.rename(oldPath, newPath);
+      // accross devices
+      await new Promise((resolve, reject) => {
+        mv(oldPath, newPath, (err) => {
+          err ? reject(err) : resolve(true);
+        });
+      });
 
       // process style data
 
@@ -138,8 +144,8 @@ export default async function saveQuoteView(req, res) {
     });
   } catch (error) {
     console.error(error);
-    const message = "Erreur lors de l'enregistrement du fichier."
-    res.status(500).json({message});
+    const message = "Erreur lors de l'enregistrement du fichier.";
+    res.status(500).json({ message });
   }
 }
 

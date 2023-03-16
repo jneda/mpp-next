@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -53,6 +54,7 @@ export default function SignForm() {
 
   return (
     <>
+    
     <Formik
       initialValues={{ name: "", email: "", password: "" }}
       validationSchema={Yup.object({
@@ -70,7 +72,16 @@ export default function SignForm() {
           <ErrorMessage name="email">{msg => <div className={styles.errorText}>{msg}</div>}</ErrorMessage>
           <Field type="password" name="password" placeholder="Mot de Passe" />
           <ErrorMessage name="password">{msg => <div className={styles.errorText}>{msg}</div>}</ErrorMessage>
+          <div className={styles.userHelp}>
+              <div>Déjà un Compte ?</div>
+              <Link href="/login" key="loginLink">
+                <div>Se Connecter</div>
+              </Link>
+          </div>
           <button className={styles.btn} type="submit">S'inscrire</button>
+          <Link href="/quotes" key="quoteLink" className={styles.buttonWrapper}>
+            <button className={styles.exploreBtn}>Découvrir</button>
+          </Link>
         </Form>
       )}
     </Formik>
