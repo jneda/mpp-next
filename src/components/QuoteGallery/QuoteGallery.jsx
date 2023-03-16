@@ -21,7 +21,7 @@ export default function QuoteGallery({ quoteCards }) {
     <>
       {/* Ici la barre de recherche etc. */}
       <div className={styles.quoteTopMenu}>
-      <Link href="/login" key="login">
+      <Link href="/signup" key="signupLink">
         <LoginBtn/>
       </Link>
       <input className={styles.quoteSearchBar} type="text" placeholder="Rechercher une citation"></input>

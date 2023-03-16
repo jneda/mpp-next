@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
 .title{
+    text-align: center;
     font-family: 'Courgette', cursive;
     font-size: 2em;
     margin: 6vh 0 3vh;
