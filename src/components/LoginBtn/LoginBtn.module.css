@@ -1,0 +1,22 @@
+.logo{
+    width: 30px;
+    max-width: 250px;
+    height:auto;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid #A92360;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 34px 12px 12px 12px;
+}
+
+.center:hover{
+    box-shadow: 0px 10px 13px -7px #000000;
+}
