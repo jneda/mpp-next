@@ -9,10 +9,10 @@ export default function Homepage() {
       <div
         className={styles.background}
         style={{
-          backgroundImage: `url(${path})`
+          backgroundImage: `url(${path})`,
         }}
       ></div>
-      <Navbar page={"homepage"} />
+      <Navbar />
     </>
   );
 }

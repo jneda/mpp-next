@@ -19,7 +19,7 @@ export default function QuoteGallery({ quoteCards }) {
     <>
       {/* Ici la barre de recherche etc. */}
       <ul className={styles.quoteGallery}>{imgElements}</ul>
-      <Navbar page={"quotes"}/>
+      <Navbar />
     </>
   );
 }

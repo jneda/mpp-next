@@ -9,12 +9,12 @@ export default function App() {
       <div
         className={styles.background}
         style={{
-          backgroundImage: `url(${path})`
+          backgroundImage: `url(${path})`,
         }}
       >
         <h1>Mes favoris</h1>
       </div>
-      <Navbar page={"favorites"} />
+      <Navbar />
     </>
   );
 }

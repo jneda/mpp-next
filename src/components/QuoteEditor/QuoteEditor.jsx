@@ -299,7 +299,7 @@ export default function QuoteEditor({ backgrounds, userId }) {
         className={styles.quoteView}
       />
       {editor}
-      <Navbar page={"editor"} />
+      <Navbar />
     </>
   );
 }
