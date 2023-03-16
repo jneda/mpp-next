@@ -1,3 +1,4 @@
+import LoginBtn from "../LoginBtn/LoginBtn";
 import Navbar from "../Navbar/Navbar";
 import styles from "./QuoteGallery.module.css";
 
@@ -18,6 +19,10 @@ export default function QuoteGallery({ quoteCards }) {
   return (
     <>
       {/* Ici la barre de recherche etc. */}
+      <div className={styles.quoteTopMenu}>
+      <LoginBtn/>
+      <input className={styles.quoteSearchBar} type="text" placeholder="Rechercher une citation"></input>
+      </div>
       <ul className={styles.quoteGallery}>{imgElements}</ul>
       <Navbar page={"quotes"}/>
     </>
