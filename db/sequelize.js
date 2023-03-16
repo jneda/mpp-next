@@ -189,7 +189,7 @@ function initDb() {
   // return sequelize.sync();
 }
 
-// initDb()
+initDb()
 
 module.exports = {
   sequelize,
